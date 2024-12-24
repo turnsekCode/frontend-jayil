@@ -73,6 +73,8 @@ import contact_img from './contact_img.png'
 import razorpay_logo from './razorpay_logo.png'
 import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
+import pendientes_category from './pendientes_category.jpg'
+import collares_category from './collares_category.jpg'
 
 export const assets = {
     logo,
@@ -92,7 +94,9 @@ export const assets = {
     contact_img,
     razorpay_logo,
     stripe_logo,
-    cross_icon
+    cross_icon,
+    pendientes_category,
+    collares_category
 }
 
 export const products = [
