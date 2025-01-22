@@ -14,6 +14,15 @@ import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AroCollection from './pages/Aro'
+import Pendientes from './pages/Pendientes'
+import LeaCollection from './pages/Lea'
+import GotaCollection from './pages/Gota'
+import ColetteCollection from './pages/Colette'
+import CorazonCollection from './pages/Corazon'
+import Collares from './pages/Collares'
+import Politica_privacidad from './pages/Politica_privacidad'
+import Detalles_envio from './pages/DetallesEnvio'
 
 const App = () => {
   return (
@@ -24,9 +33,14 @@ const App = () => {
      <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/collection' element={<Collection/>} />
-      <Route path='/collection/collares' element={<Collection/>} />
-      <Route path='/collection/pendientes' element={<Collection/>} />
+      <Route path='/collection/collares' element={<Collares/>} />
       <Route path='/collection/pulseras' element={<Collection/>} />
+      <Route path='/collection/pendientes' element={<Pendientes />} />
+      <Route path='/collection/pendientes/aro' element={<AroCollection/>} />
+      <Route path='/collection/pendientes/corazon' element={<CorazonCollection/>} />
+      <Route path='/collection/pendientes/colette' element={<ColetteCollection/>} />
+      <Route path='/collection/pendientes/gota' element={<GotaCollection/>} />
+      <Route path='/collection/pendientes/lea' element={<LeaCollection/>} />
       <Route path='/about' element={<About/>} />
       <Route path='/contact' element={<Contact/>} />
       <Route path='/product/:productId' element={<Product/>} />
@@ -34,6 +48,8 @@ const App = () => {
       <Route path='/login' element={<Login/>} />
       <Route path='/place-order' element={<PlaceOrder/>} />
       <Route path='/orders' element={<Orders/>} />
+      <Route path='/privacy_policy' element={<Politica_privacidad/>} />
+      <Route path='/delivery' element={<Detalles_envio/>} />
      </Routes>
      <Footer />
     </div>

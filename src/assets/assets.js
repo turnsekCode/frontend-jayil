@@ -68,13 +68,21 @@ import star_dull_icon from './star_dull_icon.png'
 import star_icon from './star_icon.png'
 import support_img from './support_img.png'
 import menu_icon from './menu_icon.png'
-import about_img from './about_img.png'
+import about_img from './about_img.jpg'
 import contact_img from './contact_img.png'
 import razorpay_logo from './razorpay_logo.png'
 import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
 import pendientes_category from './pendientes_category.jpg'
 import collares_category from './collares_category.jpg'
+import imagen_about from './imagen_about.png'
+import categoria_corazon from './categoria_corazon.jpg'
+import categoria_aro from './categoria_aro.jpg'
+import categoria_colette from './categoria_colette.jpg'
+import categoria_gota from './categoria_gota.jpg'
+import categoria_lea from './categoria_lea.jpg'
+
+
 
 export const assets = {
     logo,
@@ -96,7 +104,13 @@ export const assets = {
     stripe_logo,
     cross_icon,
     pendientes_category,
-    collares_category
+    collares_category,
+    imagen_about,
+    categoria_corazon,
+    categoria_aro,
+    categoria_colette,
+    categoria_gota,
+    categoria_lea
 }
 
 export const products = [

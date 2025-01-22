@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { assets } from '../assets/assets'
 import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 const categories = [
     { name: 'COLLARES', path: '/collection/collares' },
@@ -13,6 +14,7 @@ const categories = [
         path: '/collection/pendientes',
         icon: <IoIosArrowForward />,
         subcategories: [
+            { name: 'CORAZÓN', path: '/collection/pendientes/corazon' },
             { name: 'ARO', path: '/collection/pendientes/aro' },
             { name: 'COLETTE', path: '/collection/pendientes/colette' },
             { name: 'GOTA', path: '/collection/pendientes/gota' },
@@ -25,11 +27,29 @@ const categories = [
 const NavBar = () => {
 
     const [visible, setVisible] = useState(false);
-    const { setShowSearch, getCartCount } = useContext(ShopContext);
+    const [searchVisible, setSearchVisible] = useState(false);
+    const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems, getCartAmount, currency } = useContext(ShopContext);
     const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
     const [hoveredCategory, setHoveredCategory] = useState(null);
     const [isCollectionOpen, setIsCollectionOpen] = useState(false);
     const [openSubmenu, setOpenSubmenu] = useState(null);
+    const location = useLocation();
+
+
+    useEffect(() => {
+        if (location.pathname.includes('collection')) {
+            setSearchVisible(true)
+        } else {
+            setSearchVisible(false)
+        }
+    }, [location])
+
+    const logout = () => {
+        setToken('');
+        localStorage.removeItem('token');
+        navigate('/login');
+        setCartItems({});
+    }
 
     const handleNavClick = () => {
         // Cierra el menú móvil y restablece los submenús
@@ -39,12 +59,12 @@ const NavBar = () => {
     };
 
     return (
-        <div className='flex items-center justify-between py-5 font-medium'>
+        <div className='flex items-center justify-between py-5 font-medium border-b'>
             <Link to="/"><img src={assets.logo} className='w-28' alt="" /></Link>
             <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
                 <NavLink to="/" className="flex flex-col items-center gap-1">
-                    <p>HOME</p>
-                    <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
+                    <p>INICIO</p>
+                    <hr className='w-2/4 border-none h-[1.5px] bg-[#C15470] hidden' />
                 </NavLink>
                 <div
                     className="relative"
@@ -53,10 +73,10 @@ const NavBar = () => {
                 >
                     <NavLink to="/collection" className="flex flex-col items-center gap-1">
                         <div className="flex items-center gap-1">
-                            <p>COLLECTION</p>
+                            <p>COLECCIÓN</p>
                             <IoIosArrowDown />
                         </div>
-                        <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
+                        <hr className='w-2/4 border-none h-[1.5px] bg-[#C15470] hidden' />
                     </NavLink>
 
                     {/* Submenu */}
@@ -105,29 +125,39 @@ const NavBar = () => {
                     )}
                 </div>
                 <NavLink to="/about" className="flex flex-col items-center gap-1">
-                    <p>ABOUT</p>
-                    <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
+                    <p>SOBRE MI</p>
+                    <hr className='w-2/4 border-none h-[1.5px] bg-[#C15470] hidden' />
                 </NavLink>
                 <NavLink to="/contact" className="flex flex-col items-center gap-1">
-                    <p>CONTACT</p>
-                    <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
+                    <p>CONTACTO</p>
+                    <hr className='w-2/4 border-none h-[1.5px] bg-[#C15470] hidden' />
                 </NavLink>
             </ul>
             <div className='flex items-center gap-6'>
-                <img onClick={() => setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer' alt="" />
-                <div className='group relative'>
-                    <Link to='/login'><img src={assets.profile_icon} className='w-5 cursor-pointer' alt="" /></Link>
+                <p className='text-[#C15470]'>
+                    {currency}{" "}
+                    {getCartAmount() === 0
+                        ? "0.00"
+                        : getCartAmount().toFixed(2)}
+                </p>
+                {searchVisible ? <img onClick={() => setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer' alt="" /> : null}
+                {/*<div className='group relative'>
+                    <img onClick={()=> token ? null : navigate('/login')} src={assets.profile_icon} className='w-5 cursor-pointer' alt="" />
+                    {/* Dropdown */}
+                { /*token &&
                     <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
-                        <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
-                            <p className='cursor-pointer hover:text-black'>My Profile</p>
-                            <p className='cursor-pointer hover:text-black'>Orders</p>
-                            <p className='cursor-pointer hover:text-black'>Logout </p>
-                        </div>
+                    <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
+                        <p className='cursor-pointer hover:text-black'>My Profile</p>
+                        <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
+                        <p onClick={()=>logout()} className='cursor-pointer hover:text-black'>Logout </p>
                     </div>
                 </div>
+
+                   }
+                </div>*/}
                 <Link to="/cart" className='relative'>
                     <img src={assets.cart_icon} className='w-5 min-w-5' alt="" />
-                    <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>{getCartCount()}</p>
+                    <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[#C15470] text-white aspect-square rounded-full text-[8px]'>{getCartCount()}</p>
                 </Link>
                 <img onClick={() => setVisible(true)} src={assets.menu_icon} className='w-5 cursor-pointer sm:hidden' alt="" />
             </div>
@@ -137,15 +167,15 @@ const NavBar = () => {
                 <div className='flex flex-col text-gray-600'>
                     <div onClick={() => handleNavClick()} className='flex items-center gap-4 p-3 cursor-pointer'>
                         <img src={assets.dropdown_icon} className='h-4 rotate-180' alt="" />
-                        <p>Back</p>
+                        <p>Atras</p>
                     </div>
-                    <NavLink onClick={() => handleNavClick()} className='py-2 pl-6 border' to='/'>HOME</NavLink>
+                    <NavLink onClick={() => handleNavClick()} className='py-2 pl-6 border' to='/'>INICIO</NavLink>
                     <div className="relative">
                         <button
                             onClick={() => setIsCollectionOpen(!isCollectionOpen)}
                             className="w-full py-2 px-6 border flex items-center justify-between"
                         >
-                            COLLECTION
+                            COLECCIÓN
                             <FaChevronDown
                                 className={`transition-transform duration-300 ${isCollectionOpen ? 'rotate-180' : ''
                                     }`}
@@ -203,8 +233,8 @@ const NavBar = () => {
                             </div>
                         )}
                     </div>
-                    <NavLink onClick={() => handleNavClick()} className='py-2 pl-6 border' to='/about'>ABOUT</NavLink>
-                    <NavLink onClick={() => handleNavClick()} className='py-2 pl-6 border' to='/contact'>CONTACT</NavLink>
+                    <NavLink onClick={() => handleNavClick()} className='py-2 pl-6 border' to='/about'>SOBRE MI</NavLink>
+                    <NavLink onClick={() => handleNavClick()} className='py-2 pl-6 border' to='/contact'>CONTACTO</NavLink>
                 </div>
             </div>
         </div>

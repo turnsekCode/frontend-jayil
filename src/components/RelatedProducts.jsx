@@ -4,7 +4,7 @@ import Title from '../components/Title';
 import ProductItem from './ProductItem';
 
 const RelatedProducts = ({category, subCategory}) => {
-
+console.log("relate", category, subCategory)
     const {products} = useContext(ShopContext);
     const [related, setRelated] = useState([]);
 
@@ -33,7 +33,9 @@ const RelatedProducts = ({category, subCategory}) => {
                 id={item._id} 
                 image={item.image} 
                 name={item.name} 
-                price={item.price}/>
+                price={item.price}
+                category={item.category}
+                subCategory={item.subCategory}/>
             ))
         }
         </div>

@@ -72,7 +72,7 @@ const Collections = () => {
 
   useEffect(()=>{
     applyFilter();
-  }, [category, subCategory,search,showSearch])
+  }, [category, subCategory,search,showSearch,products])
 
   useEffect(()=>{
     sortProduct();
@@ -81,40 +81,43 @@ const Collections = () => {
 
 
   return (
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
+    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
       
       {/* Filter options */}
       <div className='min-w-60'>
-        <p onClick={()=>setShowFilter(!showFilter)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>FILTERS
+        <p onClick={()=>setShowFilter(!showFilter)} className='my-2 text-xl flex items-center cursor-pointer gap-2 text-gray-700'>FILTROS
           <img className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} src={assets.dropdown_icon} alt="" />
         </p>
         {/* Category filter */}
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium'>CATEGORIES</p>
+          <p className='mb-3 text-sm font-medium text-gray-700'>CATEGORIAS</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2'>
-              <input type='checkbox' className='w-3' value={'Men'} onChange={toggleCategory}/> Men
+              <input type='checkbox' className='w-3' value={'Pendientes'} onChange={toggleCategory}/> Pendientes
             </p>
             <p className='flex gap-2'>
-              <input type='checkbox' className='w-3' value={'Women'} onChange={toggleCategory}/> Women
+              <input type='checkbox' className='w-3' value={'Collares'} onChange={toggleCategory}/> Collares
             </p>
             <p className='flex gap-2'>
-              <input type='checkbox' className='w-3' value={'Kids'} onChange={toggleCategory}/> Kids
+              <input type='checkbox' className='w-3' value={'Pulseras'} onChange={toggleCategory}/> Pulseras
             </p>
           </div>
         </div>
          {/* SubCategory filter */}
          <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium'>TYPE</p>
+          <p className='mb-3 text-sm font-medium'>SUB CATEGORIA</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2'>
-              <input type='checkbox' className='w-3' value={'Topwear'} onChange={toggleSubCategory}/> Topwear
+              <input type='checkbox' className='w-3' value={'Corazón'} onChange={toggleSubCategory}/> Corazón
             </p>
             <p className='flex gap-2'>
-              <input type='checkbox' className='w-3' value={'Bottomwear'} onChange={toggleSubCategory}/> Bottomwear
+              <input type='checkbox' className='w-3' value={'Lea'} onChange={toggleSubCategory}/> Lea
             </p>
             <p className='flex gap-2'>
-              <input type='checkbox' className='w-3' value={'Winterwear'} onChange={toggleSubCategory}/> Winterwear
+              <input type='checkbox' className='w-3' value={'Colette'} onChange={toggleSubCategory}/> Colette
+            </p>
+            <p className='flex gap-2'>
+              <input type='checkbox' className='w-3' value={'Gota'} onChange={toggleSubCategory}/> Gota
             </p>
           </div>
         </div>
@@ -123,12 +126,12 @@ const Collections = () => {
       {/* Right side*/}
       <div className='flex-1'>
         <div className='flex justify-between text-base sm:text-2xl mb-4'>
-          <Title text1={'ALL'} text2={'COLLECTIONS'}/>
+          <Title text1={'TODAS LAS'} text2={'COLECCIONES'}/>
              {/* Product sort (clasificar) */}
           <select onChange={(e)=>setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2'>
-            <option value="relavent">Sort by: Relavent</option>
-            <option value="low-high">Sort by: Low to High</option>
-            <option value="high-low">Sort by: High to low</option>
+            <option value="relavent">Ordenar por: Relevancia</option>
+            <option value="low-high">Ordenar por: Menor a Mayor precio</option>
+            <option value="high-low">Ordenar por: Mayor a Menor precio</option>
           </select>
         </div>
 
@@ -141,7 +144,10 @@ const Collections = () => {
                 id={item._id} 
                 image={item.image} 
                 name={item.name} 
-                price={item.price}/>
+                price={item.price}
+                category={item.category}
+                subCategory={item.subCategory}/>
+                
             ))
         }
         </div>

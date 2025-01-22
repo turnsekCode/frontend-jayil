@@ -6,6 +6,8 @@ import OurPolicy from '../components/OurPolicy'
 import NewsletterBox from '../components/NewsletterBox'
 import ShowCategories from '../components/ShowCategories'
 import CallToAction from '../components/CallToAction'
+import ImagePromo from '../components/ImagePromo'
+import SeccionAyuda from '../components/SeccionAyuda'
 
 const Home = () => {
   return (
@@ -13,8 +15,10 @@ const Home = () => {
       <Hero />
       <ShowCategories />
       <LatestCollection />
-      <CallToAction />
+      <ImagePromo />
+      <SeccionAyuda />
       <BestSeller />
+      <CallToAction />
       <OurPolicy />
     </div>
   )
