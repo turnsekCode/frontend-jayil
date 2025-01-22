@@ -95,7 +95,7 @@ useEffect(() => {
     
     const getsProductsData = async () => {
         try {
-            const response = await axios.get(`${backenUrl}/api/product/list`);
+            const response = await axios.get(`${backenUrl}api/product/list`);
             if(response.data.success){
                 setProducts(response.data.products);
             } else {
