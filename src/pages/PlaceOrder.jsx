@@ -77,6 +77,7 @@ const PlaceOrder = () => {
         name: productData?.name,
         quantity: item?.quantity,
         price: productData?.price,
+        image: productData?.image[0]
       };
     });
 
