@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 
 const PlaceOrder = () => {
+  const backenUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [method, setMethod] = useState('cod');
   const { navigate, cartItems, products, delivery_fee, getCartAmount, currency } = useContext(ShopContext);
@@ -60,7 +61,7 @@ const PlaceOrder = () => {
     };
 
     try {
-      await axios.post('http://localhost:4000/send-email', emailData);
+      await axios.post(`${backenUrl}/send-email`, emailData);
       alert('Correo enviado exitosamente!');
       navigate('/orders')
     } catch (error) {
