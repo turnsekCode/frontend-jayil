@@ -85,6 +85,33 @@ useEffect(() => {
             return updatedCart;
         });
     };
+    
+    // Estado temporal para manejar el valor del input
+    const [tempValues, setTempValues] = useState({});
+    
+    const handleInputChange = (itemId, value) => {
+        const parsedValue = value === '' ? '' : Number(value); // Permitimos '' para evitar errores al borrar temporalmente
+        setTempValues((prevValues) => ({
+            ...prevValues,
+            [itemId]: parsedValue,
+        }));
+    
+        if (parsedValue !== '' && parsedValue > 0) {
+            // Si el valor es válido, actualizamos el carrito en tiempo real
+            updateQuantity(itemId, parsedValue);
+        }
+    };
+    
+    const handleBlur = (itemId, value) => {
+        const finalValue = value === '' ? 1 : Number(value); // Si está vacío, asumimos 1 como mínimo
+        setTempValues((prevValues) => ({
+            ...prevValues,
+            [itemId]: finalValue,
+        }));
+        updateQuantity(itemId, finalValue); // Actualizamos el carrito al perder el foco
+    };
+    
+    
 
     const getCartAmount = () => {
         return Object.entries(cartItems).reduce((total, [itemId, quantity]) => {
@@ -122,7 +149,7 @@ useEffect(() => {
         search, setSearch, showSearch, setShowSearch,
         cartItems, addToCart,
         getCartCount,updateQuantity, getCartAmount,
-        navigate, backenUrl, token, setToken,setCartItems
+        navigate, backenUrl, token, setToken,setCartItems, handleInputChange, tempValues, handleBlur
     }
 
   
