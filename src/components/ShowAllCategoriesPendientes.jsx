@@ -6,35 +6,35 @@ import {assets} from '../assets/assets'
 const callouts = [
     {
         name: 'Corazón',
-        description: 'See collection',
+        description: 'Ver colección',
         imageSrc: assets.categoria_corazon,
         imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
         href: '/collection/pendientes/corazon',
     },
     {
         name: 'Aro',
-        description: 'See collection',
+        description: 'Ver colección',
         imageSrc: assets.categoria_aro,
         imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
         href: '/collection/pendientes/aro',
     },
     {
         name: 'Colette',
-        description: 'See collection',
+        description: 'Ver colección',
         imageSrc: assets.categoria_colette,
         imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
         href: '/collection/pendientes/colette',
     },
     {
         name: 'Lea',
-        description: 'See collection',
+        description: 'Ver colección',
         imageSrc: assets.categoria_lea,
         imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
         href: '/collection/pendientes/lea',
     },
     {
         name: 'Gota',
-        description: 'See collection',
+        description: 'Ver colección',
         imageSrc: assets.categoria_gota,
         imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
         href: '/collection/pendientes/gota',
@@ -47,7 +47,7 @@ const ShowAllCategoriesPendientes = () => {
             <div className="mx-auto max-w-7xl">
                 <div className="mx-auto max-w-2xl py-6 sm:py-6 lg:max-w-none lg:py-10">
                     <div className='text-center py-8 text-3xl'>
-                        <Title text1={'SHOW ALL'} text2={'EARRINGS'} />
+                        <Title text1={'MOSTRAR TODOS'} text2={'LOS PENDIENTES'} />
                         <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>Añade un toque de autenticidad a tu estilo con nuestros pendientes artesanales, cuidadosamente elaborados a mano para ofrecerte piezas únicas y llenas de carácter. Únicos y exclusivos como tú.</p>
                     </div>
 

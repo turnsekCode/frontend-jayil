@@ -22,7 +22,7 @@ const About = () => {
       <Title text1={'EL VALOR DEL'} text2={'TRABAJO A MANO'} />
       </div>
       <div className='flex flex-col lg:flex-row mb:20'>
-        <div className='border px-10 md:px-16 py-8 sm:py-9 flex flex-col gap-5'>
+        <div className='border px-5 md:px-16 py-8 sm:py-9 flex flex-col gap-5'>
           <p className='text-gray-600'>El material usado para la artesanía es la arcilla polimérica, un material ligero, versátil y no tóxico. Todas las piezas van horneadas, lijadas y acabadas con resina, barniz o mate. Cada uno de los modelos pueden ser totalmente personalizados, de a cuerdo a tu preferencia de color o acabado siendo así un complemento totalmente único y exclusivo.</p>
           <p className='text-gray-600'>Crear estos accesorios es algo que me llena, me gusta y disfruto mucho. Aportar valor a la vida de cada mujer que decida usarlos es algo asombroso. Espero que al usarlos te sientas única y bonita como ya lo eres.</p>
         </div>

@@ -8,8 +8,8 @@ import { FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   const currentYear = new Date().getFullYear(); // Obtiene el año actual
   return (
-    <div>
-      <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-20 text-sm'>
+    <footer>
+      <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-14 text-sm'>
         <div>
             <img src={assets.logo} alt="" className='mb-5 w-32' />
             <p className='w-full md:w-2/3 text-gray-600 text-lg'>Producto Artesanal</p>
@@ -42,7 +42,7 @@ const Footer = () => {
         <hr/>
         <p className='py-5 text-sm text-center'>Copyright {currentYear}@ jayil.es - Todos los derechos reservados</p>
       </div>
-    </div>
+    </footer>
   )
 }
 
