@@ -11,6 +11,9 @@ const PlaceOrder = () => {
   const { navigate, cartItems, products, delivery_fee, getCartAmount, currency } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
+  const [coupon, setCoupon] = useState(''); // Estado para el cupón ingresado
+  const [discount, setDiscount] = useState(0); // Estado para el descuento aplicado
+  const [couponError, setCouponError] = useState(''); // Estado para manejar errores del cupón
 
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -77,7 +80,7 @@ const PlaceOrder = () => {
         name: productData?.name,
         quantity: item?.quantity,
         price: productData?.price,
-        image: productData?.image[0]
+        image: productData?.image[0],
       };
     });
 
@@ -97,7 +100,8 @@ const PlaceOrder = () => {
         getCartAmount() > 45
           ? 'Gratis (para España peninsular)'
           : `${currency} ${delivery_fee.toFixed(2)}`,
-      total: getCartAmount() + delivery_fee,
+      total: getCartAmount() + delivery_fee - discount,
+      discount,
       currency,
     };
 
@@ -110,6 +114,28 @@ const PlaceOrder = () => {
       alert('Hubo un error al enviar el correo.');
     } finally {
       setIsSending(false);
+    }
+  };
+
+  const applyCoupon = () => {
+    // Lógica de validación de cupones
+    const validCoupons = {
+      DESCUENTO10: 0.1, // 10% de descuento
+      ENVIOGRATIS: delivery_fee, // Descuento igual al costo de envío
+      DESCUENTO20: 0.2, // 20% de descuento
+    };
+
+    if (validCoupons[coupon]) {
+      const discountValue =
+        typeof validCoupons[coupon] === 'number'
+          ? getCartAmount() * validCoupons[coupon]
+          : validCoupons[coupon];
+
+      setDiscount(discountValue);
+      setCouponError('');
+    } else {
+      setDiscount(0);
+      setCouponError('Cupón inválido o expirado');
     }
   };
 
@@ -211,79 +237,66 @@ const PlaceOrder = () => {
 
       {/* Right side */}
       <div className='mt-8'>
-        <div className='mt-8 min-w-80'>
-          <div className='w-full'>
-            <div className='text-2xl'>
-              <Title text1={'TOTAL DEL'} text2={'CARRITO'} />
-            </div>
-            <div className='flex flex-col gap-2 mt-2 text-sm'>
-              {cartData.map((item, index) => {
-                const productData = products.find((product) => product._id === item._id);
-                return (
-                  <div key={index} className='flex justify-between'>
-                    <p>{productData?.name} x{item?.quantity}</p>
-                    <p>{currency}{productData?.price.toFixed(2)}</p>
-                  </div>
-                );
-              })}
-              <div className='flex justify-between'>
-                <p>Subtotal</p>
-                <p>
-                  {currency}{' '}
-                  {getCartAmount() === 0
-                    ? '0.00'
-                    : getCartAmount().toFixed(2)}
-                </p>
+        <div className='text-2xl'>
+          <Title text1={'TOTAL DEL'} text2={'CARRITO'} />
+        </div>
+        <div className='flex flex-col gap-2 mt-2 text-sm'>
+          {cartData.map((item, index) => {
+            const productData = products.find((product) => product._id === item._id);
+            return (
+              <div key={index} className='flex justify-between'>
+                <p>{productData?.name} x{item?.quantity}</p>
+                <p>{currency}{productData?.price.toFixed(2)}</p>
               </div>
-              <hr />
-              <div className='flex justify-between'>
-                <p>Costo de envío</p>
-                <p>
-                  {getCartAmount() > 45
-                    ? 'Gratis (para España peninsular)'
-                    : `${currency} ${delivery_fee.toFixed(2)}`}
-                </p>
-              </div>
-              <hr />
-              <div className='flex justify-between'>
-                <p>Total</p>
-                <p>
-                  {currency}{' '}
-                  {getCartAmount() === 0
-                    ? '0.00'
-                    : getCartAmount() > 45
-                      ? getCartAmount().toFixed(2)
-                      : (getCartAmount() + delivery_fee).toFixed(2)}
-                </p>
-              </div>
-            </div>
+            );
+          })}
+          <div className='flex justify-between'>
+            <p>Subtotal</p>
+            <p>{currency} {getCartAmount().toFixed(2)}</p>
+          </div>
+          <hr />
+          <div className='flex justify-between'>
+            <p>Costo de envío</p>
+            <p>{getCartAmount() > 45 ? 'Gratis' : `${currency} ${delivery_fee.toFixed(2)}`}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p>Descuento</p>
+            <p>- {currency} {discount.toFixed(2)}</p>
+          </div>
+          <hr />
+          <div className='flex justify-between'>
+            <p>Total</p>
+            <p>{currency} {(getCartAmount() + delivery_fee - discount).toFixed(2)}</p>
           </div>
         </div>
+
+        {/* Campo para cupón */}
+        <div className='mt-4'>
+          <input
+            type='text'
+            value={coupon}
+            onChange={(e) => setCoupon(e.target.value)}
+            className='border px-2 py-1 w-full'
+            placeholder='Introduce tu cupón de descuento'
+          />
+          <button
+            onClick={applyCoupon}
+            className='bg-green-500 text-white px-4 py-2 mt-2'
+          >
+            Aplicar cupón
+          </button>
+          {couponError && <p className='text-red-500 mt-2'>{couponError}</p>}
+        </div>
+
         <div className='mt-12'>
-          <Title text1={'MÉTODO DE'} text2={'PAGO'} />
-          <div className='flex gap-3 flex-col lg:flex-row'>
-            <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-              <img className='h-5 mx-4' src={assets.stripe_logo} alt='' />
-            </div>
-            <div onClick={() => setMethod('razorpay')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'razorpay' ? 'bg-green-400' : ''}`}></p>
-              <img className='h-5 mx-4' src={assets.razorpay_logo} alt='' />
-            </div>
-            <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
-              <p className='text-gray-500 text-sm font-medium mx-4'>CASH ON DELIVERY</p>
-            </div>
-          </div>
-          <div className='w-full text-end mt-8'>
-            <button
-              onClick={sendEmail}
-              disabled={isSending || getCartAmount() === 0}
-              className='bg-[#C15470] text-white px-16 py-3 text-sm'
-            >
-              {isSending ? 'Enviando...' : 'REALIZAR PEDIDO'}
-            </button>
-          </div>
+          {/* Botón de envío */}
+          <button
+            onClick={sendEmail}
+            disabled={isSending || getCartAmount() === 0}
+            className='bg-[#C15470] text-white px-16 py-3 text-sm'
+          >
+            {isSending ? 'Enviando...' : 'REALIZAR PEDIDO'}
+          </button>
         </div>
       </div>
     </div>
