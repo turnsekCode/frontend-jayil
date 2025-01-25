@@ -23,10 +23,12 @@ import CorazonCollection from './pages/Corazon'
 import Collares from './pages/Collares'
 import Politica_privacidad from './pages/Politica_privacidad'
 import Detalles_envio from './pages/DetallesEnvio'
+import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+      <ScrollToTop />
       <ToastContainer />
       <NavBar/>
       <SearchBar />

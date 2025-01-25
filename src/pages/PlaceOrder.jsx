@@ -3,12 +3,12 @@ import Title from '../components/Title';
 import axios from 'axios';
 import { assets } from '../assets/assets';
 import { ShopContext } from '../context/ShopContext';
+import { toast } from 'react-toastify';
 
 const PlaceOrder = () => {
-  const backenUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [method, setMethod] = useState('cod');
-  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency } = useContext(ShopContext);
+  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, token,setCartItems } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
   const [coupon, setCoupon] = useState(''); // Estado para el cupón ingresado
@@ -139,8 +139,61 @@ const PlaceOrder = () => {
     }
   };
 
+  const onSubmitHandler = async (event) => {
+    event.preventDefault()
+    function generateOrderNumber() {
+      const timestamp = Math.floor(Date.now() / 1000); // Tiempo en segundos desde 1970
+      const shortTimestamp = timestamp.toString().slice(-6); // Últimos 6 dígitos del timestamp
+      const randomPart = Math.floor(Math.random() * 10000).toString().padStart(4, '0'); // Número aleatorio de 4 dígitos
+      return `PEDIDO-${shortTimestamp}-${randomPart}`;
+    }
+    //sendEmail()
+    try {
+      let orderItems = [];
+      for (const itemId in cartItems) {
+        const quantity = cartItems[itemId];
+        if (quantity > 0) {
+          const productData = products.find((product) => product._id === itemId);
+          if (productData) {
+            const itemInfo = structuredClone(productData);
+            itemInfo.quantity = quantity;
+            orderItems.push(itemInfo);
+          }
+        }
+      }
+    
+      let orderData = {
+        orderNumber: generateOrderNumber(),
+        address: shippingInfo,
+        items: orderItems,
+        amount: getCartAmount() + delivery_fee,
+      }
+      switch(method){
+        //api calls for cod
+        case 'cod':
+          const response = await axios.post(`${backenUrl}/api/order/place`, orderData)
+          if (response.data.success){
+            setCartItems({})
+          } else {
+            toast.error(response.data.mesasage)
+          }
+        break;
+
+        default:
+          break;
+      }
+
+
+
+    } catch (error) {
+      console.error("Error al procesar el carrito:", error);
+      toast.error(error.mesasage)
+    }
+    
+  }
+
   return (
-    <div className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
+    <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
       {/* Left side */}
       <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
         <div className='text-xl sm:text-2xl my-3'>
@@ -152,18 +205,20 @@ const PlaceOrder = () => {
             onChange={handleInputChange}
             className={`border ${errors.name ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Nombre'
+            placeholder='Nombre*'
             type='text'
             name='name'
+            required
           />
           <input
             value={shippingInfo.lastName}
             onChange={handleInputChange}
             className={`border ${errors.lastName ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Apellido'
+            placeholder='Apellido*'
             type='text'
             name='lastName'
+            required
           />
         </div>
         <input
@@ -171,18 +226,20 @@ const PlaceOrder = () => {
           onChange={handleInputChange}
           className={`border ${errors.email ? 'border-red-500' : 'border-gray-300'
             } rounded py-1.5 px-3.5 w-full`}
-          placeholder='Email'
+          placeholder='Email*'
           type='email'
           name='email'
+          required
         />
         <input
           value={shippingInfo.address}
           onChange={handleInputChange}
           className={`border ${errors.address ? 'border-red-500' : 'border-gray-300'
             } rounded py-1.5 px-3.5 w-full`}
-          placeholder='Dirección, portal, puerta'
+          placeholder='Dirección, portal, puerta*'
           type='text'
           name='address'
+          required
         />
         <div className='flex gap-3'>
           <input
@@ -190,18 +247,20 @@ const PlaceOrder = () => {
             onChange={handleInputChange}
             className={`border ${errors.province ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Provincia'
+            placeholder='Provincia*'
             type='text'
             name='province'
+            required
           />
           <input
             value={shippingInfo.city}
             onChange={handleInputChange}
             className={`border ${errors.city ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Ciudad'
+            placeholder='Ciudad*'
             type='text'
             name='city'
+            required
           />
         </div>
         <div className='flex gap-3'>
@@ -210,18 +269,20 @@ const PlaceOrder = () => {
             onChange={handleInputChange}
             className={`border ${errors.postalCode ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Código postal'
+            placeholder='Código postal*'
             type='number'
             name='postalCode'
+            required
           />
           <input
             value={shippingInfo.country}
             onChange={handleInputChange}
             className={`border ${errors.country ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='País'
+            placeholder='País*'
             type='text'
             name='country'
+            required
           />
         </div>
         <input
@@ -229,9 +290,10 @@ const PlaceOrder = () => {
           onChange={handleInputChange}
           className={`border ${errors.phone ? 'border-red-500' : 'border-gray-300'
             } rounded py-1.5 px-3.5 w-full`}
-          placeholder='Teléfono'
+          placeholder='Teléfono*'
           type='number'
           name='phone'
+          required
         />
       </div>
 
@@ -291,7 +353,7 @@ const PlaceOrder = () => {
         <div className='mt-12'>
           {/* Botón de envío */}
           <button
-            onClick={sendEmail}
+            type='submit'
             disabled={isSending || getCartAmount() === 0}
             className='bg-[#C15470] text-white px-16 py-3 text-sm'
           >
@@ -299,7 +361,7 @@ const PlaceOrder = () => {
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

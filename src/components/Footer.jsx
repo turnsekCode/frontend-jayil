@@ -23,10 +23,10 @@ const Footer = () => {
         <div>
             <p className='text-xl font-medium mb-5 text-gray-700'>Links rápidos</p>
             <ul className='flex flex-col gap-1 text-gray-600'>
-                <li><Link onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} to="/">Inicio</Link></li>
-                <li><Link onClick={() => window.scrollTo(0, 0)} to="/about">Sobre mi</Link></li>
-                <li><Link onClick={() => window.scrollTo(0, 0)} to="/delivery">Política de envíos</Link></li>
-                <li><Link onClick={() => window.scrollTo(0, 0)} to="/privacy_policy">Política de privacidad</Link></li>
+                <li><Link to="/">Inicio</Link></li>
+                <li><Link to="/about">Sobre mi</Link></li>
+                <li><Link to="/delivery">Política de envíos</Link></li>
+                <li><Link to="/privacy_policy">Política de privacidad</Link></li>
             </ul>
         </div>
 
