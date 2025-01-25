@@ -57,65 +57,6 @@ const PlaceOrder = () => {
 
   const [isSending, setIsSending] = useState(false);
 
-  const sendEmail = async () => {
-    const newErrors = {};
-
-    // Validar campos vacíos
-    Object.keys(shippingInfo).forEach((key) => {
-      if (!shippingInfo[key].trim()) {
-        newErrors[key] = true;
-      }
-    });
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    setIsSending(true);
-
-    const cartDetails = cartData.map((item) => {
-      const productData = products.find((product) => product._id === item._id);
-      return {
-        name: productData?.name,
-        quantity: item?.quantity,
-        price: productData?.price,
-        image: productData?.image[0],
-      };
-    });
-
-    function generateOrderNumber() {
-      const timestamp = Math.floor(Date.now() / 1000); // Tiempo en segundos desde 1970
-      const shortTimestamp = timestamp.toString().slice(-6); // Últimos 6 dígitos del timestamp
-      const randomPart = Math.floor(Math.random() * 10000).toString().padStart(4, '0'); // Número aleatorio de 4 dígitos
-      return `PEDIDO-${shortTimestamp}-${randomPart}`;
-    }
-
-    const emailData = {
-      orderNumber: generateOrderNumber(),
-      cartDetails,
-      shippingInfo,
-      subtotal: getCartAmount(),
-      shippingFee:
-        getCartAmount() > 45
-          ? 'Gratis (para España peninsular)'
-          : `${currency} ${delivery_fee.toFixed(2)}`,
-      total: getCartAmount() + delivery_fee - discount,
-      discount,
-      currency,
-    };
-
-    try {
-      await axios.post(`${backenUrl}/send-email`, emailData);
-      alert('Correo enviado exitosamente!');
-      navigate('/orders');
-    } catch (error) {
-      console.error('Error al enviar el correo:', error);
-      alert('Hubo un error al enviar el correo.');
-    } finally {
-      setIsSending(false);
-    }
-  };
 
   const applyCoupon = () => {
     // Lógica de validación de cupones
@@ -140,14 +81,16 @@ const PlaceOrder = () => {
   };
 
   const onSubmitHandler = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
+  
+    // Función para generar el número de pedido
     function generateOrderNumber() {
       const timestamp = Math.floor(Date.now() / 1000); // Tiempo en segundos desde 1970
       const shortTimestamp = timestamp.toString().slice(-6); // Últimos 6 dígitos del timestamp
       const randomPart = Math.floor(Math.random() * 10000).toString().padStart(4, '0'); // Número aleatorio de 4 dígitos
       return `PEDIDO-${shortTimestamp}-${randomPart}`;
     }
-    //sendEmail()
+  
     try {
       let orderItems = [];
       for (const itemId in cartItems) {
@@ -161,36 +104,97 @@ const PlaceOrder = () => {
           }
         }
       }
-    
+  
+      // Crear los datos del pedido
       let orderData = {
         orderNumber: generateOrderNumber(),
         address: shippingInfo,
         items: orderItems,
-        amount: getCartAmount() + delivery_fee,
-      }
-      switch(method){
-        //api calls for cod
+        amount: getCartAmount() + (getCartAmount() > 45 ? 0 : delivery_fee),
+      };
+  
+      // Llamada API para procesar el pedido
+      switch (method) {
         case 'cod':
-          const response = await axios.post(`${backenUrl}/api/order/place`, orderData)
-          if (response.data.success){
-            setCartItems({})
+          const response = await axios.post(`${backenUrl}/api/order/place`, orderData);
+          if (response.data.success) {
+            setCartItems({});
+            // Llamada para enviar el correo solo si el pedido fue exitoso
+            await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
           } else {
-            toast.error(response.data.mesasage)
+            toast.error(response.data.message); // Mensaje de error
           }
-        break;
-
+          break;
+  
         default:
           break;
       }
-
-
-
     } catch (error) {
       console.error("Error al procesar el carrito:", error);
-      toast.error(error.mesasage)
+      toast.error(error.message);
     }
-    
-  }
+  };
+  
+  // Función para enviar el correo
+  const sendEmail = async (orderData) => {
+    const newErrors = {};
+  
+    // Validar campos vacíos
+    Object.keys(shippingInfo).forEach((key) => {
+      if (!shippingInfo[key].trim()) {
+        newErrors[key] = true;
+      }
+    });
+  
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+  
+    setIsSending(true);
+  
+    const cartDetails = orderData.items.map((item) => {
+      const productData = products.find((product) => product._id === item._id);
+      return {
+        name: productData?.name,
+        quantity: item?.quantity,
+        price: productData?.price,
+        image: productData?.image[0],
+      };
+    });
+  
+    // Preparar datos para enviar el correo
+    const emailData = {
+      orderNumber: orderData?.orderNumber,
+      cartDetails,
+      shippingInfo,
+      subtotal: getCartAmount(),
+      shippingFee:
+        getCartAmount() > 45
+          ? 'Gratis (para España peninsular)'
+          : `${currency} ${delivery_fee.toFixed(2)}`,
+      total: getCartAmount() + delivery_fee - discount,
+      discount,
+      currency,
+    };
+  
+    try {
+      const response = await axios.post(`${backenUrl}/send-email`, emailData);
+      //console.log('Respuesta del servidor al enviar el correo:', response.data); // Revisa la respuesta de la API
+      if (response.data.success) {
+        toast.success('Correo enviado exitosamente!');
+      } else {
+        toast.error('Hubo un error al enviar el correo. ' + response.data.message);
+      }
+    } catch (error) {
+      console.error('Error al enviar el correo:', error); // Aquí puedes ver el error en detalle
+      toast.error('Hubo un error al enviar el correo.');
+    } finally {
+      setIsSending(false);
+    }
+  };
+  
+  
 
   return (
     <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
@@ -319,7 +323,7 @@ const PlaceOrder = () => {
           <hr />
           <div className='flex justify-between'>
             <p>Costo de envío</p>
-            <p>{getCartAmount() > 45 ? 'Gratis' : `${currency} ${delivery_fee.toFixed(2)}`}</p>
+            <p>{getCartAmount() > 45 ? 'Gratis (Para España peninsular)' : `${currency} ${delivery_fee.toFixed(2)}`}</p>
           </div>
           <div className='flex justify-between'>
             <p>Descuento</p>

@@ -8,6 +8,7 @@ import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 
 const categories = [
+    { name: 'VER TODAS', path: '/collection' },
     { name: 'COLLARES', path: '/collection/collares' },
     {
         name: 'PENDIENTES',
@@ -71,7 +72,7 @@ const NavBar = () => {
                     onMouseEnter={() => setIsSubmenuOpen(true)}
                     onMouseLeave={() => setIsSubmenuOpen(false)}
                 >
-                    <NavLink to="/collection" className="flex flex-col items-center gap-1">
+                    <NavLink to="/collection" className="flex flex-col items-center gap-1" onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}>
                         <div className="flex items-center gap-1">
                             <p>COLECCIÓN</p>
                             <IoIosArrowDown />
@@ -92,6 +93,7 @@ const NavBar = () => {
                                     onMouseLeave={() => setHoveredCategory(null)}
                                 >
                                     <NavLink
+                                        onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}
                                         to={category.path}
                                         className="px-4 py-2 hover:bg-gray-100 text-gray-800 flex items-center justify-between"
                                     >
@@ -110,6 +112,7 @@ const NavBar = () => {
                                         >
                                             {category.subcategories.map((subcategory, subIndex) => (
                                                 <NavLink
+                                                    onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}
                                                     key={subIndex}
                                                     to={subcategory.path}
                                                     className="block px-4 py-2 hover:bg-gray-100 text-gray-800"
@@ -163,7 +166,7 @@ const NavBar = () => {
             </div>
 
             {/* side bar menu para moviles*/}
-            <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}>
+            <div className={`z-10 absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}>
                 <div className='flex flex-col text-gray-600'>
                     <div onClick={() => handleNavClick()} className='flex items-center gap-4 p-3 cursor-pointer'>
                         <img src={assets.dropdown_icon} className='h-4 rotate-180' alt="" />
