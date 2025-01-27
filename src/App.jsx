@@ -31,10 +31,13 @@ import FloralCollection from './pages/Coleccion_floral'
 import OvaloCollection from './pages/Ovalo'
 import ElenaCollection from './pages/Elena'
 import CascadaCollection from './pages/Cascada'
+import ScrollToTopButton from './components/ScrollToTopButton'
+import Sumup from './pages/Sumup'
 
 const App = () => {
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+      <ScrollToTopButton />
       <ScrollToTop />
       <ToastContainer />
       <NavBar/>
@@ -67,6 +70,7 @@ const App = () => {
       <Route path='/privacy_policy' element={<Politica_privacidad/>} />
       <Route path='/delivery' element={<Detalles_envio/>} />
       <Route path='/verify' element={<Verify/>} />
+      <Route path='/sumup' element={<Sumup/>} />
      </Routes>
      <Footer />
     </div>

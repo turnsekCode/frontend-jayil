@@ -18,6 +18,7 @@ const ShopContextProvider = (props) =>{
     const [products, setProducts] = useState([]);
     const [token, setToken] = useState('');
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
    
 
 
@@ -121,9 +122,11 @@ useEffect(() => {
     };
     
     const getsProductsData = async () => {
+        setLoading(true); // Mueve esto al principio para indicar que el loading empieza.
         try {
             const response = await axios.get(`${backenUrl}/api/product/list`);
-            if(response.data.success){
+            
+            if (response.data.success) {
                 setProducts(response.data.products);
             } else {
                 toast.error(response.data.message);
@@ -131,8 +134,11 @@ useEffect(() => {
         } catch (error) {
             console.log(error);
             toast.error(error.message);
+        } finally {
+            setLoading(false); // Asegúrate de que el loading termine tanto en éxito como en error.
         }
-    }    
+    };
+      
 
     useEffect(() => {
         getsProductsData();
@@ -149,7 +155,7 @@ useEffect(() => {
         search, setSearch, showSearch, setShowSearch,
         cartItems, addToCart,
         getCartCount,updateQuantity, getCartAmount,
-        navigate, backenUrl, token, setToken,setCartItems, handleInputChange, tempValues, handleBlur
+        navigate, backenUrl, token, setToken,setCartItems, handleInputChange, tempValues, handleBlur, loading
     }
 
   

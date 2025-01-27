@@ -6,7 +6,7 @@ import ProductItem from '../components/ProductItem'
 
 const Collections = () => {
 
-  const {products, search, showSearch} = useContext(ShopContext);
+  const {products, search, showSearch, loading} = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category,setCategory] = useState([]);
@@ -134,6 +134,9 @@ const Collections = () => {
             <p className='flex gap-2'>
               <input type='checkbox' className='w-3' value={'Cascada'} onChange={toggleSubCategory}/> Cascada
             </p>
+            <p className='flex gap-2'>
+              <input type='checkbox' className='w-3' value={'Aro'} onChange={toggleSubCategory}/> Aro
+            </p>
           </div>
         </div>
       </div>
@@ -151,9 +154,9 @@ const Collections = () => {
         </div>
 
        {/* Map product */}
-       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-            {filterProducts.length === 0 ? (
-                Array.from({ length: 8 }).map((_, index) => (
+       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6 h-auto'>
+            {loading ? (
+                Array.from({ length: 4 }).map((_, index) => (
                     <div key={index} className="rounded-lg animate-pulse">
                         <div className="h-[250px] bg-gray-300 "></div>
                         <div className="h-4 bg-gray-300  mt-4 w-3/4"></div>

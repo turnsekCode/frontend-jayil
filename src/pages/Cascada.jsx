@@ -6,7 +6,7 @@ import CallToAction from '../components/CallToAction';
 
 const CascadaCollection = () => {
 
-  const {products, search, showSearch} = useContext(ShopContext);
+  const {products, search, showSearch, loading} = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState([]);
   const [sortType,setSortType] = useState('relavent')  
 
@@ -86,9 +86,9 @@ const CascadaCollection = () => {
         </div>
 
         {/* Map product */}
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-            {filterProducts.length === 0 ? (
-                Array.from({ length: 8 }).map((_, index) => (
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6 h-auto'>
+            {loading ? (
+                Array.from({ length: 4 }).map((_, index) => (
                     <div key={index} className="rounded-lg animate-pulse">
                         <div className="h-[250px] bg-gray-300 "></div>
                         <div className="h-4 bg-gray-300  mt-4 w-3/4"></div>

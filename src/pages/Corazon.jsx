@@ -6,7 +6,7 @@ import CallToAction from '../components/CallToAction';
 
 const CorazonCollection = () => {
 
-  const {products, search, showSearch} = useContext(ShopContext);
+  const {products, search, showSearch, loading} = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState([]);
   const [sortType,setSortType] = useState('relavent');
 
@@ -87,7 +87,7 @@ const CorazonCollection = () => {
 
        {/* Map product */}
        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-            {filterProducts.length === 0 ? (
+            {loading ? (
                 Array.from({ length: 8 }).map((_, index) => (
                     <div key={index} className="rounded-lg animate-pulse">
                         <div className="h-[250px] bg-gray-300 "></div>
