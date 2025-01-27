@@ -3,7 +3,7 @@ import ShowAllCategoriesPendientes from '../components/ShowAllCategoriesPendient
 
 const Pendientes = () => {
   return (
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 justify-center'>
       <ShowAllCategoriesPendientes />
     </div>
   )

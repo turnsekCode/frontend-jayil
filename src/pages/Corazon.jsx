@@ -85,21 +85,29 @@ const CorazonCollection = () => {
             </p>
         </div>
 
-          {/* Map product */}
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-        {
-            filterProducts.map((item, index)=>(
-                <ProductItem 
-                key={index} 
-                id={item._id} 
-                image={item.image} 
-                name={item.name} 
-                price={item.price}
-                category={item.category}
-                subCategory={item.subCategory}/>
-                
-            ))
-        }
+       {/* Map product */}
+       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
+            {filterProducts.length === 0 ? (
+                Array.from({ length: 8 }).map((_, index) => (
+                    <div key={index} className="rounded-lg animate-pulse">
+                        <div className="h-[250px] bg-gray-300 "></div>
+                        <div className="h-4 bg-gray-300  mt-4 w-3/4"></div>
+                        <div className="h-4 bg-gray-300  mt-2 w-1/2"></div>
+                    </div>
+                ))
+            ) : (
+                filterProducts.map((item, index) => (
+                    <ProductItem
+                        key={index}
+                        id={item._id}
+                        image={item.image}
+                        name={item.name}
+                        price={item.price}
+                        category={item.category}
+                        subCategory={item.subCategory}
+                    />
+                ))
+            )}
         </div>
         <CallToAction/>
       </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import Title from './Title'
 import { Link } from 'react-router-dom'
 import {assets} from '../assets/assets'
+import AnimatedBlock from './AnimatedBlock';
 
 const callouts = [
     {
@@ -39,6 +40,41 @@ const callouts = [
         imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
         href: '/collection/pendientes/gota',
     },
+    {
+        name: 'Colección Floral',
+        description: 'Ver colección',
+        imageSrc: assets.categoria_coleccion_floral,
+        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+        href: '/collection/pendientes/coleccion-floral',
+    },
+    {
+        name: 'Óvalo',
+        description: 'Ver colección',
+        imageSrc: assets.categoria_ovalo,
+        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+        href: '/collection/pendientes/ovalo',
+    },
+    {
+        name: 'Elena',
+        description: 'Ver colección',
+        imageSrc: assets.categoria_elena,
+        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+        href: '/collection/pendientes/elena',
+    },
+    {
+        name: 'Cascada',
+        description: 'Ver colección',
+        imageSrc: assets.categoria_cascada,
+        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+        href: '/collection/pendientes/cascada',
+    },
+    {
+        name: 'Hoja',
+        description: 'Ver colección',
+        imageSrc: assets.categoria_hoja,
+        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+        href: '/collection/pendientes/hoja',
+    },
 ]
 
 const ShowAllCategoriesPendientes = () => {
@@ -53,7 +89,8 @@ const ShowAllCategoriesPendientes = () => {
 
                     <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
                         {callouts.map((callout) => (
-                            <div key={callout.name} className="group relative p-4 border border-gray-400">
+                            <AnimatedBlock key={callout.name}>
+                            <div  className="group relative p-4 border border-gray-400">
                                 <img
                                     alt={callout.imageAlt}
                                     src={callout.imageSrc}
@@ -67,6 +104,7 @@ const ShowAllCategoriesPendientes = () => {
                                 </h3>
                                 <p className="text-base font-semibold text-gray-900">{callout.description}</p>
                             </div>
+                            </AnimatedBlock>
                         ))}
                     </div>
                 </div>

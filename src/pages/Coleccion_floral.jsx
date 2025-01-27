@@ -4,7 +4,7 @@ import Title from '../components/Title';
 import ProductItem from '../components/ProductItem'
 import CallToAction from '../components/CallToAction';
 
-const LeaCollection = () => {
+const FloralCollection = () => {
 
   const {products, search, showSearch} = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -22,7 +22,7 @@ const LeaCollection = () => {
 
     // Filtro por categoría "Pendientes" y subcategoría "Aro"
     const selectedCategory = "Pendientes";
-    const selectedSubcategory = "Lea";
+    const selectedSubcategory = "Colección Floral";
     productsCopy = productsCopy.filter(item =>
         item.category === selectedCategory && item.subCategory === selectedSubcategory
     );
@@ -71,7 +71,7 @@ const LeaCollection = () => {
       {/* Right side*/}
       <div className='flex-1'>
         <div className='flex justify-between text-base sm:text-2xl mb-4 gap-2'>
-          <Title text1={'COLECCIÓN DE'} text2={'LEA'}/>
+          <Title text1={'COLECCIÓN DE'} text2={'COLECCIÓN FLORAL'}/>
              {/* Product sort (clasificar) */}
           <select onChange={(e)=>setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2 sm:w-auto w-full'>
           <option value="relavent">Ordenar por: Relevancia</option>
@@ -81,12 +81,12 @@ const LeaCollection = () => {
         </div>
         <div >
             <p className='mb-10 text-gray-500 text-sm px-2'>
-            Los pendientes Lea son perfectos para el uso diario gracias a su diseño ligero y cómodo. Su versatilidad los convierte en el accesorio ideal para cualquier ocasión, desde una jornada laboral hasta una salida casual. Realza tu belleza natural y destaca con la elegancia discreta de estos pendientes artesanales que combinan a la perfección con tu día a día.
+            Los pendientes Hoja son perfectos para el uso diario gracias a su diseño ligero y cómodo. Su versatilidad los convierte en el accesorio ideal para cualquier ocasión, desde una jornada laboral hasta una salida casual. Realza tu belleza natural y destaca con la elegancia discreta de estos pendientes artesanales que combinan a la perfección con tu día a día.
             </p>
         </div>
 
-        {/* Map product */}
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
+       {/* Map product */}
+       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
             {filterProducts.length === 0 ? (
                 Array.from({ length: 8 }).map((_, index) => (
                     <div key={index} className="rounded-lg animate-pulse">
@@ -116,4 +116,4 @@ const LeaCollection = () => {
   )
 }
 
-export default LeaCollection
+export default FloralCollection

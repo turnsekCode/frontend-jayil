@@ -20,6 +20,11 @@ const categories = [
             { name: 'COLETTE', path: '/collection/pendientes/colette' },
             { name: 'GOTA', path: '/collection/pendientes/gota' },
             { name: 'LEA', path: '/collection/pendientes/lea' },
+            { name: 'COLECCIÓN FLORAL', path: '/collection/pendientes/coleccion-floral' },
+            { name: 'ÓVALO', path: '/collection/pendientes/ovalo' },
+            { name: 'ELENA', path: '/collection/pendientes/elena' },
+            { name: 'CASCADA', path: '/collection/pendientes/cascada' },
+            { name: 'HOJA', path: '/collection/pendientes/hoja' },
         ],
     },
     { name: 'PULSERAS', path: '/collection/pulseras' },
@@ -83,7 +88,7 @@ const NavBar = () => {
                     {/* Submenu */}
                     {isSubmenuOpen && (
                         <div
-                            className="absolute top-full left-0 bg-white shadow-md rounded-md py-2 w-48 transition-transform transform scale-100 opacity-100"
+                            className="absolute top-full left-0 bg-white shadow-md rounded-md py-2 w-48 transition-transform transform scale-100 opacity-100 z-10"
                         >
                             {categories.map((category, index) => (
                                 <div

@@ -24,6 +24,13 @@ import Collares from './pages/Collares'
 import Politica_privacidad from './pages/Politica_privacidad'
 import Detalles_envio from './pages/DetallesEnvio'
 import ScrollToTop from './components/ScrollToTop'
+import Verify from './pages/Verify'
+import HojaCollection from './pages/Hoja'
+import Pulseras from './pages/Pulseras'
+import FloralCollection from './pages/Coleccion_floral'
+import OvaloCollection from './pages/Ovalo'
+import ElenaCollection from './pages/Elena'
+import CascadaCollection from './pages/Cascada'
 
 const App = () => {
   return (
@@ -36,13 +43,20 @@ const App = () => {
       <Route path='/' element={<Home/>} />
       <Route path='/collection' element={<Collection/>} />
       <Route path='/collection/collares' element={<Collares/>} />
-      <Route path='/collection/pulseras' element={<Collection/>} />
+      <Route path='/collection/pulseras' element={<Pulseras/>} />
       <Route path='/collection/pendientes' element={<Pendientes />} />
       <Route path='/collection/pendientes/aro' element={<AroCollection/>} />
       <Route path='/collection/pendientes/corazon' element={<CorazonCollection/>} />
       <Route path='/collection/pendientes/colette' element={<ColetteCollection/>} />
       <Route path='/collection/pendientes/gota' element={<GotaCollection/>} />
       <Route path='/collection/pendientes/lea' element={<LeaCollection/>} />
+
+      <Route path='/collection/pendientes/ovalo' element={<OvaloCollection/>} />
+      <Route path='/collection/pendientes/coleccion-floral' element={<FloralCollection/>} />
+      <Route path='/collection/pendientes/elena' element={<ElenaCollection/>} />
+      <Route path='/collection/pendientes/cascada' element={<CascadaCollection/>} />
+      <Route path='/collection/pendientes/Hoja' element={<HojaCollection/>} />
+
       <Route path='/about' element={<About/>} />
       <Route path='/contact' element={<Contact/>} />
       <Route path='/product/:productId' element={<Product/>} />
@@ -52,6 +66,7 @@ const App = () => {
       <Route path='/orders' element={<Orders/>} />
       <Route path='/privacy_policy' element={<Politica_privacidad/>} />
       <Route path='/delivery' element={<Detalles_envio/>} />
+      <Route path='/verify' element={<Verify/>} />
      </Routes>
      <Footer />
     </div>

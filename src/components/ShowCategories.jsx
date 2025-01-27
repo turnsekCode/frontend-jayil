@@ -21,7 +21,7 @@ const callouts = [
     {
         name: 'PULSERAS',
         description: 'Ver colección',
-        imageSrc: assets.pendientes_category,
+        imageSrc: assets.pulseras_category,
         imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
         href: '/collection/pulseras',
     },

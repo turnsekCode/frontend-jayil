@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Title from '../components/Title';
 import axios from 'axios';
-import { assets } from '../assets/assets';
 import { ShopContext } from '../context/ShopContext';
 import { toast } from 'react-toastify';
+import { assets } from '../assets/assets';
 
 const PlaceOrder = () => {
 
   const [method, setMethod] = useState('cod');
-  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, token,setCartItems } = useContext(ShopContext);
+  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, token, setCartItems } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
   const [coupon, setCoupon] = useState(''); // Estado para el cupón ingresado
   const [discount, setDiscount] = useState(0); // Estado para el descuento aplicado
   const [couponError, setCouponError] = useState(''); // Estado para manejar errores del cupón
+  const [isSending, setIsSending] = useState(false); // Estado para manejar el envío del correo
+  const [errors, setErrors] = useState({}); // Estado para manejar errores de campos vacíos
 
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -27,15 +29,12 @@ const PlaceOrder = () => {
     phone: '',
   });
 
-  const [errors, setErrors] = useState({}); // Estado para manejar errores
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setShippingInfo({
       ...shippingInfo,
       [name]: value,
     });
-
     // Eliminar error del campo al escribir
     setErrors({
       ...errors,
@@ -48,15 +47,11 @@ const PlaceOrder = () => {
       const tempData = Object.entries(cartItems)
         .filter(([_, quantity]) => quantity > 0)
         .map(([itemId, quantity]) => ({ _id: itemId, quantity }));
-
       setCartData(tempData);
     } else {
       setCartData([]); // Si no hay datos, limpia el estado
     }
   }, [cartItems]);
-
-  const [isSending, setIsSending] = useState(false);
-
 
   const applyCoupon = () => {
     // Lógica de validación de cupones
@@ -82,7 +77,6 @@ const PlaceOrder = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-  
     // Función para generar el número de pedido
     function generateOrderNumber() {
       const timestamp = Math.floor(Date.now() / 1000); // Tiempo en segundos desde 1970
@@ -90,7 +84,6 @@ const PlaceOrder = () => {
       const randomPart = Math.floor(Math.random() * 10000).toString().padStart(4, '0'); // Número aleatorio de 4 dígitos
       return `PEDIDO-${shortTimestamp}-${randomPart}`;
     }
-  
     try {
       let orderItems = [];
       for (const itemId in cartItems) {
@@ -104,28 +97,52 @@ const PlaceOrder = () => {
           }
         }
       }
-  
       // Crear los datos del pedido
       let orderData = {
         orderNumber: generateOrderNumber(),
         address: shippingInfo,
         items: orderItems,
         amount: getCartAmount() + (getCartAmount() > 45 ? 0 : delivery_fee),
+        delivery_fee: delivery_fee
       };
-  
       // Llamada API para procesar el pedido
       switch (method) {
         case 'cod':
           const response = await axios.post(`${backenUrl}/api/order/place`, orderData);
           if (response.data.success) {
             setCartItems({});
+            setDiscount(0);
+            setCoupon('');
             // Llamada para enviar el correo solo si el pedido fue exitoso
             await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
           } else {
             toast.error(response.data.message); // Mensaje de error
           }
           break;
-  
+
+        case 'stripe':
+
+          const responseStripe = await axios.post(`${backenUrl}/api/order/stripe`, orderData,);
+          if (responseStripe.data.success) {
+            const { session_url } = responseStripe.data;
+            window.location.replace(session_url);
+          } else {
+            toast.error(responseStripe.data.message);
+          }
+          break;
+
+        case 'sumup':
+          const responseSumUp = await axios.post(`https://api.sumup.com/v0.1/checkouts/`, orderData);
+          console.log('Respuesta de SumUp:', responseSumUp.data); // Ver la respuesta de SumUp
+          if (responseSumUp.data.success) {
+            const { session_url } = responseSumUp.data;
+            window.location.replace(session_url);
+          } else {
+            toast.error(responseSumUp.data.message);
+          }
+          break;
+
+
         default:
           break;
       }
@@ -134,25 +151,21 @@ const PlaceOrder = () => {
       toast.error(error.message);
     }
   };
-  
+
   // Función para enviar el correo
   const sendEmail = async (orderData) => {
     const newErrors = {};
-  
     // Validar campos vacíos
     Object.keys(shippingInfo).forEach((key) => {
       if (!shippingInfo[key].trim()) {
         newErrors[key] = true;
       }
     });
-  
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-  
     setIsSending(true);
-  
     const cartDetails = orderData.items.map((item) => {
       const productData = products.find((product) => product._id === item._id);
       return {
@@ -162,7 +175,6 @@ const PlaceOrder = () => {
         image: productData?.image[0],
       };
     });
-  
     // Preparar datos para enviar el correo
     const emailData = {
       orderNumber: orderData?.orderNumber,
@@ -173,11 +185,12 @@ const PlaceOrder = () => {
         getCartAmount() > 45
           ? 'Gratis (para España peninsular)'
           : `${currency} ${delivery_fee.toFixed(2)}`,
-      total: getCartAmount() + delivery_fee - discount,
+      total: getCartAmount() > 45
+        ? getCartAmount() - discount // No sumar delivery_fee si es gratis
+        : getCartAmount() + delivery_fee - discount,
       discount,
       currency,
     };
-  
     try {
       const response = await axios.post(`${backenUrl}/send-email`, emailData);
       //console.log('Respuesta del servidor al enviar el correo:', response.data); // Revisa la respuesta de la API
@@ -193,8 +206,8 @@ const PlaceOrder = () => {
       setIsSending(false);
     }
   };
-  
-  
+
+
 
   return (
     <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
@@ -332,7 +345,15 @@ const PlaceOrder = () => {
           <hr />
           <div className='flex justify-between'>
             <p>Total</p>
-            <p>{currency} {(getCartAmount() + delivery_fee - discount).toFixed(2)}</p>
+            <p>
+              {currency}{" "}
+              {getCartAmount() === 0
+                ? "0.00"
+                : getCartAmount() > 45
+                  ? (getCartAmount() - discount).toFixed(2) // No sumar delivery_fee si es gratis
+                  : (getCartAmount() + delivery_fee - discount).toFixed(2)}
+            </p>
+
           </div>
         </div>
 
@@ -346,6 +367,7 @@ const PlaceOrder = () => {
             placeholder='Introduce tu cupón de descuento'
           />
           <button
+            type='button'
             onClick={applyCoupon}
             className='bg-green-500 text-white px-4 py-2 mt-2'
           >
@@ -353,16 +375,33 @@ const PlaceOrder = () => {
           </button>
           {couponError && <p className='text-red-500 mt-2'>{couponError}</p>}
         </div>
-
         <div className='mt-12'>
-          {/* Botón de envío */}
-          <button
-            type='submit'
-            disabled={isSending || getCartAmount() === 0}
-            className='bg-[#C15470] text-white px-16 py-3 text-sm'
-          >
-            {isSending ? 'Enviando...' : 'REALIZAR PEDIDO'}
-          </button>
+          <Title text1={'PAYMENT'} text2={'METHOD'} />
+          {/* payment method seletion */}
+          <div className='flex gap-3 flex-col lg:flex-row'>
+            <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
+              <img className='h-5 mx-4' src={assets.stripe_logo} alt="" />
+            </div>
+            <div onClick={() => setMethod('sumup')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'sumup' ? 'bg-green-400' : ''}`}></p>
+              <img className='h-5 mx-4' src={assets.razorpay_logo} alt="" />
+            </div>
+            <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
+              <p className='text-gray-500 text-sm font-medium mx-4'>CASH ON DELIVERY</p>
+            </div>
+          </div>
+          <div className='mt-12'>
+            {/* Botón de envío */}
+            <button
+              type='submit'
+              disabled={isSending || getCartAmount() === 0}
+              className='bg-[#C15470] text-white px-16 py-3 text-sm'
+            >
+              {isSending ? 'Enviando...' : 'REALIZAR PEDIDO'}
+            </button>
+          </div>
         </div>
       </div>
     </form>

@@ -16,14 +16,20 @@ import contact_img from './contact_img.png'
 import razorpay_logo from './razorpay_logo.png'
 import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
-import pendientes_category from './pendientes_category.jpg'
-import collares_category from './collares_category.jpg'
+import pendientes_category from './pendientes.jpg'
+import collares_category from './collares.jpg'
+import pulseras_category from './pulseras.jpg'
 import imagen_about from './imagen_about.png'
 import categoria_corazon from './categoria_corazon.jpg'
 import categoria_aro from './categoria_aro.jpg'
 import categoria_colette from './categoria_colette.jpg'
 import categoria_gota from './categoria_gota.jpg'
 import categoria_lea from './categoria_lea.jpg'
+import categoria_coleccion_floral from './categoria_coleccion_floral.jpg'
+import categoria_ovalo from './categoria_ovalo.jpg'
+import categoria_elena from './categoria_elena.jpg'
+import categoria_cascada from './categoria_cascada.jpg'
+import categoria_hoja from './categoria_hoja.jpg'
 import sobre_mi from './sobre_mi.webp'
 
 
@@ -49,11 +55,17 @@ export const assets = {
     cross_icon,
     pendientes_category,
     collares_category,
+    pulseras_category,
     imagen_about,
     categoria_corazon,
     categoria_aro,
     categoria_colette,
     categoria_gota,
     categoria_lea,
+    categoria_coleccion_floral,
+    categoria_ovalo,
+    categoria_elena,
+    categoria_cascada,
+    categoria_hoja,
     sobre_mi
 }
