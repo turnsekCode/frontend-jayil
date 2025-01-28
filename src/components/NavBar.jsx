@@ -25,6 +25,8 @@ const categories = [
             { name: 'ELENA', path: '/collection/pendientes/elena' },
             { name: 'CASCADA', path: '/collection/pendientes/cascada' },
             { name: 'HOJA', path: '/collection/pendientes/hoja' },
+            { name: 'KARINA', path: '/collection/pendientes/karina' },
+            { name: 'CÍRCULO', path: '/collection/pendientes/circulo' },
         ],
     },
     { name: 'PULSERAS', path: '/collection/pulseras' },

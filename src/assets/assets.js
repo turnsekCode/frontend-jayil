@@ -30,6 +30,8 @@ import categoria_ovalo from './categoria_ovalo.jpg'
 import categoria_elena from './categoria_elena.jpg'
 import categoria_cascada from './categoria_cascada.jpg'
 import categoria_hoja from './categoria_hoja.jpg'
+import categoria_karina from './karina.webp'
+import categoria_circulo from './circulo.webp'
 import sobre_mi from './sobre_mi.webp'
 
 
@@ -67,5 +69,7 @@ export const assets = {
     categoria_elena,
     categoria_cascada,
     categoria_hoja,
+    categoria_karina,
+    categoria_circulo,
     sobre_mi
 }

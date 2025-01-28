@@ -33,6 +33,8 @@ import ElenaCollection from './pages/Elena'
 import CascadaCollection from './pages/Cascada'
 import ScrollToTopButton from './components/ScrollToTopButton'
 import Sumup from './pages/Sumup'
+import CirculoCollection from './pages/Circulo'
+import KarinaCollection from './pages/Karina'
 
 const App = () => {
   return (
@@ -58,7 +60,10 @@ const App = () => {
       <Route path='/collection/pendientes/coleccion-floral' element={<FloralCollection/>} />
       <Route path='/collection/pendientes/elena' element={<ElenaCollection/>} />
       <Route path='/collection/pendientes/cascada' element={<CascadaCollection/>} />
-      <Route path='/collection/pendientes/Hoja' element={<HojaCollection/>} />
+      <Route path='/collection/pendientes/hoja' element={<HojaCollection/>} />
+      <Route path='/collection/pendientes/circulo' element={<CirculoCollection/>} />
+      <Route path='/collection/pendientes/karina' element={<KarinaCollection/>} />
+
 
       <Route path='/about' element={<About/>} />
       <Route path='/contact' element={<Contact/>} />

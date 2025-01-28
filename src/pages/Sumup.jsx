@@ -1,66 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-const Sumup = () => {
-  const [paymentLink, setPaymentLink] = useState(null);
+const SumUp = () => {
+  const [statusMessages, setStatusMessages] = useState([]); // Estado para mensajes del widget
+  const statusRef = useRef(null); // Referencia para el contenedor de mensajes
 
-  const handlePayment = async () => {
-    const amount = 10.0; // Monto del pago
-    const currency = "USD"; // Moneda
-    const customerEmail = "cliente@ejemplo.com"; // Email del cliente
-
-    try {
-      // Autenticar y obtener un token de acceso
-      const authResponse = await fetch("http://localhost:4000/auth", {
-        method: "POST",
-      });
-      const authData = await authResponse.json();
-
-      if (!authData.access_token) {
-        throw new Error("Error al autenticar: Token no recibido.");
-      }
-
-      const token = authData.access_token;
-
-      // Crear el enlace de pago
-      const checkoutResponse = await fetch(
-        "http://localhost:4000/create-checkout",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token, amount, currency, customerEmail }),
-        }
-      );
-
-      const checkoutData = await checkoutResponse.json();
-
-      if (!checkoutData.checkout_url) {
-        throw new Error("Error al crear el enlace de pago.");
-      }
-
-      // Redirigir al cliente al enlace de pago
-      window.location.replace(checkoutData.checkout_url);
-    } catch (error) {
-      console.error("Error en el proceso de pago:", error);
-      alert("Hubo un error durante el proceso de pago. Por favor, intenta de nuevo.");
-    }
+  // Función para actualizar los mensajes
+  const updateStatus = (message, elementType = "p") => {
+    setStatusMessages((prevMessages) => [
+      ...prevMessages,
+      { message, elementType },
+    ]);
   };
+
+  // Inicializar el widget SumUp cuando el componente se monta
+  useEffect(() => {
+    if (window.SumUpCard) {
+      window.SumUpCard.mount({
+        checkoutId: "demo", // ID de checkout de demostración
+        onResponse: (type, body) => {
+          updateStatus(`Tipo de respuesta: ${type}`);
+          updateStatus(`Respuesta completa: ${JSON.stringify(body)}`, "pre");
+        },
+      });
+
+      // Limpiar el widget al desmontar el componente
+      return () => {
+        if (window.SumUpCard) {
+          window.SumUpCard.unmount();
+        }
+      };
+    } else {
+      updateStatus("El SDK de SumUp no está cargado.");
+    }
+  }, []);
 
   return (
     <div>
-      <h1>Pagos en Línea con SumUp</h1>
-      <button onClick={handlePayment}>Pagar con SumUp</button>
-      {paymentLink && (
-        <div>
-          <p>Enlace de pago creado:</p>
-          <a href={paymentLink} target="_blank" rel="noopener noreferrer">
-            Pagar ahora
-          </a>
-        </div>
-      )}
+      <h1>Demo de Widget de Pago con SumUp</h1>
+      <div id="sumup-card"></div> {/* Aquí se montará el widget de SumUp */}
+
+      {/* Contenedor para mostrar los mensajes */}
+      <div
+        ref={statusRef}
+        className="mt-4 bg-gray-100 p-4 rounded border max-w-lg"
+      >
+        <h2 className="font-bold">Estado:</h2>
+        {statusMessages.map((status, index) =>
+          status.elementType === "p" ? (
+            <p key={index}>{status.message}</p>
+          ) : (
+            <pre key={index}>{status.message}</pre>
+          )
+        )}
+      </div>
     </div>
   );
 };
 
-export default Sumup;
+export default SumUp;

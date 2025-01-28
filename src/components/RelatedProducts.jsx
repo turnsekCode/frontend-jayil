@@ -4,7 +4,7 @@ import Title from '../components/Title';
 import ProductItem from './ProductItem';
 
 const RelatedProducts = ({category, subCategory}) => {
-console.log("relate", category, subCategory)
+
     const {products} = useContext(ShopContext);
     const [related, setRelated] = useState([]);
 

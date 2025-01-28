@@ -33,8 +33,8 @@ const ShowCategories = () => {
             <div className="mx-auto max-w-7xl">
                 <div className="mx-auto max-w-2xl py-6 sm:py-6 lg:max-w-none lg:py-10">
                     <div className='text-center py-8 text-3xl'>
-                        <Title text1={'VER'} text2={'CATEGORIAS'} />
-                        <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, dolores.</p>
+                        <Title text1={'VER'} text2={'CATEGORÍAS'} />
+                       {/* <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, dolores.</p> */}
                     </div>
 
                     <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">

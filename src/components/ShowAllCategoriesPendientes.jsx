@@ -75,6 +75,20 @@ const callouts = [
         imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
         href: '/collection/pendientes/hoja',
     },
+    {
+        name: 'Karina',
+        description: 'Ver colección',
+        imageSrc: assets.categoria_karina,
+        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+        href: '/collection/pendientes/karina',
+    },
+    {
+        name: 'Círculo',
+        description: 'Ver colección',
+        imageSrc: assets.categoria_circulo,
+        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+        href: '/collection/pendientes/circulo',
+    },
 ]
 
 const ShowAllCategoriesPendientes = () => {
