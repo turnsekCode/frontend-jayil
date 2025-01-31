@@ -19,7 +19,7 @@ const callouts = [
         href: '/collection/collares',
     },
     {
-        name: 'PULSERAS',
+        name: 'PULSERAS Y ANILLOS',
         description: 'Ver colección',
         imageSrc: assets.pulseras_category,
         imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',

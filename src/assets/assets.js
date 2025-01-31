@@ -33,6 +33,10 @@ import categoria_hoja from './categoria_hoja.jpg'
 import categoria_karina from './karina.webp'
 import categoria_circulo from './circulo.webp'
 import sobre_mi from './sobre_mi.webp'
+import homeWeb from './home WEB.jpg'
+import homeMovil from './HOME MOVIL.jpg'
+import fornituraWeb from './fornitura web.jpg'
+import fornituraMovil from './fornitura.jpg'
 
 
 
@@ -71,5 +75,10 @@ export const assets = {
     categoria_hoja,
     categoria_karina,
     categoria_circulo,
-    sobre_mi
+    sobre_mi,
+    homeWeb,
+    homeMovil,
+    fornituraWeb,
+    fornituraMovil
+
 }

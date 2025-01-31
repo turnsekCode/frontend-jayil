@@ -28,6 +28,17 @@ const About = () => {
         </div>
         <img className='w-full lg:max-w-[460px] object-cover' src={assets.sobre_mi} alt="" />
       </div>
+
+      <div className='my-10 flex flex-col lg:flex-row gap-16'>
+      <div className='my-10 flex flex-col lg:flex-row gap-16'>
+        <div className='flex flex-col justify-center gap-6 lg:w-2/4 text-gray-600'>
+          <p>Recuerda que puedes elegir el tope o la fornitura de la oreja de cada pendiente en dorado o plateado, según la disponibilidad del modelo. Al realizar tu pedido, solo espera nuestro contacto para seleccionar la opción que prefieras. Elegir una buena fornitura o tope de acero inoxidable garantiza comodidad y durabilidad, evitando alergias e irritaciones en la piel.</p>
+          <p className='uppercase'> A continuación, te dejamos una breve descripción de algunos tipos de fornitura y sus ventajas.</p>
+        </div>
+        <img className='w-full lg:max-w-[550px] object-cover  hidden md:block' src={assets.fornituraWeb} alt="" />
+        <img className='w-full lg:max-w-[550px] object-cover block md:hidden ' src={assets.fornituraMovil} alt="" />
+      </div>
+      </div>
       <CallToAction />
     </div>
   )

@@ -32,9 +32,9 @@ import OvaloCollection from './pages/Ovalo'
 import ElenaCollection from './pages/Elena'
 import CascadaCollection from './pages/Cascada'
 import ScrollToTopButton from './components/ScrollToTopButton'
-import Sumup from './pages/Sumup'
 import CirculoCollection from './pages/Circulo'
 import KarinaCollection from './pages/Karina'
+import Success from './pages/Success'
 
 const App = () => {
   return (
@@ -75,7 +75,7 @@ const App = () => {
       <Route path='/privacy_policy' element={<Politica_privacidad/>} />
       <Route path='/delivery' element={<Detalles_envio/>} />
       <Route path='/verify' element={<Verify/>} />
-      <Route path='/sumup' element={<Sumup/>} />
+      <Route path='/success' element={<Success/>} />
      </Routes>
      <Footer />
     </div>

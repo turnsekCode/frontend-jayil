@@ -4,18 +4,20 @@ import axios from 'axios';
 import { ShopContext } from '../context/ShopContext';
 import { toast } from 'react-toastify';
 import { assets } from '../assets/assets';
+import SumupPopUp from '../components/SumupPopUp';
 
 const PlaceOrder = () => {
 
   const [method, setMethod] = useState('cod');
-  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, token, setCartItems } = useContext(ShopContext);
-
+  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, token, setCartItems, setCheckoutToken, checkoutToken } = useContext(ShopContext);
+  console.log("amount", getCartAmount())
   const [cartData, setCartData] = useState([]);
   const [coupon, setCoupon] = useState(''); // Estado para el cupón ingresado
   const [discount, setDiscount] = useState(0); // Estado para el descuento aplicado
   const [couponError, setCouponError] = useState(''); // Estado para manejar errores del cupón
   const [isSending, setIsSending] = useState(false); // Estado para manejar el envío del correo
   const [errors, setErrors] = useState({}); // Estado para manejar errores de campos vacíos
+  const [isOpen, setIsOpen] = useState(false);
 
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -108,34 +110,54 @@ const PlaceOrder = () => {
       // Llamada API para procesar el pedido
       switch (method) {
         case 'cod':
+          setIsSending(true);
           const response = await axios.post(`${backenUrl}/api/order/place`, orderData);
           if (response.data.success) {
             setCartItems({});
             setDiscount(0);
             setCoupon('');
+            setIsSending(false);
             // Llamada para enviar el correo solo si el pedido fue exitoso
             await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
           } else {
             toast.error(response.data.message); // Mensaje de error
+            setIsSending(false);
           }
           break;
 
         case 'stripe':
-
+          setIsSending(true);
           const responseStripe = await axios.post(`${backenUrl}/api/order/stripe`, orderData,);
           if (responseStripe.data.success) {
             const { session_url } = responseStripe.data;
             window.location.replace(session_url);
+            setIsSending(false);
           } else {
             toast.error(responseStripe.data.message);
+            setIsSending(false);
           }
           break;
 
         case 'sumup':
-          navigate('/sumup');
+          setIsSending(true);
+          try {
+            const response = await axios.post(`${backenUrl}/api/order/sumup`, orderData,);
+            const data = await response.data;
+         
+            if (data) {
+              setCheckoutToken(data);
+              setIsOpen(true)
+              setIsSending(false);
+            } else {
+              alert("Error al crear el checkout.");
+              setIsSending(false);
+            }
+          } catch (error) {
+            console.error("Error al crear el checkout:", error);
+            alert("Hubo un error al crear el checkout.");
+            setIsSending(false);
+          }
           break;
-
-
         default:
           break;
       }
@@ -145,6 +167,7 @@ const PlaceOrder = () => {
     }
   };
 
+ 
   // Función para enviar el correo
   const sendEmail = async (orderData) => {
     const newErrors = {};
@@ -349,7 +372,8 @@ const PlaceOrder = () => {
 
           </div>
         </div>
-
+        {/* popup sumup */}
+        <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} />
         {/* Campo para cupón */}
         <div className='mt-4'>
           <input

@@ -8,12 +8,14 @@ import ShowCategories from '../components/ShowCategories'
 import CallToAction from '../components/CallToAction'
 import ImagePromo from '../components/ImagePromo'
 import SeccionAyuda from '../components/SeccionAyuda'
+import HomeImage from '../components/HomeImage'
 
 const Home = () => {
   return (
     <div>
       <Hero />
       <ShowCategories />
+      <HomeImage/>
       <LatestCollection />
       <ImagePromo />
       <SeccionAyuda />
