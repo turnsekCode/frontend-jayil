@@ -46,11 +46,16 @@ const Cart = () => {
                 <input
                   onChange={(e) => {
                     const value = e.target.value;
-                    handleInputChange(item._id, value === '' ? '' : Number(value)); // Manejamos el estado temporal
+                    const numericValue = value === '' ? '' : Number(value);
+
+                    // Validar que el valor no sea mayor que 2
+                    if (numericValue <= 2) {
+                      handleInputChange(item._id, numericValue); // Solo actualizamos si el valor es válido
+                    }
                   }}
                   onBlur={(e) => {
                     const value = e.target.value;
-                    const quantity = value === '' ? 1 : Number(value); // Si está vacío, asumimos que el mínimo es 1
+                    const quantity = value === '' ? 1 : Math.min(Number(value), 2); // Asegurarse de que el valor no sea mayor que 2
                     handleBlur(item._id, quantity); // Al perder el foco, actualizamos
                   }}
                   value={tempValues[item._id] ?? item.quantity} // Mostramos el estado temporal o la cantidad original
@@ -59,6 +64,7 @@ const Cart = () => {
                   min={1}
                   max={2}
                 />
+
 
                 <img onClick={() => updateQuantity(item._id, 0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src={assets.bin_icon} alt="" />
               </div>

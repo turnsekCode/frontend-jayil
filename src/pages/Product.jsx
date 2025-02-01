@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom'
 import {ShopContext} from '../context/ShopContext'
-import { assets } from '../assets/assets';
 import RelatedProducts from '../components/RelatedProducts';
-import { toast } from 'react-toastify';
 
 const Product = () => {
 
@@ -13,7 +11,6 @@ const Product = () => {
   const [image, setImage] = useState('');
 
   const fetchProductsData = async () => {
-
     products.map((item)=>{
       if(item._id === productId){
         setProductData(item)
@@ -57,7 +54,7 @@ const Product = () => {
             </div>*/}
             <div className='mt-5 text-3xl font-medium'>{currency}{productData.price.toFixed(2)}</div>
             <p className='mt-5 text-gray-500 md:w-4/5'>{productData.description}</p>
-            <button onClick={()=>{addToCart(productData._id, productData.name), notify()}} className='bg-[#C15470] text-white mt-4 px-8 py-3 text-sm active:bg-gray-700'>AÑADIR AL CARRITO</button>
+            <button onClick={()=>{addToCart(productData._id, productData.name)}} className='bg-[#C15470] text-white mt-4 px-8 py-3 text-sm active:bg-gray-700'>AÑADIR AL CARRITO</button>
             <hr className='mt-8 sm:w-4/5'/>
             <p className='mt-5 text-gray-500 md:w-4/5'>Categoria: {productData.category}</p>
         </div>
