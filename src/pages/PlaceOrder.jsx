@@ -124,6 +124,7 @@ const PlaceOrder = () => {
             setDiscount(0);
             setCoupon('');
             setIsSending(false);
+            navigate("/success");
             // Llamada para enviar el correo solo si el pedido fue exitoso
             await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
           } else {
