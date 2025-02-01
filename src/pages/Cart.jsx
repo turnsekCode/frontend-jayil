@@ -60,7 +60,7 @@ const Cart = () => {
                     handleBlur(item._id, quantity); // Al perder el foco, actualizamos
                   }}
                   value={tempValues[item._id] ?? item.quantity} // Mostramos el estado temporal o la cantidad original
-                  className="border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1"
+                  className="border w-10 sm:w-30 px-1 sm:px-2 py-1"
                   type="number"
                   min={1}
                   max={2}
