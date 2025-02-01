@@ -21,7 +21,7 @@ const LatestCollection = () => {
       <div className="text-center py-8 text-3xl">
         <Title text1="ÚLTIMAS" text2="COLECCIONES" />
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, dolores.
+          Brilla con lo más nuevo, encuentra piezas exclusivas en nuestra última colección, ¡Elige tu favorita!
         </p>
       </div>
 

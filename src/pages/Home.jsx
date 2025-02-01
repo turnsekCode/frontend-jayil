@@ -9,19 +9,23 @@ import CallToAction from '../components/CallToAction'
 import ImagePromo from '../components/ImagePromo'
 import SeccionAyuda from '../components/SeccionAyuda'
 import HomeImage from '../components/HomeImage'
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Jayil.es</title>
+        <meta name='description' content='Joyería con diseño exclusivo hechas a mano' />
+      </Helmet>
+
       <Hero />
       <ShowCategories />
       <HomeImage/>
       <LatestCollection />
-      <ImagePromo />
       <SeccionAyuda />
       <BestSeller />
       <CallToAction />
-      <OurPolicy />
     </div>
   )
 }

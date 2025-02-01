@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { assets } from '../assets/assets';
 import SumupPopUp from '../components/SumupPopUp';
 import ClipLoader from 'react-spinners/ClipLoader'
+import { Helmet } from 'react-helmet-async';
 
 const PlaceOrder = () => {
 
@@ -108,8 +109,8 @@ const PlaceOrder = () => {
         address: shippingInfo,
         items: orderItems,
         amount: getCartAmount() > 45
-        ? getCartAmount() - discount // No sumar delivery_fee si es gratis
-        : getCartAmount() + delivery_fee - discount,
+          ? getCartAmount() - discount // No sumar delivery_fee si es gratis
+          : getCartAmount() + delivery_fee - discount,
         delivery_fee: delivery_fee
       };
       setOrderData(orderData);
@@ -236,202 +237,209 @@ const PlaceOrder = () => {
 
 
   return (
-    <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
-      {/* Left side */}
-      <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
-        <div className='text-xl sm:text-2xl my-3'>
-          <Title text1={'INFORMACIÓN DE'} text2={'ENVÍO'} />
-        </div>
-        <div className='flex gap-3'>
+    <>  
+    <Helmet>
+      <title>Jayil.es</title>
+      <meta name='description' content='Joyería con diseño exclusivo hechas a mano' />
+      <script src="https://gateway.sumup.com/gateway/ecom/card/v2/sdk.js"></script>
+    </Helmet>
+      <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
+        {/* Left side */}
+        <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
+          <div className='text-xl sm:text-2xl my-3'>
+            <Title text1={'INFORMACIÓN DE'} text2={'ENVÍO'} />
+          </div>
+          <div className='flex gap-3'>
+            <input
+              value={shippingInfo.name}
+              onChange={handleInputChange}
+              className={`border ${errors.name ? 'border-red-500' : 'border-gray-300'
+                } rounded py-1.5 px-3.5 w-full`}
+              placeholder='Nombre*'
+              type='text'
+              name='name'
+              required
+            />
+            <input
+              value={shippingInfo.lastName}
+              onChange={handleInputChange}
+              className={`border ${errors.lastName ? 'border-red-500' : 'border-gray-300'
+                } rounded py-1.5 px-3.5 w-full`}
+              placeholder='Apellido*'
+              type='text'
+              name='lastName'
+              required
+            />
+          </div>
           <input
-            value={shippingInfo.name}
+            value={shippingInfo.email}
             onChange={handleInputChange}
-            className={`border ${errors.name ? 'border-red-500' : 'border-gray-300'
+            className={`border ${errors.email ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Nombre*'
-            type='text'
-            name='name'
+            placeholder='Email*'
+            type='email'
+            name='email'
             required
           />
           <input
-            value={shippingInfo.lastName}
+            value={shippingInfo.address}
             onChange={handleInputChange}
-            className={`border ${errors.lastName ? 'border-red-500' : 'border-gray-300'
+            className={`border ${errors.address ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Apellido*'
+            placeholder='Dirección, portal, puerta*'
             type='text'
-            name='lastName'
+            name='address'
             required
           />
-        </div>
-        <input
-          value={shippingInfo.email}
-          onChange={handleInputChange}
-          className={`border ${errors.email ? 'border-red-500' : 'border-gray-300'
-            } rounded py-1.5 px-3.5 w-full`}
-          placeholder='Email*'
-          type='email'
-          name='email'
-          required
-        />
-        <input
-          value={shippingInfo.address}
-          onChange={handleInputChange}
-          className={`border ${errors.address ? 'border-red-500' : 'border-gray-300'
-            } rounded py-1.5 px-3.5 w-full`}
-          placeholder='Dirección, portal, puerta*'
-          type='text'
-          name='address'
-          required
-        />
-        <div className='flex gap-3'>
+          <div className='flex gap-3'>
+            <input
+              value={shippingInfo.province}
+              onChange={handleInputChange}
+              className={`border ${errors.province ? 'border-red-500' : 'border-gray-300'
+                } rounded py-1.5 px-3.5 w-full`}
+              placeholder='Provincia*'
+              type='text'
+              name='province'
+              required
+            />
+            <input
+              value={shippingInfo.city}
+              onChange={handleInputChange}
+              className={`border ${errors.city ? 'border-red-500' : 'border-gray-300'
+                } rounded py-1.5 px-3.5 w-full`}
+              placeholder='Ciudad*'
+              type='text'
+              name='city'
+              required
+            />
+          </div>
+          <div className='flex gap-3'>
+            <input
+              value={shippingInfo.postalCode}
+              onChange={handleInputChange}
+              className={`border ${errors.postalCode ? 'border-red-500' : 'border-gray-300'
+                } rounded py-1.5 px-3.5 w-full`}
+              placeholder='Código postal*'
+              type='number'
+              name='postalCode'
+              required
+            />
+            <input
+              value={shippingInfo.country}
+              onChange={handleInputChange}
+              className={`border ${errors.country ? 'border-red-500' : 'border-gray-300'
+                } rounded py-1.5 px-3.5 w-full`}
+              placeholder='País*'
+              type='text'
+              name='country'
+              required
+            />
+          </div>
           <input
-            value={shippingInfo.province}
+            value={shippingInfo.phone}
             onChange={handleInputChange}
-            className={`border ${errors.province ? 'border-red-500' : 'border-gray-300'
+            className={`border ${errors.phone ? 'border-red-500' : 'border-gray-300'
               } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Provincia*'
-            type='text'
-            name='province'
-            required
-          />
-          <input
-            value={shippingInfo.city}
-            onChange={handleInputChange}
-            className={`border ${errors.city ? 'border-red-500' : 'border-gray-300'
-              } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Ciudad*'
-            type='text'
-            name='city'
-            required
-          />
-        </div>
-        <div className='flex gap-3'>
-          <input
-            value={shippingInfo.postalCode}
-            onChange={handleInputChange}
-            className={`border ${errors.postalCode ? 'border-red-500' : 'border-gray-300'
-              } rounded py-1.5 px-3.5 w-full`}
-            placeholder='Código postal*'
+            placeholder='Teléfono*'
             type='number'
-            name='postalCode'
-            required
-          />
-          <input
-            value={shippingInfo.country}
-            onChange={handleInputChange}
-            className={`border ${errors.country ? 'border-red-500' : 'border-gray-300'
-              } rounded py-1.5 px-3.5 w-full`}
-            placeholder='País*'
-            type='text'
-            name='country'
+            name='phone'
             required
           />
         </div>
-        <input
-          value={shippingInfo.phone}
-          onChange={handleInputChange}
-          className={`border ${errors.phone ? 'border-red-500' : 'border-gray-300'
-            } rounded py-1.5 px-3.5 w-full`}
-          placeholder='Teléfono*'
-          type='number'
-          name='phone'
-          required
-        />
-      </div>
 
-      {/* Right side */}
-      <div className='mt-8'>
-        <div className='text-2xl'>
-          <Title text1={'TOTAL DEL'} text2={'CARRITO'} />
-        </div>
-        <div className='flex flex-col gap-2 mt-2 text-sm'>
-          {cartData.map((item, index) => {
-            const productData = products.find((product) => product._id === item._id);
-            return (
-              <div key={index} className='flex justify-between'>
-                <p>{productData?.name} x{item?.quantity}</p>
-                <p>{currency}{productData?.price.toFixed(2)}</p>
-              </div>
-            );
-          })}
-          <div className='flex justify-between'>
-            <p>Subtotal</p>
-            <p>{currency} {getCartAmount().toFixed(2)}</p>
+        {/* Right side */}
+        <div className='mt-8'>
+          <div className='text-2xl'>
+            <Title text1={'TOTAL DEL'} text2={'CARRITO'} />
           </div>
-          <hr />
-          <div className='flex justify-between'>
-            <p>Costo de envío</p>
-            <p>{getCartAmount() > 45 ? 'Gratis (Para España peninsular)' : `${currency} ${delivery_fee.toFixed(2)}`}</p>
-          </div>
-          <div className='flex justify-between'>
-            <p>Descuento</p>
-            <p>- {currency} {discount.toFixed(2)}</p>
-          </div>
-          <hr />
-          <div className='flex justify-between'>
-            <p>Total</p>
-            <p>
-              {currency}{" "}
-              {getCartAmount() === 0
-                ? "0.00"
-                : getCartAmount() > 45
-                  ? (getCartAmount() - discount).toFixed(2) // No sumar delivery_fee si es gratis
-                  : (getCartAmount() + delivery_fee - discount).toFixed(2)}
-            </p>
+          <div className='flex flex-col gap-2 mt-2 text-sm'>
+            {cartData.map((item, index) => {
+              const productData = products.find((product) => product._id === item._id);
+              return (
+                <div key={index} className='flex justify-between'>
+                  <p>{productData?.name} x{item?.quantity}</p>
+                  <p>{currency}{productData?.price.toFixed(2)}</p>
+                </div>
+              );
+            })}
+            <div className='flex justify-between'>
+              <p>Subtotal</p>
+              <p>{currency} {getCartAmount().toFixed(2)}</p>
+            </div>
+            <hr />
+            <div className='flex justify-between'>
+              <p>Costo de envío</p>
+              <p>{getCartAmount() > 45 ? 'Gratis (Para España peninsular)' : `${currency} ${delivery_fee.toFixed(2)}`}</p>
+            </div>
+            <div className='flex justify-between'>
+              <p>Descuento</p>
+              <p>- {currency} {discount.toFixed(2)}</p>
+            </div>
+            <hr />
+            <div className='flex justify-between'>
+              <p>Total</p>
+              <p>
+                {currency}{" "}
+                {getCartAmount() === 0
+                  ? "0.00"
+                  : getCartAmount() > 45
+                    ? (getCartAmount() - discount).toFixed(2) // No sumar delivery_fee si es gratis
+                    : (getCartAmount() + delivery_fee - discount).toFixed(2)}
+              </p>
 
+            </div>
           </div>
-        </div>
-        {/* popup sumup */}
-        <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} setCoupon={setCoupon} orderData={orderData} sendEmail={sendEmail} setOrderCancel={setOrderCancel} orderCancel={orderCancel}  />
-        {/* Campo para cupón */}
-        <div className='mt-4'>
-          <input
-            type='text'
-            value={coupon}
-            onChange={(e) => setCoupon(e.target.value)}
-            className='border px-2 py-1 w-full'
-            placeholder='Introduce tu cupón de descuento'
-          />
-          <button
-            type='button'
-            onClick={applyCoupon}
-            className='bg-green-500 text-white px-4 py-2 mt-2'
-          >
-            Aplicar cupón
-          </button>
-          {couponError && <p className='text-red-500 mt-2'>{couponError}</p>}
-        </div>
-        <div className='mt-12'>
-          <Title text1={'PAYMENT'} text2={'METHOD'} />
-          {/* payment method seletion */}
-          <div className='flex gap-3 flex-col lg:flex-row'>
-            <div onClick={() => setMethod('stripe')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-              <img className='h-5 ' src={assets.stripe_logo} alt="" />
-            </div>
-            <div onClick={() => setMethod('sumup')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'sumup' ? 'bg-green-400' : ''}`}></p>
-              <img className='h-7' src={assets.razorpay_logo} alt="" />
-            </div>
-            <div onClick={() => setMethod('cod')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
-              <p className='text-gray-500 text-sm font-medium'>CASH ON DELIVERY</p>
-            </div>
+          {/* popup sumup */}
+          <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} setCoupon={setCoupon} orderData={orderData} sendEmail={sendEmail} setOrderCancel={setOrderCancel} orderCancel={orderCancel} />
+          {/* Campo para cupón */}
+          <div className='mt-4'>
+            <input
+              type='text'
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+              className='border px-2 py-1 w-full'
+              placeholder='Introduce tu cupón de descuento'
+            />
+            <button
+              type='button'
+              onClick={applyCoupon}
+              className='bg-green-500 text-white px-4 py-2 mt-2'
+            >
+              Aplicar cupón
+            </button>
+            {couponError && <p className='text-red-500 mt-2'>{couponError}</p>}
           </div>
           <div className='mt-12'>
-            {/* Botón de envío */}
-            <button
-              type='submit'
-              disabled={isSending || getCartAmount() === 0}
-              className='bg-[#C15470] text-white px-5 text-sm w-[247px] h-[52px]'
-            >
-              {isSending ? <ClipLoader size={30} color="#ffffff"/> : 'REALIZAR PEDIDO'}
-            </button>
+            <Title text1={'PAYMENT'} text2={'METHOD'} />
+            {/* payment method seletion */}
+            <div className='flex gap-3 flex-col lg:flex-row'>
+              <div onClick={() => setMethod('stripe')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
+                <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
+                <img className='h-5 ' src={assets.stripe_logo} alt="" />
+              </div>
+              <div onClick={() => setMethod('sumup')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
+                <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'sumup' ? 'bg-green-400' : ''}`}></p>
+                <img className='h-7' src={assets.razorpay_logo} alt="" />
+              </div>
+              <div onClick={() => setMethod('cod')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
+                <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
+                <p className='text-gray-500 text-sm font-medium'>CASH ON DELIVERY</p>
+              </div>
+            </div>
+            <div className='mt-12'>
+              {/* Botón de envío */}
+              <button
+                type='submit'
+                disabled={isSending || getCartAmount() === 0}
+                className='bg-[#C15470] text-white px-5 text-sm w-[247px] h-[52px]'
+              >
+                {isSending ? <ClipLoader size={30} color="#ffffff" /> : 'REALIZAR PEDIDO'}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
 
