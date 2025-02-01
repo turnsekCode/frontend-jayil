@@ -5,19 +5,22 @@ import { ShopContext } from '../context/ShopContext';
 import { toast } from 'react-toastify';
 import { assets } from '../assets/assets';
 import SumupPopUp from '../components/SumupPopUp';
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const PlaceOrder = () => {
 
   const [method, setMethod] = useState('cod');
-  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, token, setCartItems, setCheckoutToken, checkoutToken } = useContext(ShopContext);
+  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, setCartItems, setCheckoutToken, setIsSending, isSending } = useContext(ShopContext);
   console.log("amount", getCartAmount())
   const [cartData, setCartData] = useState([]);
   const [coupon, setCoupon] = useState(''); // Estado para el cupón ingresado
   const [discount, setDiscount] = useState(0); // Estado para el descuento aplicado
-  const [couponError, setCouponError] = useState(''); // Estado para manejar errores del cupón
-  const [isSending, setIsSending] = useState(false); // Estado para manejar el envío del correo
+  const [couponError, setCouponError] = useState(''); // Estado para manejar errores del cupón correo
   const [errors, setErrors] = useState({}); // Estado para manejar errores de campos vacíos
   const [isOpen, setIsOpen] = useState(false);
+  const [orderData, setOrderData] = useState({});
+  const [paymentType, setPaymentType] = useState('Transferencia'); // Estado para el tipo de pago
+  const [orderCancel, setOrderCancel] = useState(null);
 
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -104,12 +107,16 @@ const PlaceOrder = () => {
         orderNumber: generateOrderNumber(),
         address: shippingInfo,
         items: orderItems,
-        amount: getCartAmount() + (getCartAmount() > 45 ? 0 : delivery_fee),
+        amount: getCartAmount() > 45
+        ? getCartAmount() - discount // No sumar delivery_fee si es gratis
+        : getCartAmount() + delivery_fee - discount,
         delivery_fee: delivery_fee
       };
+      setOrderData(orderData);
       // Llamada API para procesar el pedido
       switch (method) {
         case 'cod':
+          setPaymentType('Transferencia');
           setIsSending(true);
           const response = await axios.post(`${backenUrl}/api/order/place`, orderData);
           if (response.data.success) {
@@ -126,6 +133,7 @@ const PlaceOrder = () => {
           break;
 
         case 'stripe':
+          setPaymentType('Stripe');
           setIsSending(true);
           const responseStripe = await axios.post(`${backenUrl}/api/order/stripe`, orderData,);
           if (responseStripe.data.success) {
@@ -139,24 +147,26 @@ const PlaceOrder = () => {
           break;
 
         case 'sumup':
-          setIsSending(true);
+          setPaymentType('Sumup');
+          setOrderCancel(false)
           try {
+            setIsSending(true);
             const response = await axios.post(`${backenUrl}/api/order/sumup`, orderData,);
             const data = await response.data;
-         
             if (data) {
               setCheckoutToken(data);
               setIsOpen(true)
               setIsSending(false);
             } else {
-              alert("Error al crear el checkout.");
+              toast.error("Error al crear el checkout.");
               setIsSending(false);
             }
           } catch (error) {
             console.error("Error al crear el checkout:", error);
-            alert("Hubo un error al crear el checkout.");
+            toast.error("Hubo un error al crear el checkout.");
             setIsSending(false);
           }
+          setIsSending(false);
           break;
         default:
           break;
@@ -166,8 +176,6 @@ const PlaceOrder = () => {
       toast.error(error.message);
     }
   };
-
- 
   // Función para enviar el correo
   const sendEmail = async (orderData) => {
     const newErrors = {};
@@ -196,6 +204,7 @@ const PlaceOrder = () => {
       orderNumber: orderData?.orderNumber,
       cartDetails,
       shippingInfo,
+      paymentType,
       subtotal: getCartAmount(),
       shippingFee:
         getCartAmount() > 45
@@ -373,7 +382,7 @@ const PlaceOrder = () => {
           </div>
         </div>
         {/* popup sumup */}
-        <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} />
+        <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} setCoupon={setCoupon} orderData={orderData} sendEmail={sendEmail} setOrderCancel={setOrderCancel} orderCancel={orderCancel}  />
         {/* Campo para cupón */}
         <div className='mt-4'>
           <input
@@ -414,9 +423,9 @@ const PlaceOrder = () => {
             <button
               type='submit'
               disabled={isSending || getCartAmount() === 0}
-              className='bg-[#C15470] text-white px-16 py-3 text-sm'
+              className='bg-[#C15470] text-white px-5 text-sm w-[247px] h-[52px]'
             >
-              {isSending ? 'Enviando...' : 'REALIZAR PEDIDO'}
+              {isSending ? <ClipLoader size={30} color="#ffffff"/> : 'REALIZAR PEDIDO'}
             </button>
           </div>
         </div>

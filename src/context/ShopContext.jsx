@@ -19,7 +19,8 @@ const ShopContextProvider = (props) =>{
     const [token, setToken] = useState('');
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-     const [checkoutToken, setCheckoutToken] = useState(null);
+    const [checkoutToken, setCheckoutToken] = useState(null);
+    const [isSending, setIsSending] = useState(false); 
    
 
 
@@ -157,7 +158,7 @@ useEffect(() => {
         cartItems, addToCart,
         getCartCount,updateQuantity, getCartAmount,
         navigate, backenUrl, token, setToken,setCartItems, handleInputChange, tempValues, handleBlur, loading,
-        setCheckoutToken, checkoutToken
+        setCheckoutToken, checkoutToken, setIsSending, isSending
     }
 
   
