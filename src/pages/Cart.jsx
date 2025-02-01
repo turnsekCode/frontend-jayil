@@ -32,7 +32,7 @@ const Cart = () => {
           cartData.map((item, index) => {
             const productData = products.find((product) => product._id === item._id);
             return (
-              <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr,0.5fr,0.5fr] sm:grid-cols-[4fr_,fr,0.5fr] items-center gap-4'>
+              <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr,1.5fr,0.5fr] sm:grid-cols-[4fr_,1fr,0.5fr] items-center gap-4'>
                 <div className='flex items-start gap-6'>
                   <img className='w-16 sm:w-20' src={productData?.image[0]} alt="" />
                   <div>
@@ -43,6 +43,7 @@ const Cart = () => {
                     </div>
                   </div>
                 </div>
+                <div>
                 <input
                   onChange={(e) => {
                     const value = e.target.value;
@@ -64,8 +65,8 @@ const Cart = () => {
                   min={1}
                   max={2}
                 />
-
-
+                <p className='text-sm'>Solo puedes elegir dos productos</p>
+                </div>
                 <img onClick={() => updateQuantity(item._id, 0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src={assets.bin_icon} alt="" />
               </div>
             )
