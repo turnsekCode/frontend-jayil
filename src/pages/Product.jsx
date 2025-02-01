@@ -22,15 +22,6 @@ const Product = () => {
       }
     })
   }
-  
-  const notify = () =>{
-
-    toast.success("Producto añadido al carrito", {
-      position: "bottom-right",
-      className: 'foo-bar'
-    });
-  }
-
 
   useEffect(()=>{
     fetchProductsData()

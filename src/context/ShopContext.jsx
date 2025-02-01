@@ -61,13 +61,34 @@ useEffect(() => {
 }, [cartItems]);
 
 
+  const notify = () =>{
 
-    const addToCart = (itemId) => { // aqui envio el id de cada producto seleccionado para saber si hay mas de uno
-        setCartItems((prevCartItems) => ({
-            ...prevCartItems,
-            [itemId]: (prevCartItems[itemId] || 0) + 1,
-        }));
-    };
+    toast.success("Producto añadido al carrito", {
+      position: "bottom-right",
+      className: 'foo-bar'
+    });
+  }
+  const addToCart = (itemId) => {
+    setCartItems((prevCartItems) => {
+        const currentQuantity = prevCartItems[itemId] || 0;
+        
+        // Verificar si la cantidad actual es menos que 2
+        if (currentQuantity < 2) {
+            const updatedCart = {
+                ...prevCartItems,
+                [itemId]: currentQuantity + 1,
+            };
+            notify(); // Solo se ejecuta notify si la cantidad es menos de 2
+            return updatedCart;
+        } else {
+            // Si la cantidad es 2 o más, no hacer nada (opcional: puedes mostrar un mensaje de alerta)
+            toast.info("Solo puedes añadir hasta 2 unidades de este producto.");
+            return prevCartItems; // No modificamos el carrito si ya hay 2
+        }
+    });
+};
+
+
 
     const getCartCount = () => { // aqui hacemos un simple contador del total de productos seleccionados
         return Object.values(cartItems).reduce((total, count) => total + count, 0);
