@@ -65,7 +65,7 @@ const Cart = () => {
                   min={1}
                   max={2}
                 />
-                <p className='text-sm'>Solo puedes elegir dos productos</p>
+                <p className='text-[10px]'>Solo puedes elegir dos productos</p>
                 </div>
                 <img onClick={() => updateQuantity(item._id, 0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src={assets.bin_icon} alt="" />
               </div>
