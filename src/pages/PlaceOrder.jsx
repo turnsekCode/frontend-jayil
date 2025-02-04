@@ -240,12 +240,12 @@ const PlaceOrder = () => {
   // Función para generar el mensaje de WhatsApp
   const sendWhatsAppMessage = (orderData) => {
     const phoneNumber = "651148387"; // Reemplaza con el número al que quieres enviar el mensaje
-    const message = `📦 *Nuevo Pedido Realizado* \n
-  🛍 *Cliente:* ${orderData.address.name} \n
-  📧 *Email:* ${orderData.address.email} \n
-  📞 *Teléfono:* ${orderData.address.phone} \n
-  📍 *Número de pedido:* ${orderData.orderNumber} \n
-  💰 *Total:* ${orderData.amount} ${currency} \n
+    const message = `📦 *Nuevo Pedido Realizado*
+  🛍 *Cliente:* ${orderData.address.name} ${orderData.address.lastName}
+  📧 *Email:* ${orderData.address.email}
+  📞 *Teléfono:* ${orderData.address.phone}
+  📍 *Número de pedido:* ${orderData.orderNumber}
+  💰 *Total:* ${orderData.amount} ${currency}
   🛒 *Productos:* \n${orderData.items.map(item => `- ${item.name} x${item.quantity}`).join("\n")}`;
 
     // Crear el enlace de WhatsApp
