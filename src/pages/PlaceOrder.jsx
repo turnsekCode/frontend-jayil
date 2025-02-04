@@ -129,7 +129,7 @@ const PlaceOrder = () => {
             setIsSending(false);
             navigate("/success");
             // Llamada para enviar el correo solo si el pedido fue exitoso
-            //await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
+            await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
             // Enviar mensaje de WhatsApp
             sendWhatsAppMessage(orderData);
           } else {
@@ -239,7 +239,7 @@ const PlaceOrder = () => {
   };
   // Función para generar el mensaje de WhatsApp
   const sendWhatsAppMessage = (orderData) => {
-    const phoneNumber = "651148387"; // Reemplaza con el número al que quieres enviar el mensaje
+    const phoneNumber = "672563452"; // Reemplaza con el número al que quieres enviar el mensaje
     const message = `- *Nuevo Pedido Realizado*
   - *Cliente:* ${orderData.address.name} ${orderData.address.lastName}
   - *Email:* ${orderData.address.email}
