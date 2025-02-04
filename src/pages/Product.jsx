@@ -12,7 +12,7 @@ const Product = () => {
 
   const fetchProductsData = async () => {
     products.map((item)=>{
-      if(item._id === productId){
+      if(item.slug === productId){
         setProductData(item)
         setImage(item.image[0])
         return null;

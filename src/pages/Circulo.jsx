@@ -9,7 +9,7 @@ const CirculoCollection = () => {
   const {products, search, showSearch, loading} = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState([]);
   const [sortType,setSortType] = useState('relavent')
-
+  console.log(filterProducts)
   const applyFilter = () => {
     let productsCopy = products.slice();
 
@@ -106,6 +106,7 @@ const CirculoCollection = () => {
                         price={item.price}
                         category={item.category}
                         subCategory={item.subCategory}
+                        slug={item.slug}
                     />
                 ))
             )}

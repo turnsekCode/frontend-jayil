@@ -13,7 +13,7 @@ import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   return (
-    <div>
+    <section>
       <Helmet>
         <title>Jayil.es</title>
         <meta name='description' content='Joyería con diseño exclusivo hechas a mano' />
@@ -26,7 +26,7 @@ const Home = () => {
       <SeccionAyuda />
       <BestSeller />
       <CallToAction />
-    </div>
+    </section>
   )
 }
 

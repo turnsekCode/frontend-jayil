@@ -105,6 +105,7 @@ console.log(productsCopy)
                         price={item.price}
                         category={item.category}
                         subCategory={item.subCategory}
+                        slug={item.slug}
                     />
                 ))
             )}

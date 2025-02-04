@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet-async';
 
 const PlaceOrder = () => {
 
-  const [method, setMethod] = useState('cod');
+  const [method, setMethod] = useState('');
   const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, setCartItems, setCheckoutToken, setIsSending, isSending } = useContext(ShopContext);
   console.log("amount", getCartAmount())
   const [cartData, setCartData] = useState([]);
@@ -114,11 +114,13 @@ const PlaceOrder = () => {
         delivery_fee: delivery_fee
       };
       setOrderData(orderData);
+
       // Llamada API para procesar el pedido
       switch (method) {
         case 'cod':
           setPaymentType('Transferencia');
           setIsSending(true);
+          console.log(orderData)
           const response = await axios.post(`${backenUrl}/api/order/place`, orderData);
           if (response.data.success) {
             setCartItems({});
@@ -127,7 +129,9 @@ const PlaceOrder = () => {
             setIsSending(false);
             navigate("/success");
             // Llamada para enviar el correo solo si el pedido fue exitoso
-            await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
+            //await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
+            // Enviar mensaje de WhatsApp
+            sendWhatsAppMessage(orderData);
           } else {
             toast.error(response.data.message); // Mensaje de error
             setIsSending(false);
@@ -233,16 +237,33 @@ const PlaceOrder = () => {
       setIsSending(false);
     }
   };
+  // Función para generar el mensaje de WhatsApp
+  const sendWhatsAppMessage = (orderData) => {
+    const phoneNumber = "651148387"; // Reemplaza con el número al que quieres enviar el mensaje
+    const message = `📦 *Nuevo Pedido Realizado* \n
+  🛍 *Cliente:* ${orderData.address.name} \n
+  📧 *Email:* ${orderData.address.email} \n
+  📞 *Teléfono:* ${orderData.address.phone} \n
+  📍 *Número de pedido:* ${orderData.orderNumber} \n
+  💰 *Total:* ${orderData.amount} ${currency} \n
+  🛒 *Productos:* \n${orderData.items.map(item => `- ${item.name} x${item.quantity}`).join("\n")}`;
+
+    // Crear el enlace de WhatsApp
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Abrir WhatsApp en una nueva pestaña
+    window.open(url, "_blank");
+  };
 
 
 
   return (
-    <>  
-    <Helmet>
-      <title>Jayil.es</title>
-      <meta name='description' content='Joyería con diseño exclusivo hechas a mano' />
-      <script src="https://gateway.sumup.com/gateway/ecom/card/v2/sdk.js"></script>
-    </Helmet>
+    <>
+      <Helmet>
+        <title>Jayil.es</title>
+        <meta name='description' content='Joyería con diseño exclusivo hechas a mano' />
+        <script src="https://gateway.sumup.com/gateway/ecom/card/v2/sdk.js"></script>
+      </Helmet>
       <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh]'>
         {/* Left side */}
         <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
@@ -410,22 +431,25 @@ const PlaceOrder = () => {
             {couponError && <p className='text-red-500 mt-2'>{couponError}</p>}
           </div>
           <div className='mt-12'>
-            <Title text1={'PAYMENT'} text2={'METHOD'} />
+            <Title text1={'ELIGE METODO'} text2={'DE PAGO'} />
             {/* payment method seletion */}
             <div className='flex gap-3 flex-col lg:flex-row'>
-              <div onClick={() => setMethod('stripe')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
+              {/* <div onClick={() => setMethod('stripe')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
                 <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
                 <img className='h-5 ' src={assets.stripe_logo} alt="" />
-              </div>
+              </div>*/}
               <div onClick={() => setMethod('sumup')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
                 <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'sumup' ? 'bg-green-400' : ''}`}></p>
                 <img className='h-7' src={assets.razorpay_logo} alt="" />
               </div>
               <div onClick={() => setMethod('cod')} className='flex items-center gap-2 border p-2 px-2 cursor-pointer'>
                 <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
-                <p className='text-gray-500 text-sm font-medium'>CASH ON DELIVERY</p>
+                <p className='text-gray-500 text-sm font-medium'><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 48 48">
+                  <path fill="#fff" d="M4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5c5.1,0,9.8,2,13.4,5.6	C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19c0,0,0,0,0,0h0c-3.2,0-6.3-0.8-9.1-2.3L4.9,43.3z"></path><path fill="#fff" d="M4.9,43.8c-0.1,0-0.3-0.1-0.4-0.1c-0.1-0.1-0.2-0.3-0.1-0.5L7,33.5c-1.6-2.9-2.5-6.2-2.5-9.6	C4.5,13.2,13.3,4.5,24,4.5c5.2,0,10.1,2,13.8,5.7c3.7,3.7,5.7,8.6,5.7,13.8c0,10.7-8.7,19.5-19.5,19.5c-3.2,0-6.3-0.8-9.1-2.3	L5,43.8C5,43.8,4.9,43.8,4.9,43.8z"></path><path fill="#cfd8dc" d="M24,5c5.1,0,9.8,2,13.4,5.6C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19h0c-3.2,0-6.3-0.8-9.1-2.3	L4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5 M24,43L24,43L24,43 M24,43L24,43L24,43 M24,4L24,4C13,4,4,13,4,24	c0,3.4,0.8,6.7,2.5,9.6L3.9,43c-0.1,0.3,0,0.7,0.3,1c0.2,0.2,0.4,0.3,0.7,0.3c0.1,0,0.2,0,0.3,0l9.7-2.5c2.8,1.5,6,2.2,9.2,2.2	c11,0,20-9,20-20c0-5.3-2.1-10.4-5.8-14.1C34.4,6.1,29.4,4,24,4L24,4z"></path><path fill="#40c351" d="M35.2,12.8c-3-3-6.9-4.6-11.2-4.6C15.3,8.2,8.2,15.3,8.2,24c0,3,0.8,5.9,2.4,8.4L11,33l-1.6,5.8	l6-1.6l0.6,0.3c2.4,1.4,5.2,2.2,8,2.2h0c8.7,0,15.8-7.1,15.8-15.8C39.8,19.8,38.2,15.8,35.2,12.8z"></path><path fill="#fff" fill-rule="evenodd" d="M19.3,16c-0.4-0.8-0.7-0.8-1.1-0.8c-0.3,0-0.6,0-0.9,0	s-0.8,0.1-1.3,0.6c-0.4,0.5-1.7,1.6-1.7,4s1.7,4.6,1.9,4.9s3.3,5.3,8.1,7.2c4,1.6,4.8,1.3,5.7,1.2c0.9-0.1,2.8-1.1,3.2-2.3	c0.4-1.1,0.4-2.1,0.3-2.3c-0.1-0.2-0.4-0.3-0.9-0.6s-2.8-1.4-3.2-1.5c-0.4-0.2-0.8-0.2-1.1,0.2c-0.3,0.5-1.2,1.5-1.5,1.9	c-0.3,0.3-0.6,0.4-1,0.1c-0.5-0.2-2-0.7-3.8-2.4c-1.4-1.3-2.4-2.8-2.6-3.3c-0.3-0.5,0-0.7,0.2-1c0.2-0.2,0.5-0.6,0.7-0.8	c0.2-0.3,0.3-0.5,0.5-0.8c0.2-0.3,0.1-0.6,0-0.8C20.6,19.3,19.7,17,19.3,16z" clip-rule="evenodd"></path>
+                </svg></p><span className='text-gray-700'>WHATSAPP</span>
               </div>
             </div>
+            <p className='text-gray-600 text-sm mt-2'>Para otros métodos de pago comunicate con nosotros por whatsapp</p>
             <div className='mt-12'>
               {/* Botón de envío */}
               <button

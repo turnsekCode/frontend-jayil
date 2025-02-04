@@ -33,8 +33,8 @@ const Footer = () => {
         <div>
             <p className='text-xl font-medium mb-5 text-gray-700'>Contáctanos</p>
             <ul className='flex flex-col gap-1 text-gray-600'>
-                <li>+34 543-456-765</li>
-                <li>contact@jayil.es</li>
+                <li>(+34) 672 56 34 52</li>
+                <li>jayil.artesania@gmail.com</li>
             </ul>
         </div>
       </div>

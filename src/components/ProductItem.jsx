@@ -3,14 +3,14 @@ import { ShopContext } from '../context/ShopContext'
 import {Link} from 'react-router-dom'
 import AnimatedBlock from './AnimatedBlock';
 
-const ProductItem = ({id,image,name,price, category, subCategory}) => {
+const ProductItem = ({slug,image,name,price, category, subCategory}) => {
 
     const {currency} = useContext(ShopContext);
 
 
   return (
     <AnimatedBlock>
-    <Link className='text-gray-700 cursor-pointer' to={`/product/${id}`}>
+    <Link className='text-gray-700 cursor-pointer' to={`/product/${slug}`}>
         <div className='overflow-hidden'>
             <img className='w-100 hover:scale-110 transition ease-in-out' src={image[0]} alt="" />
         </div>
