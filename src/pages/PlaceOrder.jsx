@@ -22,6 +22,7 @@ const PlaceOrder = () => {
   const [orderData, setOrderData] = useState({});
   const [paymentType, setPaymentType] = useState('Transferencia'); // Estado para el tipo de pago
   const [orderCancel, setOrderCancel] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -119,14 +120,14 @@ const PlaceOrder = () => {
       switch (method) {
         case 'cod':
           setPaymentType('Transferencia');
-          setIsSending(true);
+          setLoading(true);
           console.log(orderData)
           const response = await axios.post(`${backenUrl}/api/order/place`, orderData);
           if (response.data.success) {
             setCartItems({});
             setDiscount(0);
             setCoupon('');
-            setIsSending(false);
+            setLoading(false);
             navigate("/success");
             // Llamada para enviar el correo solo si el pedido fue exitoso
             await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
@@ -134,21 +135,21 @@ const PlaceOrder = () => {
             sendWhatsAppMessage(orderData);
           } else {
             toast.error(response.data.message); // Mensaje de error
-            setIsSending(false);
+            setLoading(false);
           }
           break;
 
         case 'stripe':
           setPaymentType('Stripe');
-          setIsSending(true);
+          setLoading(true);
           const responseStripe = await axios.post(`${backenUrl}/api/order/stripe`, orderData,);
           if (responseStripe.data.success) {
             const { session_url } = responseStripe.data;
             window.location.replace(session_url);
-            setIsSending(false);
+            setLoading(false);
           } else {
             toast.error(responseStripe.data.message);
-            setIsSending(false);
+            setLoading(false);
           }
           break;
 
@@ -156,23 +157,23 @@ const PlaceOrder = () => {
           setPaymentType('Sumup');
           setOrderCancel(false)
           try {
-            setIsSending(true);
+            setLoading(true);
             const response = await axios.post(`${backenUrl}/api/order/sumup`, orderData,);
             const data = await response.data;
             if (data) {
               setCheckoutToken(data);
               setIsOpen(true)
-              setIsSending(false);
+              setLoading(false);
             } else {
               toast.error("Error al crear el checkout.");
-              setIsSending(false);
+              setLoading(false);
             }
           } catch (error) {
             console.error("Error al crear el checkout:", error);
             toast.error("Hubo un error al crear el checkout.");
-            setIsSending(false);
+            setLoading(false);
           }
-          setIsSending(false);
+          setLoading(false);
           break;
         default:
           break;
@@ -195,7 +196,7 @@ const PlaceOrder = () => {
       setErrors(newErrors);
       return;
     }
-    setIsSending(true);
+    setLoading(true);
     const cartDetails = orderData.items.map((item) => {
       const productData = products.find((product) => product._id === item._id);
       return {
@@ -234,7 +235,7 @@ const PlaceOrder = () => {
       console.error('Error al enviar el correo:', error); // Aquí puedes ver el error en detalle
       toast.error('Hubo un error al enviar el correo.');
     } finally {
-      setIsSending(false);
+      setLoading(false);
     }
   };
   // Función para generar el mensaje de WhatsApp
@@ -454,10 +455,10 @@ const PlaceOrder = () => {
               {/* Botón de envío */}
               <button
                 type='submit'
-                disabled={isSending || getCartAmount() === 0}
+                disabled={loading || getCartAmount() === 0}
                 className='bg-[#C15470] text-white px-5 text-sm w-[247px] h-[52px]'
               >
-                {isSending ? <ClipLoader size={30} color="#ffffff" /> : 'REALIZAR PEDIDO'}
+                {loading ? <ClipLoader size={30} color="#ffffff" /> : 'REALIZAR PEDIDO'}
               </button>
             </div>
           </div>

@@ -30,7 +30,8 @@ console.log(orderCancel)
         await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
       } else if (data.success === false) {
         setIsCheckingPayment(false); // 🔹 Detener el chequeo
-        setPaymentStatus(data.message);
+        toast.error(data.message);
+        cancelPayment();
         navigate("/place-order");
       } else {
         setPaymentStatus("El pago aún está en proceso...");
@@ -115,11 +116,11 @@ console.log(orderCancel)
   }, [orderCancel]); 
 
   return (
-    <div className="flex justify-center items-center z-20">
+    <div className="flex justify-center items-center z-50">
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
-            <div id="sumup-card"></div> {/* El widget de pago se monta aquí */}
+            <div className="z-50" id="sumup-card"></div> {/* El widget de pago se monta aquí */}
             {showBtonCancel ? <button
               className="mt-4 px-4 py-2 bg-[#C15470] text-white"
               onClick={() => { setIsOpen(false), cancelPayment() }}
