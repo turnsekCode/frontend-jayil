@@ -31,8 +31,11 @@ console.log(orderCancel)
       } else if (data.success === false) {
         setIsCheckingPayment(false); // 🔹 Detener el chequeo
         toast.error(data.message);
-        cancelPayment();
+        setIsOpen(false);
+        setPaymentStatus('')
+        setIsSending(false);
         navigate("/place-order");
+       
       } else {
         setPaymentStatus("El pago aún está en proceso...");
       }
@@ -57,7 +60,7 @@ console.log(orderCancel)
           setPaymentStatus("PAGO ENVIADO");
           // 🔹 No hacemos nada aquí, solo esperamos la respuesta final.
         } else if (type === "success") {
-          setPaymentStatus("PAGO PROCESADO");
+          setPaymentStatus("PROCESANDO PAGO...");
           // 🔹 Ahora sí activamos la verificación del pago
           setIsCheckingPayment(true);
         } else if (type === "error") {
