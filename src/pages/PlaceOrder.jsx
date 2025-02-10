@@ -154,7 +154,7 @@ const PlaceOrder = () => {
           break;
 
         case 'sumup':
-          setPaymentType('Sumup');
+          setPaymentType('Tarjeta');
           setOrderCancel(false)
           try {
             setLoading(true);

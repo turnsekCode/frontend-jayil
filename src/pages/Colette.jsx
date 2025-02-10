@@ -3,6 +3,7 @@ import {ShopContext} from '../context/ShopContext'
 import Title from '../components/Title';
 import ProductItem from '../components/ProductItem'
 import CallToAction from '../components/CallToAction';
+import {Helmet} from 'react-helmet-async';
 
 const ColetteCollection = () => {
 
@@ -64,6 +65,12 @@ const ColetteCollection = () => {
 
 
   return (
+    <>
+    <Helmet>
+        <title>Pendientes de Moda hechos a mano - Joyería </title>
+        <meta name='description' content='Los pendientes Colette son perfectos para el uso diario gracias a su diseño ligero y cómodo adquierelos para tu colección de accesorios para tu día a día' />
+      </Helmet>
+   
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
       
       {/* Filter options */}
@@ -117,6 +124,7 @@ const ColetteCollection = () => {
       </div>
   
     </div>
+    </>
   )
 }
 

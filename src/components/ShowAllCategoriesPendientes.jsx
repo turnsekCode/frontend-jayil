@@ -1,8 +1,9 @@
 import React from 'react'
 import Title from './Title'
 import { Link } from 'react-router-dom'
-import {assets} from '../assets/assets'
+import { assets } from '../assets/assets'
 import AnimatedBlock from './AnimatedBlock';
+import { Helmet } from 'react-helmet-async';
 
 const callouts = [
     {
@@ -93,37 +94,44 @@ const callouts = [
 
 const ShowAllCategoriesPendientes = () => {
     return (
-        <div className="">
-            <div className="mx-auto max-w-7xl">
-                <div className="mx-auto max-w-2xl py-6 sm:py-6 lg:max-w-none lg:py-10">
-                    <div className='text-center py-8 text-3xl'>
-                        <Title text1={'MOSTRAR TODOS'} text2={'LOS PENDIENTES'} />
-                        <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>Añade un toque de autenticidad a tu estilo con nuestros pendientes artesanales, cuidadosamente elaborados a mano para ofrecerte piezas únicas y llenas de carácter. Únicos y exclusivos como tú.</p>
-                    </div>
+        <>
+            <Helmet>
+                <title>Joyería Artesanal Exclusiva - Pendientes, Anillos y Collares Hechos a Mano</title>
+                <meta name='description' content='Descubre joyería única que combina diseño exclusivo artesanal con acero inoxidable. Pendientes, anillos y collares hechos a mano, complementos para mujer, fusionando moda, elegancia y durabilidad. ¡Encuentra tu estilo único aquí!' />
+            </Helmet>
 
-                    <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
-                        {callouts.map((callout) => (
-                            <AnimatedBlock key={callout.name}>
-                            <div  className="group relative p-4 border border-gray-400">
-                                <img
-                                    alt={callout.imageAlt}
-                                    src={callout.imageSrc}
-                                    className="w-full bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square"
-                                />
-                                <h3 className="mt-6 text-sm text-gray-500">
-                                    <Link to={callout.href}>
-                                        <span className="absolute inset-0" />
-                                        {callout.name}
-                                    </Link>
-                                </h3>
-                                <p className="text-base font-semibold text-gray-900">{callout.description}</p>
-                            </div>
-                            </AnimatedBlock>
-                        ))}
+            <div className="">
+                <div className="mx-auto max-w-7xl">
+                    <div className="mx-auto max-w-2xl py-6 sm:py-6 lg:max-w-none lg:py-10">
+                        <div className='text-center py-8 text-3xl'>
+                            <Title text1={'MOSTRAR TODOS'} text2={'LOS PENDIENTES'} />
+                            <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>Añade un toque de autenticidad a tu estilo con nuestros pendientes artesanales, cuidadosamente elaborados a mano para ofrecerte piezas únicas y llenas de carácter. Únicos y exclusivos como tú.</p>
+                        </div>
+
+                        <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
+                            {callouts.map((callout) => (
+                                <AnimatedBlock key={callout.name}>
+                                    <div className="group relative p-4 border border-gray-400">
+                                        <img
+                                            alt={callout.imageAlt}
+                                            src={callout.imageSrc}
+                                            className="w-full bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square"
+                                        />
+                                        <h3 className="mt-6 text-sm text-gray-500">
+                                            <Link to={callout.href}>
+                                                <span className="absolute inset-0" />
+                                                {callout.name}
+                                            </Link>
+                                        </h3>
+                                        <p className="text-base font-semibold text-gray-900">{callout.description}</p>
+                                    </div>
+                                </AnimatedBlock>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

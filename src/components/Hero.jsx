@@ -6,12 +6,12 @@ const Hero = () => {
     <div className='flex flex-col sm:flex-row border border-gray-400'>
       {/* Hero left side*/}
       <div className='w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0'>
-        <div className='text-[#414141] px-4'>
+        <div className='text-[#414141] px-4 py-2'>
             <div className='flex items-center gap-2'>
                 <span className='w-8 md:w-11 h-[2px] bg-[#C15470]'></span>
                 <p className='font-medium text-sm md:text-base'>Pendientes, collares y pulseras</p>
             </div>
-            <h1 className='prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed'>JOYERÍA CON DISEÑO EXCLUSIVO</h1>
+            <h1 className='prata-regular text-3xl sm:py-3 lg:text-6xl leading-relaxed'>JOYERÍA CON DISEÑO EXCLUSIVO</h1>
             <div className='flex items-center gap-2'>
                 <p className='font-semibold text-sm md:text-base'>hechas a mano</p>
                 <p className='w-8 md:w-11 h-[1px] bg-[#C15470]'></p>
