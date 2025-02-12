@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useState, useEffect } from 'react';
 import Hero from '../components/Hero';
 import ShowCategories from '../components/ShowCategories';
 import { Helmet } from 'react-helmet-async';
+import { assets } from '../assets/assets';
 
 // Lazy load de los componentes
 const HomeImage = lazy(() => import('../components/HomeImage'));
@@ -38,6 +39,7 @@ const Home = () => {
           name="description"
           content="Descubre joyería única que combina diseño exclusivo artesanal con acero inoxidable. Pendientes, anillos y collares hechos a mano, complementos para mujer, fusionando moda, elegancia y durabilidad. ¡Encuentra tu estilo único aquí!"
         />
+         <link rel="preload" as="image" href={assets.hero_img} />
       </Helmet>
 
       <section>
