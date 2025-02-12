@@ -47,7 +47,7 @@ const AroCollection = () => {
         break;
 
       default:
-        applyFilter()
+        applyFilter(fpCopy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
         break;
     }
   }
