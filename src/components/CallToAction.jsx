@@ -8,7 +8,7 @@ const CallToAction = () => {
       <p className='text-gray-400 mt-3'>Comunícate con nosotros a través de WhatsApp</p>
       <div className='w-full sm:w-1/2 flex items-center justify-center gap-3 mx-auto my-6 pl-3'>
         <a
-          href="https://wa.me/672563452?text=Estoy%20interesado%20en%20personalizar%20un%20producto"
+          href="https://wa.me/672563452?text=Estoy%20interesada%20en%20personalizar%20un%20producto"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-[#25d366] text-white text-xs px-10 py-4 flex items-center justify-center"
