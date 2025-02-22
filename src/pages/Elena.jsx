@@ -70,7 +70,7 @@ const ElenaCollection = () => {
         <meta name='description' content='Descubre la elegancia atemporal de nuestros pendientes hechos a mano, modelo Helena. Estos pendientes destacan por su diseño asimétrico único, exclusivos y únicos como tú. ¡Hazlos tuyos hoy!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

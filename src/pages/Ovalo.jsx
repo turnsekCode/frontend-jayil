@@ -70,7 +70,7 @@ const OvaloCollection = () => {
         <meta name='description' content='Luce los exclusivos pendientes Ovalo, diseño artesanal único con un toque moderno. Fornituras de acero inoxidable, elegancia duradera y estilo inigualable. Descubre la joyería que resalta tu personalidad. ¡Compra ahora!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

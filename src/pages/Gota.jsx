@@ -71,7 +71,7 @@ const GotaCollection = () => {
         <meta name='description' content='Añade un toque de distinción a tu colección de joyería con los Pendientes Gota y disfruta de la combinación perfecta de artesanía y moda. Hechos para realzar tu estilo y marcar tendencia. ¡Hazlos tuyos hoy!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

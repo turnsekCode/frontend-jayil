@@ -70,7 +70,7 @@ const LeaCollection = () => {
         <meta name='description' content='Sumérgete en la delicadeza y sofisticación de nuestros pendientes hechos a mano, modelo Lea. Exclusivos y únicos como tú. ¡Adquiérelos hoy!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

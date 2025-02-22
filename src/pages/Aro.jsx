@@ -70,7 +70,7 @@ const AroCollection = () => {
         <meta name='description' content='Descubre los pendientes de moda Aro, diseño circular hecho a mano con arcilla polimérica. Exclusivos y ligeros, ideales para realzar tu estilo con un toque único. Joyería artesanal que define tu esencia. ¡Hazlos tuyos hoy!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

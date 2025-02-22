@@ -71,7 +71,7 @@ const Pulseras = () => {
         <meta name='description' content='Descubre nuestra colección de pulseras hechas a mano, diseños exclusivos que complementan tu look diario. Joyería para mujer  ¡Encuentra el tuyo hoy!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

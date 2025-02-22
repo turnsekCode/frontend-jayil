@@ -69,7 +69,7 @@ const CascadaCollection = () => {
         <title>Pendientes Cascada - Moda en Joyería Artesanal para Mujer</title>
         <meta name='description' content='Descubre los pendientes Cascada, diseño exclusivo para mujer con fornituras de acero inoxidable. Elegancia y modernidad en joyería artesanal, perfecta para realzar tu estilo y marcar tendencia. ¡Hazlos tuyos hoy!' />
       </Helmet>
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

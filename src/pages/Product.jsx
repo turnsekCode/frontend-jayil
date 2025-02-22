@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet-async';
 const Product = () => {
 
   const { productId } = useParams();
+  console.log(productId)
   const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('');
@@ -32,7 +33,7 @@ const Product = () => {
         <meta name='description' content='Descubre joyería única que combina diseño exclusivo artesanal con acero inoxidable. Pendientes, anillos y collares hechos a mano, complementos para mujer, fusionando moda, elegancia y durabilidad. ¡Encuentra tu estilo único aquí!' />
       </Helmet>
 
-      <div className='pt-10 transition-opacity ease-in duration-500 opacity-100'>
+      <div className='pt-[120px] transition-opacity ease-in duration-500 opacity-100'>
         {/* product data*/}
         <div className='flex gap-12 sm:gap-12 flex-col sm:flex-row'>
           {/* product image */}

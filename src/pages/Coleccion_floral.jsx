@@ -70,7 +70,7 @@ const FloralCollection = () => {
         <meta name='description' content='Explora la colección Floral, joyería artesanal inspirada en la naturaleza. Pendientes, anillos y collares únicos hechos a mano, diseñados para la mujer que ama la moda y la exclusividad. ¡Descubre tu pieza favorita!!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

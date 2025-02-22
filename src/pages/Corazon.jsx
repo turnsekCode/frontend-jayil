@@ -70,7 +70,7 @@ const CorazonCollection = () => {
         <meta name='description' content='Enamórate de los pendientes Corazón, joyas únicas hechas a mano con diseño exclusivo. Perfectos para destacar tu estilo romántico y sofisticado. Joyería artesanal que combina elegancia y originalidad. ¡Adquiérelos hoy!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

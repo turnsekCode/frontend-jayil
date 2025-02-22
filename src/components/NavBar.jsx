@@ -42,6 +42,10 @@ const NavBar = () => {
     const [isCollectionOpen, setIsCollectionOpen] = useState(false);
     const [openSubmenu, setOpenSubmenu] = useState(null);
     const location = useLocation();
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [isFixed, setIsFixed] = useState(false);
+
 
 
     useEffect(() => {
@@ -66,9 +70,41 @@ const NavBar = () => {
         setOpenSubmenu(null);
     };
 
+
+
+    useEffect(() => {
+        const handleScroll = () => {
+          const currentScrollY = window.scrollY;
+    
+          if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Desaparece al hacer scroll hacia abajo
+            setIsVisible(false);
+            setTimeout(() => {
+              setIsFixed(true); // Se fija después de desaparecer
+              requestAnimationFrame(() => setIsVisible(true)); // Reaparece de inmediato sin salto
+            }, 200);
+          } else if (currentScrollY <= 50) {
+            // Al volver al top, recupera su estado original
+            setIsVisible(true);
+            setTimeout(() => setIsFixed(false), 300); // Pequeño delay para evitar salto
+          }
+    
+          setLastScrollY(currentScrollY);
+        };
+    
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+      }, [lastScrollY]);
+
     return (
-        <header>
-            <nav className='flex items-center justify-between py-5 font-medium border-b'>
+        <header    className={`fixed left-0 w-full z-50 border-b transition-transform duration-500 ease-out ${
+            isFixed
+              ? "top-0 bg-white shadow-md py-1 translate-y-0 opacity-100"
+              : isVisible
+              ? "top-0 py-1 bg-white opacity-100"
+              : "-translate-y-full opacity-0"
+          }`}>
+            <nav className={`flex items-center justify-between font-medium px-6`}>
                 <Link to="/"><img src={assets.logo} className='w-28' alt="jayil artesania" /></Link>
                 <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
                     <NavLink to="/" className="flex flex-col items-center gap-1">
@@ -174,7 +210,7 @@ const NavBar = () => {
                 </div>
 
                 {/* side bar menu para moviles*/}
-                <div className={`z-10 absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}>
+                <div className={`z-10 absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all h-[100vh] ${visible ? 'w-full' : 'w-0'}`}>
                     <div className='flex flex-col text-gray-600'>
                         <div onClick={() => handleNavClick()} className='flex items-center gap-4 p-3 cursor-pointer'>
                             <img src={assets.dropdown_icon} className='h-4 rotate-180' alt="" />

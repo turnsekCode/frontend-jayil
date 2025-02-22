@@ -35,6 +35,7 @@ import ScrollToTopButton from './components/ScrollToTopButton'
 import CirculoCollection from './pages/Circulo'
 import KarinaCollection from './pages/Karina'
 import Success from './pages/Success'
+import WhatsAppButton from './components/WhatsappBoton'
 
 const App = () => {
   return (
@@ -44,6 +45,7 @@ const App = () => {
       <ToastContainer />
       <NavBar/>
       <SearchBar />
+      <WhatsAppButton/>
      <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/collection' element={<Collection/>} />

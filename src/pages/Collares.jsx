@@ -69,7 +69,7 @@ const Collares = () => {
         <meta name='description' content='Descubre nuestra colección de collares hechos a mano, diseños exclusivos que combinan moda y artesanía. Joyería para mujer con materiales de alta calidad, perfecta para cualquier ocasión. ¡Encuentra el tuyo hoy!' />
       </Helmet>
 
-      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+      <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
 
         {/* Filter options */}
 

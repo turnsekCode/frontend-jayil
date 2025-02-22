@@ -29,7 +29,7 @@ const Cart = () => {
         <meta name='description' content='Carrito' />
       </Helmet>
 
-      <div className='pt-14'>
+      <div className='pt-[120px]'>
         <div className='text-2xl mb-3'>
           <Title text1={'TU'} text2={'CARRITO'} />
         </div>

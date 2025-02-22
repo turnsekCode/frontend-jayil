@@ -71,7 +71,7 @@ const ColetteCollection = () => {
         <meta name='description' content='Los pendientes Colette son perfectos para el uso diario gracias a su diseño ligero y cómodo adquierelos para tu colección de accesorios para tu día a día' />
       </Helmet>
    
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
+    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>
       
       {/* Filter options */}
    
