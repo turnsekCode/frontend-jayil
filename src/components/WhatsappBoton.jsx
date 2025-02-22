@@ -23,7 +23,7 @@ const WhatsAppButton = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
       whileHover={{ scale: 1.1 }} // Efecto al pasar el mouse
       whileTap={{ scale: 0.9 }} // Efecto al hacer clic
-      className="fixed bottom-5 left-5 bg-green-500 text-white p-3 rounded-full shadow-lg flex items-center justify-center cursor-pointer"
+      className="fixed bottom-5 left-5 bg-green-500 text-white p-3 rounded-full shadow-lg flex items-center justify-center cursor-pointer z-50"
     >
       <motion.div
         animate={{
