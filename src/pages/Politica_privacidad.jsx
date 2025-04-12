@@ -2,7 +2,7 @@ import React from 'react'
 
 const Politica_privacidad = () => {
   return (
-    <div className='pt-10'>
+    <div className='pt-28'>
       <b className='w-full text-gray-600'>Política de privacidad</b>
       <p className='w-full text-gray-600 mb-5'>En Jayil.es nos tomamos muy en serio la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos su información personal cuando visita y utiliza nuestro sitio web, basada en el Reglamento General de Protección de Datos (RGPD) de la Unión Europea y la Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), Ley Orgánica 3/2018, aprobada el 5 de diciembre de 2018.</p>
 

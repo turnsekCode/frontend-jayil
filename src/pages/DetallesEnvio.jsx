@@ -2,7 +2,7 @@ import React from 'react'
 
 const Detalles_envio = () => {
   return (
-    <div className='pt-10'>
+    <div className='pt-28'>
       <b className='w-full text-gray-600'>Detalles de envíos</b>
       <b className='w-full text-gray-600 mb-5'>Envíos y Elaboración</b>
 

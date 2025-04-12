@@ -181,6 +181,7 @@ const PlaceOrder = () => {
     } catch (error) {
       console.error("Error al procesar el carrito:", error);
       toast.error(error.message);
+      setLoading(false);
     }
   };
   // Función para enviar el correo
@@ -240,21 +241,26 @@ const PlaceOrder = () => {
   };
   // Función para generar el mensaje de WhatsApp
   const sendWhatsAppMessage = (orderData) => {
-    const phoneNumber = "672563452"; // Reemplaza con el número al que quieres enviar el mensaje
+    const phoneNumber = "672563452";
     const message = `- *Nuevo Pedido Realizado*
   - *Cliente:* ${orderData.address.name} ${orderData.address.lastName}
   - *Email:* ${orderData.address.email}
   - *Teléfono:* ${orderData.address.phone}
   - *Número de pedido:* ${orderData.orderNumber}
-  - *Total:* ${orderData.amount} ${currency}
+  - *Total:* ${orderData.amount} € 
   - *Productos:* \n${orderData.items.map(item => `- ${item.name} x${item.quantity}`).join("\n")}`;
-
-    // Crear el enlace de WhatsApp
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-    // Abrir WhatsApp en una nueva pestaña
+  
+    const encodedMessage = encodeURIComponent(message);
+  
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  
+    const url = isMobile
+      ? `whatsapp://send?phone=${phoneNumber}&text=${encodedMessage}`
+      : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+  
     window.open(url, "_blank");
   };
+  
 
 
 

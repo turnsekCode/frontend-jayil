@@ -21,7 +21,6 @@ const Cart = () => {
       setCartData([]); // Si no hay datos, limpia el estado
     }
   }, [cartItems]);
-
   return (
     <>
       <Helmet>
@@ -35,7 +34,7 @@ const Cart = () => {
         </div>
 
         <div>
-          {
+          { cartData.length != 0 ? (
             cartData.map((item, index) => {
               const productData = products.find((product) => product._id === item._id);
               return (
@@ -78,6 +77,12 @@ const Cart = () => {
                 </div>
               )
             })
+            ) : (
+              <div className=' text-gray-500 mt-10'>
+                <p className='text-lg'>Tu carrito está vacío</p>
+                <p className='text-sm'>Agrega productos para verlos aquí</p>
+              </div>
+            )
           }
         </div>
         <div className='flex justify-end my-20'>
