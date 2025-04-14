@@ -1,0 +1,7 @@
+# robots.txt para jayil.es
+User-agent: *
+# Permitir el acceso a todas las páginas del sitio
+Allow: /
+
+# Sitemap - Indicar la ubicación del sitemap.xml
+Sitemap: https://jayil.es/sitemap.xml
