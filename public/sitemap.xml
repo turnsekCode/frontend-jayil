@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.tusitio.com/</loc>
+    <loc>https://www.jayil.es</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection</loc>
+    <loc>https://www.jayil.es/collection</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/collares</loc>
+    <loc>https://www.jayil.es/collection/collares</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pulseras</loc>
+    <loc>https://www.jayil.es/collection/pulseras</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes</loc>
+    <loc>https://www.jayil.es/collection/pendientes</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/aro</loc>
+    <loc>https://www.jayil.es/collection/pendientes/aro</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/corazon</loc>
+    <loc>https://www.jayil.es/collection/pendientes/corazon</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/colette</loc>
+    <loc>https://www.jayil.es/collection/pendientes/colette</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/gota</loc>
+    <loc>https://www.jayil.es/collection/pendientes/gota</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/lea</loc>
+    <loc>https://www.jayil.es/collection/pendientes/lea</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/ovalo</loc>
+    <loc>https://www.jayil.es/collection/pendientes/ovalo</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/coleccion-floral</loc>
+    <loc>https://www.jayil.es/collection/pendientes/coleccion-floral</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/elena</loc>
+    <loc>https://www.jayil.es/collection/pendientes/elena</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/cascada</loc>
+    <loc>https://www.jayil.es/collection/pendientes/cascada</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/hoja</loc>
+    <loc>https://www.jayil.es/collection/pendientes/hoja</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/circulo</loc>
+    <loc>https://www.jayil.es/collection/pendientes/circulo</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/collection/pendientes/karina</loc>
+    <loc>https://www.jayil.es/collection/pendientes/karina</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/about</loc>
+    <loc>https://www.jayil.es/about</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/contact</loc>
+    <loc>https://www.jayil.es/contact</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.tusitio.com/product/:productId</loc>
+    <loc>https://www.jayil.es/product/joyeria-artesanales-pendientes-gota-marron</loc>
     <priority>0.6</priority>
   </url>
 </urlset>
