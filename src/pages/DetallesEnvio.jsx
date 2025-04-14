@@ -1,10 +1,17 @@
 import React from 'react'
+import { Helmet } from 'react-helmet-async';
 
 const Detalles_envio = () => {
   return (
-    <div className='pt-28'>
-      <b className='w-full text-gray-600'>Detalles de envíos</b>
-      <b className='w-full text-gray-600 mb-5'>Envíos y Elaboración</b>
+    <>
+      <Helmet>
+        <title>Jayil.es</title>
+        <meta name='description' content='Joyería con diseño exclusivo hechas a mano' />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      <div className='pt-28'>
+        <b className='w-full text-gray-600'>Detalles de envíos</b>
+        <b className='w-full text-gray-600 mb-5'>Envíos y Elaboración</b>
 
         <p className='w-full text-gray-600 mb-5'>El coste de envío para la España Peninsular es de 4,90 euros, utilizando el servicio de Correos, con un plazo de entrega estimado de 3 a 4 días laborables. Para envíos fuera de España, te rogamos que te pongas en contacto con nosotros a través de WhatsApp para calcular la tarifa exacta.</p>
 
@@ -24,7 +31,8 @@ const Detalles_envio = () => {
 
         <b className='w-full text-gray-500 mb-5'>Nos encanta la idea de que si el producto no cumple con tus expectativas, puede convertirse en un regalo perfecto e ideal. Aunque te aseguramos que te encantarán nuestras joyitas.</b>
 
-    </div>
+      </div>
+    </>
   )
 }
 

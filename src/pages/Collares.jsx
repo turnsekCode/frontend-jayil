@@ -67,6 +67,9 @@ const Collares = () => {
       <Helmet>
         <title>Collares Exclusivos de moda  - Joyería para Mujer y acero inoxidable</title>
         <meta name='description' content='Descubre nuestra colección de collares hechos a mano, diseños exclusivos que combinan moda y artesanía. Joyería para mujer con materiales de alta calidad, perfecta para cualquier ocasión. ¡Encuentra el tuyo hoy!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/collares' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

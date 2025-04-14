@@ -68,6 +68,9 @@ const HojaCollection = () => {
       <Helmet>
         <title>Pendientes Hoja - Moda en complementos para Mujer</title>
         <meta name='description' content='Descubre los pendientes Hoja, diseño exclusivo y delicado para mujer con fornituras de acero inoxidable. Con los pendientes Hoja, lleva contigo una pieza de arte que complementa tu belleza y personalidad en cada ocasión. ¡Hazlos tuyos hoy!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/hoja' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

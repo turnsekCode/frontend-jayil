@@ -68,6 +68,9 @@ const ElenaCollection = () => {
       <Helmet>
         <title>Pendientes de Moda Elena - Joyería Artesanal</title>
         <meta name='description' content='Descubre la elegancia atemporal de nuestros pendientes hechos a mano, modelo Helena. Estos pendientes destacan por su diseño asimétrico único, exclusivos y únicos como tú. ¡Hazlos tuyos hoy!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/elena' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

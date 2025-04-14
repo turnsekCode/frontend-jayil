@@ -69,6 +69,9 @@ const Pulseras = () => {
       <Helmet>
         <title>Pulseras Artesanales Exclusivas - Joyería de moda para Mujer</title>
         <meta name='description' content='Descubre nuestra colección de pulseras hechas a mano, diseños exclusivos que complementan tu look diario. Joyería para mujer  ¡Encuentra el tuyo hoy!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pulseras' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

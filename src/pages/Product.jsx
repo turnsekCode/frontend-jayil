@@ -81,6 +81,9 @@ const Product = () => {
             },
           })}
         </script>
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href={`https://www.jayil.es/product/${productData.slug}`} />
       </Helmet>
 
       <div className="pt-[120px] transition-opacity ease-in duration-500 opacity-100">

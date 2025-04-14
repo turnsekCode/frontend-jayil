@@ -69,6 +69,9 @@ const GotaCollection = () => {
       <Helmet>
         <title>Pendientes Gota - Moda en Joyería Artesanal para Mujer</title>
         <meta name='description' content='Añade un toque de distinción a tu colección de joyería con los Pendientes Gota y disfruta de la combinación perfecta de artesanía y moda. Hechos para realzar tu estilo y marcar tendencia. ¡Hazlos tuyos hoy!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/gota' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

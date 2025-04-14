@@ -68,6 +68,9 @@ const FloralCollection = () => {
       <Helmet>
         <title>Colección Floral - Pendientes, Anillos y Collares Artesanales para Mujer</title>
         <meta name='description' content='Explora la colección Floral, joyería artesanal inspirada en la naturaleza. Pendientes, anillos y collares únicos hechos a mano, diseñados para la mujer que ama la moda y la exclusividad. ¡Descubre tu pieza favorita!!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/coleccion-floral' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

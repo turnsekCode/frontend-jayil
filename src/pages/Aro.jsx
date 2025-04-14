@@ -68,6 +68,9 @@ const AroCollection = () => {
       <Helmet>
         <title>Pendientes Aro Exclusivos - Joyería Artesanal en Arcilla Polimérica</title>
         <meta name='description' content='Descubre los pendientes de moda Aro, diseño circular hecho a mano con arcilla polimérica. Exclusivos y ligeros, ideales para realzar tu estilo con un toque único. Joyería artesanal que define tu esencia. ¡Hazlos tuyos hoy!' />
+        <meta name='keywords' content='pendientes aro, joyería artesanal, arcilla polimérica, pendientes de moda, diseño exclusivo, joyas únicas, accesorios de moda' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/aro' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

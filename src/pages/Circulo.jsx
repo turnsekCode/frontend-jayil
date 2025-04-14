@@ -67,6 +67,9 @@ const CirculoCollection = () => {
       <Helmet>
         <title>Pendientes Exclusivos - Joyería Artesanal Hecha a Mano</title>
         <meta name='description' content='Sumérgete en la delicadeza y sofisticación de nuestros pendientes hechos a mano, modelo Círculo. Exclusivos y únicos como tú. ¡Adquiérelos hoy!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/circulo' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

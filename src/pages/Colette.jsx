@@ -69,6 +69,9 @@ const ColetteCollection = () => {
     <Helmet>
         <title>Pendientes de Moda hechos a mano - Joyería </title>
         <meta name='description' content='Los pendientes Colette son perfectos para el uso diario gracias a su diseño ligero y cómodo adquierelos para tu colección de accesorios para tu día a día' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/colette' />
       </Helmet>
    
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

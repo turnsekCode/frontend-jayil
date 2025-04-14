@@ -26,6 +26,7 @@ const Cart = () => {
       <Helmet>
         <title>Carrito</title>
         <meta name='description' content='Carrito' />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
       <div className='pt-[120px]'>

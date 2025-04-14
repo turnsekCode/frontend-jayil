@@ -60,6 +60,9 @@ const Home = () => {
           content="Tienda online de joyas únicas hechas a mano. Pendientes, pulseras y collares desde Valencia. ¡Descúbrelos!"
         />
         <meta name="twitter:image" content={assets.hero_img} />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es' />
       </Helmet>
 
       <section>

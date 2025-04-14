@@ -67,6 +67,9 @@ const OvaloCollection = () => {
       <Helmet>
         <title>Pendientes Óvalo Exclusivos - Joyería Artesanal en Acero Inoxidable</title>
         <meta name='description' content='Luce los exclusivos pendientes Ovalo, diseño artesanal único con un toque moderno. Fornituras de acero inoxidable, elegancia duradera y estilo inigualable. Descubre la joyería que resalta tu personalidad. ¡Compra ahora!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/ovalo' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

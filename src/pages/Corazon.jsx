@@ -68,6 +68,9 @@ const CorazonCollection = () => {
       <Helmet>
         <title>Pendientes Corazón Exclusivos - Joyería Artesanal Hecha a Mano</title>
         <meta name='description' content='Enamórate de los pendientes Corazón, joyas únicas hechas a mano con diseño exclusivo. Perfectos para destacar tu estilo romántico y sofisticado. Joyería artesanal que combina elegancia y originalidad. ¡Adquiérelos hoy!' />
+        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/collection/pendientes/corazon' />
       </Helmet>
 
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-[110px]'>

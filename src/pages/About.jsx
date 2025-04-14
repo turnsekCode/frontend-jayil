@@ -10,6 +10,10 @@ const About = () => {
       <Helmet>
         <title>Sobre de mi</title>
         <meta name='description' content='Sobre mi' />
+        <meta name='keywords' content='joyería, accesorios, handmade, arcilla polimérica, pendientes, pulseras, collares' />
+        <meta name='author' content='Raquel Turnsek' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.jayil.es/about' />
       </Helmet>
 
       <div>
