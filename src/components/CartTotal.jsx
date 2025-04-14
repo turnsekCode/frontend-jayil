@@ -17,10 +17,9 @@ const CartTotal = () => {
         <div className='flex justify-between'>
           <p>Subtotal</p>
           <p>
-            {currency}{" "}
             {getCartAmount() === 0
               ? "0.00"
-              : getCartAmount().toFixed(2)}
+              : getCartAmount().toFixed(2)} {currency}
           </p>
         </div>
         <hr />
@@ -29,19 +28,19 @@ const CartTotal = () => {
           <p>
             {getCartAmount() > 45
               ? "Gratis (para España peninsular)"
-              : `${currency} ${delivery_fee.toFixed(2)}`}
+              : `${delivery_fee.toFixed(2)} ${currency}`}
           </p>
         </div>
         <hr />
         <div className='flex justify-between'>
           <p>Total</p>
           <p>
-            {currency}{" "}
+            
             {getCartAmount() === 0
               ? "0.00"
               : getCartAmount() > 45
                 ? getCartAmount().toFixed(2) // No sumar delivery_fee si es gratis
-                : (getCartAmount() + delivery_fee).toFixed(2)}
+                : (getCartAmount() + delivery_fee).toFixed(2)} {currency}
           </p>
         </div>
       </div>

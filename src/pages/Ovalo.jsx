@@ -13,7 +13,6 @@ const OvaloCollection = () => {
 
   const applyFilter = () => {
     let productsCopy = products.slice();
-    console.log(productsCopy)
     // Filtro por búsqueda
     if (showSearch && search) {
       productsCopy = productsCopy.filter(item =>

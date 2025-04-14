@@ -34,55 +34,84 @@ const Cart = () => {
         </div>
 
         <div>
-          { cartData.length != 0 ? (
+          {cartData.length != 0 ? (
             cartData.map((item, index) => {
               const productData = products.find((product) => product._id === item._id);
               return (
-                <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr,1.5fr,0.5fr] sm:grid-cols-[4fr_,1fr,0.5fr] items-center gap-4'>
-                  <div className='flex items-start gap-6'>
-                    <img className='w-16 sm:w-20' src={productData?.image[0]} alt="" />
-                    <div>
-                      <p className='text-sx sm:text-lg font-medium'>{productData?.name}</p>
-                      <div className='flex items-center gap-5 mt-2'>
-                        <p>{currency}{Number(productData?.price || 0).toFixed(2)}</p>
-
-                      </div>
+                <div
+                  key={index}
+                  className="py-4 border-t border-b text-gray-700 flex flex-col sm:grid sm:grid-cols-[4fr_2fr_0.5fr] sm:items-center gap-4"
+                >
+                  {/* Producto: imagen + info */}
+                  <div className="flex gap-4 sm:items-center">
+                    <img
+                      className="w-20 h-auto flex-shrink-0"
+                      src={productData?.image[0]}
+                      alt={productData?.name}
+                    />
+                    <div className="flex flex-col">
+                      <p className="text-base sm:text-lg font-medium">{productData?.name}</p>
+                      <p className="mt-1 text-sm text-gray-500">
+                        {currency}{Number(productData?.price || 0).toFixed(2)}
+                      </p>
                     </div>
                   </div>
+
+                  {/* Controles de cantidad */}
                   <div>
                     <input
                       onChange={(e) => {
                         const value = e.target.value;
                         const numericValue = value === '' ? '' : Number(value);
-
-                        // Validar que el valor no sea mayor que 2
-                        if (numericValue <= 2) {
-                          handleInputChange(item._id, numericValue); // Solo actualizamos si el valor es válido
+                        if (numericValue <= productData?.quantity) {
+                          handleInputChange(item._id, numericValue);
                         }
                       }}
                       onBlur={(e) => {
                         const value = e.target.value;
-                        const quantity = value === '' ? 1 : Math.min(Number(value), 2); // Asegurarse de que el valor no sea mayor que 2
-                        handleBlur(item._id, quantity); // Al perder el foco, actualizamos
+                        const quantity = value === '' ? 1 : Math.min(Number(value), productData?.quantity);
+                        handleBlur(item._id, quantity);
                       }}
-                      value={tempValues[item._id] ?? item.quantity} // Mostramos el estado temporal o la cantidad original
-                      className="border w-10 sm:w-30 px-1 sm:px-2 py-1"
+                      value={tempValues[item._id] ?? item.quantity}
+                      className="border w-20 px-2 py-1 text-center text-sm rounded"
                       type="number"
                       min={1}
-                      max={2}
+                      max={productData?.quantity}
+                      disabled={productData?.quantity === 0}
                     />
-                    <p className='text-[10px]'>Solo puedes elegir dos productos</p>
+
+                    {/* Stock info */}
+                    {productData?.quantity === 0 ? (
+                      <div className="mt-1 text-xs text-yellow-600">
+                        <p className="font-semibold">⚠ Producto no disponible.</p>
+                        <p>Contáctanos para más unidades.</p>
+                      </div>
+                    ) : (
+                      <div className="mt-1 text-xs text-green-700">
+                        <p>Quedan <span className="font-semibold">{productData?.quantity}</span> unidades.</p>
+                      </div>
+                    )}
                   </div>
-                  <img onClick={() => updateQuantity(item._id, 0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src={assets.bin_icon} alt="" />
+
+                  {/* Botón eliminar */}
+                  <div className="flex justify-end sm:justify-center">
+                    <img
+                      onClick={() => updateQuantity(item._id, 0)}
+                      className="w-5 h-5 cursor-pointer"
+                      src={assets.bin_icon}
+                      alt="Eliminar producto"
+                    />
+                  </div>
                 </div>
+
               )
             })
-            ) : (
-              <div className=' text-gray-500 mt-10'>
-                <p className='text-lg'>Tu carrito está vacío</p>
-                <p className='text-sm'>Agrega productos para verlos aquí</p>
-              </div>
-            )
+          ) : (
+            <div className=' text-gray-500 mt-10'>
+              <p className='text-lg'>Tu carrito está vacío</p>
+              <p className='text-sm'>Agrega productos para verlos aquí</p>
+            </div>
+          )
           }
         </div>
         <div className='flex justify-end my-20'>

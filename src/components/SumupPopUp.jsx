@@ -11,7 +11,6 @@ export default function SumupPopUp({ isOpen, setIsOpen, orderData, setCoupon, se
   const [cardInstance, setCardInstance] = useState(null); // Guardar instancia del widget
   const [showBtonCancel, setShowBtonCancel] = useState(false);
 
-console.log(orderCancel)
   const checkPaymentStatus = async () => {
     try {
       const response = await fetch(`${backenUrl}/api/order/verify-sumup`, {
@@ -20,7 +19,7 @@ console.log(orderCancel)
         body: JSON.stringify({ checkoutId: checkoutToken?.checkoutToken.id, orderData, orderCancel }),
       });
       const data = await response.json();
-      console.log("🔍 Verificando pago:", data);
+      //console.log("🔍 Verificando pago:", data);
       if (data.success) {
         setIsCheckingPayment(false); // 🔹 Detener el chequeo
         toast.info("✅ " + data.message);

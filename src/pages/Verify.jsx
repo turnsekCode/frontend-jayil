@@ -25,7 +25,7 @@ const Verify = () => {
     
             const data = await response.json();  // Obtener la respuesta como JSON
     
-            console.log(data);  // Ver la respuesta del servidor
+            //console.log(data);  // Ver la respuesta del servidor
     
             if (data.success) {
                 setCartItems([]);
@@ -35,7 +35,7 @@ const Verify = () => {
                 navigate('/cart');
             }
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             toast.error('Error verifying payment');
             navigate('/cart');
         }

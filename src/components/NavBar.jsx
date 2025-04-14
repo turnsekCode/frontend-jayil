@@ -104,7 +104,7 @@ const NavBar = () => {
               ? "top-0 py-1 bg-white opacity-100"
               : "-translate-y-full opacity-0"
           }`}>
-            <nav className={`flex items-center justify-between font-medium px-6`}>
+            <nav className={`flex items-center justify-between font-medium px-6 gap-3`}>
                 <Link to="/"><img src={assets.logo} className='w-28' alt="jayil artesania" /></Link>
                 <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
                     <NavLink to="/" className="flex flex-col items-center gap-1">
@@ -180,12 +180,13 @@ const NavBar = () => {
                         <hr className='w-2/4 border-none h-[1.5px] bg-[#C15470] hidden' />
                     </NavLink>
                 </ul>
-                <div className='flex items-center gap-6'>
+                <div className='flex items-center gap-4'>
+                    <p className='text-[#C15470] text-sm leading-[1.2] text-center'>Envío GRATIS en pedidos superiores a 45€</p>
                     <p className='text-[#C15470]'>
-                        {currency}{" "}
+                        
                         {getCartAmount() === 0
                             ? "0.00"
-                            : getCartAmount().toFixed(2)}
+                            : getCartAmount().toFixed(2)}{currency}
                     </p>
                     {searchVisible ? <img onClick={() => setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer' alt="" /> : null}
                     {/*<div className='group relative'>

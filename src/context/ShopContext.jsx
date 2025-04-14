@@ -68,25 +68,26 @@ const ShopContextProvider = (props) => {
             className: 'foo-bar'
         });
     }
-    const addToCart = (itemId) => {
+    const addToCart = (itemId, productData) => {
         setCartItems((prevCartItems) => {
             const currentQuantity = prevCartItems[itemId] || 0;
-
-            // Verificar si la cantidad actual es menos que 2
-            if (currentQuantity < 2) {
+    
+            // Verificar si la cantidad actual es menor que la cantidad disponible del producto
+            if (currentQuantity < productData) {
                 const updatedCart = {
                     ...prevCartItems,
                     [itemId]: currentQuantity + 1,
                 };
-                notify(); // Solo se ejecuta notify si la cantidad es menos de 2
+                notify(); // Solo se ejecuta notify si la cantidad es menos que la disponible
                 return updatedCart;
             } else {
-                // Si la cantidad es 2 o más, no hacer nada (opcional: puedes mostrar un mensaje de alerta)
-                toast.info("Solo puedes añadir hasta 2 unidades de este producto.");
+                // Si la cantidad es igual o mayor que la disponible, no hacer nada
+                toast.info(`Solo puedes añadir hasta ${productData} unidades de este producto.`);
                 return prevCartItems; // No modificamos el carrito si ya hay 2
             }
         });
     };
+    
 
 
 
@@ -155,7 +156,7 @@ const ShopContextProvider = (props) => {
                 toast.error(response.data.message);
             }
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             toast.error(error.message);
         } finally {
             setLoading(false); // Asegúrate de que el loading termine tanto en éxito como en error.

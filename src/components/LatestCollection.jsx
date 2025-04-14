@@ -8,13 +8,28 @@ const LatestCollection = () => {
   const [latestProducts, setLatestProducts] = useState([]);
 
   useEffect(() => {
-    // Ordenar los productos por el campo 'date' en orden descendente
-    const sortedProducts = products
-      .slice() // Crear una copia del array para no mutarlo directamente
-      .sort((a, b) => b.date - a.date); // Más recientes primero
+    if (products.length > 0) {
+      const sortedProducts = products
+        .slice()
+        .sort((a, b) => b.date - a.date);
 
-    setLatestProducts(sortedProducts.slice(0, 10)); // Tomar los 10 primeros
+      setLatestProducts(sortedProducts.slice(0, 10));
+    }
   }, [products]);
+
+  const renderSkeleton = () => {
+    return (
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+        {Array.from({ length: 10 }).map((_, index) => (
+          <div key={index} className="animate-pulse space-y-2">
+            <div className="bg-gray-300 w-full h-40 rounded-xl" />
+            <div className="h-4 bg-gray-300 w-3/4 rounded" />
+            <div className="h-3 bg-gray-200 w-1/2 rounded" />
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="my-10">
@@ -25,21 +40,24 @@ const LatestCollection = () => {
         </p>
       </div>
 
-      {/* Renderizar los productos */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-        {latestProducts.map((item) => (
-          <ProductItem
-            key={item._id} // Es mejor usar `_id` como clave única en lugar del índice
-            id={item._id}
-            image={item.image}
-            name={item.name}
-            price={item.price}
-            category={item.category}
-            subCategory={item.subCategory}
-            slug={item.slug}
-          />
-        ))}
-      </div>
+      {latestProducts.length > 0 ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+          {latestProducts.map((item) => (
+            <ProductItem
+              key={item._id}
+              id={item._id}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+              category={item.category}
+              subCategory={item.subCategory}
+              slug={item.slug}
+            />
+          ))}
+        </div>
+      ) : (
+        renderSkeleton()
+      )}
     </div>
   );
 };

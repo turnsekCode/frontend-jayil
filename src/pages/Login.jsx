@@ -36,13 +36,11 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       toast.error(error.message);
       
     }
   }
-
-console.log("token",token);
   useEffect(() => {  
     if(token){
       navigate('/');
