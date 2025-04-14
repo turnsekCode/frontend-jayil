@@ -106,7 +106,7 @@ const NavBar = () => {
           }`}>
             <nav className={`flex items-center justify-between font-medium px-6 gap-3`}>
                 <Link to="/"><img src={assets.logo} className='w-28' alt="jayil artesania" /></Link>
-                <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
+                <div className='hidden sm:flex gap-5 text-sm text-gray-700'>
                     <NavLink to="/" className="flex flex-col items-center gap-1">
                         <p>INICIO</p>
                         <hr className='w-2/4 border-none h-[1.5px] bg-[#C15470] hidden' />
@@ -179,7 +179,7 @@ const NavBar = () => {
                         <p>CONTACTO</p>
                         <hr className='w-2/4 border-none h-[1.5px] bg-[#C15470] hidden' />
                     </NavLink>
-                </ul>
+                </div>
                 <div className='flex items-center gap-4'>
                     <p className='text-[#C15470] text-sm leading-[1.2] text-center'>Envío GRATIS en pedidos superiores a 45€</p>
                     <p className='text-[#C15470]'>
