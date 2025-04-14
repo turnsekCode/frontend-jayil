@@ -40,27 +40,6 @@ const Home = () => {
           content="Descubre joyería única que combina diseño exclusivo artesanal con acero inoxidable. Pendientes, anillos y collares hechos a mano, complementos para mujer, fusionando moda, elegancia y durabilidad. ¡Encuentra tu estilo único aquí!"
         />
         <link rel="preload" as="image" href={assets.hero_img} />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Store",
-            "name": "jayil.es",
-            "url": "https://jayil.es",
-            "logo": "/logo.png", // cambia esto si tu logo tiene otra URL
-            "image": assets.hero_img, // opcional, imagen destacada
-            "description": "Jayil.es es una tienda online de joyería de ocasión. Vendemos pendientes, pulseras y collares artesanales con envío desde Valencia, España.",
-            "telephone": "+34 672 56 34 52",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Valencia",
-              "addressCountry": "ES"
-            },
-            "sameAs": [
-              "https://www.instagram.com/jayil.artesania",
-              "https://www.facebook.com/jayil.artesania"
-            ]
-          })}
-        </script>
         <meta name="author" content="Jayil Artesanía" />
         {/* Open Graph (Facebook, WhatsApp, etc.) */}
         <meta property="og:title" content="Jayil.es | Joyería artesanal de ocasión" />
