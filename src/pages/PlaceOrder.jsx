@@ -268,6 +268,7 @@ const PlaceOrder = () => {
         <title>Jayil.es</title>
         <meta name='description' content='Joyería con diseño exclusivo hechas a mano' />
         <script src="https://gateway.sumup.com/gateway/ecom/card/v2/sdk.js"></script>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-[120px] sm:pt-28 min-h-[80vh]'>
         {/* Left side */}
