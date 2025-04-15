@@ -1,4 +1,3 @@
-// generate-sitemap.js
 import axios from 'axios';
 import { create } from 'xmlbuilder2';
 import fs from 'fs';
@@ -6,12 +5,17 @@ import fs from 'fs';
 const BASE_URL = 'https://jayil.es';
 const PRODUCT_API = `https://backend-jayil.vercel.app/api/product/list`;
 
+const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+
 async function getProductUrls() {
   try {
     const res = await axios.get(PRODUCT_API);
     const products = res.data.products || [];
 
-    return products.map((p) => `${BASE_URL}/product/${p.slug}`);
+    return products.map((p) => ({
+      loc: `${BASE_URL}/product/${p.slug}`,
+      lastmod: today
+    }));
   } catch (error) {
     console.error('❌ Error al obtener productos:', error.message);
     return [];
@@ -39,15 +43,19 @@ async function generateSitemap() {
     `${BASE_URL}/collection/pendientes/hoja`,
     `${BASE_URL}/collection/pendientes/circulo`,
     `${BASE_URL}/collection/pendientes/karina`
-  ];
+  ].map((url) => ({
+    loc: url,
+    lastmod: today
+  }));
 
   const productUrls = await getProductUrls();
 
   const urls = [...staticUrls, ...productUrls];
 
-  const urlset = urls.map((url) => ({
+  const urlset = urls.map(({ loc, lastmod }) => ({
     url: {
-      loc: url,
+      loc,
+      lastmod,
       changefreq: 'weekly',
       priority: 0.8,
     },
@@ -59,7 +67,7 @@ async function generateSitemap() {
     .end({ prettyPrint: true });
 
   fs.writeFileSync('./public/sitemap.xml', xml);
-  console.log('✅ Sitemap generado correctamente en /public/sitemap.xml');
+  console.log('✅ Sitemap generado correctamente con <lastmod> en /public/sitemap.xml');
 }
 
 generateSitemap();
