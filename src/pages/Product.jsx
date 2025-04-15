@@ -46,7 +46,6 @@ const Product = () => {
       </div>
     </div>
   );
-
   if (!productData) return renderSkeleton();
 
   return (
@@ -62,7 +61,7 @@ const Product = () => {
             "@context": "https://schema.org/",
             "@type": "Product",
             name: productData.name,
-            image: productData.image,
+            image: productData.image[0],
             description: productData.description,
             sku: productData._id,
             brand: {
