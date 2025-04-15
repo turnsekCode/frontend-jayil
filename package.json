@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
-    "axios": "^1.7.9",
+    "axios": "^1.8.4",
     "framer-motion": "^12.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -20,7 +20,8 @@
     "react-intersection-observer": "^9.15.1",
     "react-router-dom": "^7.0.1",
     "react-spinners": "^0.15.0",
-    "react-toastify": "^10.0.6"
+    "react-toastify": "^10.0.6",
+    "xmlbuilder2": "^3.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
