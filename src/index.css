@@ -12,7 +12,7 @@ a.active hr {
     font-family: Outfit;
     
 }
-body {
+html, body {
   overflow-x: hidden;
 }
 
