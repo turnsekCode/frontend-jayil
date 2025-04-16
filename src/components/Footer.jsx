@@ -14,9 +14,9 @@ const Footer = () => {
             <img src={assets.logo} alt="" className='mb-5 w-32' />
             <p className='w-full md:w-2/3 text-gray-600 text-lg'>Producto Artesanal</p>
             <div className='flex gap-5 mt-3 text-lg'>
-              <a title='Instagram' aria-label="Instagram" href='/'><FaInstagram /></a>
-              <a title='Facebook' aria-label="Facebook" href='/'><FaFacebook /></a>
-              <a title='Linkedin' aria-label="Linkedin" href='/'><FaLinkedin /></a>
+              <a title='Instagram' aria-label="Instagram" href='https://www.instagram.com/jayil.artesania' target='_blank'><FaInstagram /></a>
+              <a title='Facebook' aria-label="Facebook" href='https://www.facebook.com/jayil.artesania' target='_blank'><FaFacebook /></a>
+              <a title='Linkedin' aria-label="Linkedin" href='https://www.linkedin.com/jayil.artesania' target='_blank'><FaLinkedin /></a>
             </div>
         </div>
 
