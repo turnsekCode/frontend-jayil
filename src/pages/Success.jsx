@@ -10,7 +10,7 @@ const Success = () => {
         <meta name='description' content='Joyería con diseño exclusivo hechas a mano' />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-      <div className='flex flex-col sm:flex-row items-center justify-center py-12 px-6'>
+      <div className='flex flex-col sm:flex-row items-center justify-center py-12 px-6 mt-20'>
         <div className='bg-white shadow-xl rounded-2xl p-8 max-w-md text-center border-t-4 border-[#C15470]'>
           <FaCheckCircle className='text-[#C15470] text-6xl mb-4 mx-auto' />
           <h1 className='text-3xl font-bold text-gray-800'>¡Gracias por tu compra!</h1>
