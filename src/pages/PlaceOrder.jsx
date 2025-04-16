@@ -215,7 +215,7 @@ const PlaceOrder = () => {
       shippingFee:
         getCartAmount() > 45
           ? 'Gratis (para España peninsular)'
-          : `${currency} ${delivery_fee.toFixed(2)}`,
+          : `${delivery_fee.toFixed(2)}${currency} `,
       total: getCartAmount() > 45
         ? getCartAmount() - discount // No sumar delivery_fee si es gratis
         : getCartAmount() + delivery_fee - discount,
