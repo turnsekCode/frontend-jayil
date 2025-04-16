@@ -62,7 +62,7 @@ const PlaceOrder = () => {
   const applyCoupon = () => {
     // Lógica de validación de cupones
     const validCoupons = {
-      lanzamiento15: 0.15, // 15% de descuento
+      LANZAMIENTO15: 0.15, // 15% de descuento
       ENVIOGRATIS: delivery_fee, // Descuento igual al costo de envío
     };
 
