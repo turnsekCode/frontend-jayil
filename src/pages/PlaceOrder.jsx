@@ -293,7 +293,7 @@ const PlaceOrder = () => {
       ? `whatsapp://send?phone=${phoneNumber}&text=${encodedMessage}`
       : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
 
-    //window.open(url, "_blank");
+    window.open(url);
   };
 
 
