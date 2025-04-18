@@ -105,10 +105,6 @@ const PlaceOrder = () => {
     }
   };
 
-
-
-
-
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     // Función para generar el número de pedido
@@ -121,16 +117,18 @@ const PlaceOrder = () => {
     try {
       let orderItems = [];
       for (const itemId in cartItems) {
-        const quantity = cartItems[itemId];
+        const { id, quantity } = cartItems[itemId]; // Destructuración de la estructura con id y quantity
+
         if (quantity > 0) {
-          const productData = products.find((product) => product._id === itemId);
+          const productData = products.find((product) => product._id === id); // Busca el producto con el id correspondiente
           if (productData) {
-            const itemInfo = structuredClone(productData);
-            itemInfo.quantity = quantity;
-            orderItems.push(itemInfo);
+            const itemInfo = structuredClone(productData); // Clona el producto para evitar modificar el original
+            itemInfo.quantity = quantity; // Asigna la cantidad al producto
+            orderItems.push(itemInfo); // Añade el producto al array orderItems
           }
         }
       }
+
       // Crear los datos del pedido
       let orderData = {
         orderNumber: generateOrderNumber(),
@@ -453,7 +451,7 @@ const PlaceOrder = () => {
             </div>
           </div>
           {/* popup sumup */}
-          <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} setCoupon={setCoupon} orderData={orderData} sendEmail={sendEmail} setOrderCancel={setOrderCancel} orderCancel={orderCancel} updateProductQuantity={updateProductQuantity}  />
+          <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} setCoupon={setCoupon} orderData={orderData} sendEmail={sendEmail} setOrderCancel={setOrderCancel} orderCancel={orderCancel} updateProductQuantity={updateProductQuantity} />
           {/* Campo para cupón */}
           <div className='mt-4'>
             <input
