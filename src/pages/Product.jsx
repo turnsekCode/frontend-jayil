@@ -47,14 +47,23 @@ const Product = () => {
     </div>
   );
   if (!productData) return renderSkeleton();
-
   return (
     <>
       <Helmet>
-        <title>{productData.metaTitle}</title>
+        <title>
+          {productData?.metaTitle && productData.metaTitle !== 'undefined' && productData.metaTitle.trim() !== ''
+            ? productData.metaTitle
+            : 'Joyería Artesanal Exclusiva - Pendientes, Anillos y Collares Hechos a Mano'}
+        </title>
         <meta
           name="description"
-          content={productData.metaDescription}
+          content={
+            productData?.metaDescription &&
+            productData.metaDescription !== 'undefined' &&
+            productData.metaDescription.trim() !== ''
+              ? productData.metaDescription
+              : 'Descubre joyería única que combina diseño exclusivo artesanal con acero inoxidable. Pendientes, anillos y collares hechos a mano, complementos para mujer, fusionando moda, elegancia y durabilidad. ¡Encuentra tu estilo único aquí!'
+          }
         />
         <script type="application/ld+json">
           {JSON.stringify({

@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
 import ClipLoader from 'react-spinners/ClipLoader'
 
 
-export default function SumupPopUp({ isOpen, setIsOpen, orderData, setCoupon, sendEmail,setOrderCancel,orderCancel }) {
+export default function SumupPopUp({ isOpen, setIsOpen, orderData, setCoupon, sendEmail,setOrderCancel,orderCancel,updateProductQuantity }) {
   const [paymentStatus, setPaymentStatus] = useState("");
   const [isCheckingPayment, setIsCheckingPayment] = useState(false); // 🔹 Nuevo estado
-  const { checkoutToken, navigate, setCheckoutToken, backenUrl, setCartItems, setIsSending, isSending } = useContext(ShopContext);
+  const { setUpdateQuantity, checkoutToken, navigate, setCheckoutToken, backenUrl, setCartItems, setIsSending, isSending, cartItems } = useContext(ShopContext);
   const [cardInstance, setCardInstance] = useState(null); // Guardar instancia del widget
   const [showBtonCancel, setShowBtonCancel] = useState(false);
 
@@ -26,6 +26,12 @@ export default function SumupPopUp({ isOpen, setIsOpen, orderData, setCoupon, se
         setCartItems({}); // Limpiar el carrito
         setCoupon(""); // Limpiar el cupón
         navigate("/success");
+        setTimeout(async () => {
+          setUpdateQuantity(true);
+        }, 5000);
+        for (const item of Object.values(cartItems)) {
+          await updateProductQuantity({ id: item.id, quantity: item.quantity });
+        }
         await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
       } else if (data.success === false) {
         setIsCheckingPayment(false); // 🔹 Detener el chequeo

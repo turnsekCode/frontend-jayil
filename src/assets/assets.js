@@ -37,6 +37,7 @@ import homeWeb from './home WEB.jpg'
 import homeMovil from './HOME MOVIL.jpg'
 import fornituraWeb from './fornitura web.jpg'
 import fornituraMovil from './fornitura.jpg'
+import personalizacion from './personalizacion.webp'
 
 
 
@@ -79,6 +80,6 @@ export const assets = {
     homeWeb,
     homeMovil,
     fornituraWeb,
-    fornituraMovil
-
+    fornituraMovil,
+    personalizacion
 }

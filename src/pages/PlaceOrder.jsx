@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet-async';
 const PlaceOrder = () => {
 
   const [method, setMethod] = useState('');
-  const { navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, setCartItems, setCheckoutToken, setIsSending, isSending } = useContext(ShopContext);
+  const { setUpdateQuantity, navigate, cartItems, products, delivery_fee, getCartAmount, currency, backenUrl, setCartItems, setCheckoutToken, setIsSending, isSending } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
   const [coupon, setCoupon] = useState(''); // Estado para el cupón ingresado
   const [discount, setDiscount] = useState(0); // Estado para el descuento aplicado
@@ -80,6 +80,34 @@ const PlaceOrder = () => {
       setCouponError('Cupón inválido o expirado');
     }
   };
+  const updateProductQuantity = async ({ id, quantity }) => {
+    try {
+      const res = await fetch(`${backenUrl}/api/product/update-quantity`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          quantity, // cantidad que quiero restar, ej: 1, 2, etc.
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        return;
+        //console.log("Cantidad restada correctamente");
+      } else {
+        console.error(data.message);
+      }
+    } catch (err) {
+      console.error("Error al actualizar cantidad:", err);
+    }
+  };
+
+
+
+
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -127,10 +155,19 @@ const PlaceOrder = () => {
             setCoupon('');
             setLoading(false);
             navigate("/success");
+            setTimeout(async () => {
+              setUpdateQuantity(true); // Puedes usarlo para disparar un efecto si necesitas
+            }, 5000);
             // Llamada para enviar el correo solo si el pedido fue exitoso
             await sendEmail(orderData); // Pasar los datos del pedido a la función sendEmail
             // Enviar mensaje de WhatsApp
             sendWhatsAppMessage(orderData);
+
+            // Aquí, actualizamos la cantidad en la base de datos si el pedido fue exitoso
+            // Llamamos a handleAddToCart para actualizar la cantidad de productos en el backend
+            for (const item of Object.values(cartItems)) {
+              await updateProductQuantity({ id: item.id, quantity: item.quantity });
+            }
           } else {
             toast.error(response.data.message); // Mensaje de error
             setLoading(false);
@@ -247,18 +284,18 @@ const PlaceOrder = () => {
   - *Número de pedido:* ${orderData.orderNumber}
   - *Total:* ${orderData.amount} € 
   - *Productos:* \n${orderData.items.map(item => `- ${item.name} x${item.quantity}`).join("\n")}`;
-  
+
     const encodedMessage = encodeURIComponent(message);
-  
+
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  
+
     const url = isMobile
       ? `whatsapp://send?phone=${phoneNumber}&text=${encodedMessage}`
       : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
-  
+
     window.open(url, "_blank");
   };
-  
+
 
 
 
@@ -416,7 +453,7 @@ const PlaceOrder = () => {
             </div>
           </div>
           {/* popup sumup */}
-          <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} setCoupon={setCoupon} orderData={orderData} sendEmail={sendEmail} setOrderCancel={setOrderCancel} orderCancel={orderCancel} />
+          <SumupPopUp isOpen={isOpen} setIsOpen={setIsOpen} setCoupon={setCoupon} orderData={orderData} sendEmail={sendEmail} setOrderCancel={setOrderCancel} orderCancel={orderCancel} updateProductQuantity={updateProductQuantity}  />
           {/* Campo para cupón */}
           <div className='mt-4'>
             <input

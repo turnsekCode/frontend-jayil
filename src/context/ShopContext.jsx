@@ -21,6 +21,7 @@ const ShopContextProvider = (props) => {
     const [loading, setLoading] = useState(false);
     const [checkoutToken, setCheckoutToken] = useState(null);
     const [isSending, setIsSending] = useState(false);
+    const [uodateQuantity, setUpdateQuantity] = useState(false);
 
 
 
@@ -68,48 +69,56 @@ const ShopContextProvider = (props) => {
             className: 'foo-bar'
         });
     }
-    const addToCart = (itemId, productData) => {
+    const addToCart = (itemId, productStock) => {
         setCartItems((prevCartItems) => {
-            const currentQuantity = prevCartItems[itemId] || 0;
+            const currentItem = prevCartItems[itemId] || { id: itemId, quantity: 0 };
+            const currentQuantity = currentItem.quantity;
     
-            // Verificar si la cantidad actual es menor que la cantidad disponible del producto
-            if (currentQuantity < productData) {
+            if (currentQuantity < productStock) {
                 const updatedCart = {
                     ...prevCartItems,
-                    [itemId]: currentQuantity + 1,
+                    [itemId]: {
+                        id: itemId,
+                        quantity: currentQuantity + 1,
+                    },
                 };
-                notify(); // Solo se ejecuta notify si la cantidad es menos que la disponible
+                notify();
                 return updatedCart;
             } else {
-                // Si la cantidad es igual o mayor que la disponible, no hacer nada
-                toast.info(`Solo puedes añadir hasta ${productData} unidades de este producto.`);
-                return prevCartItems; // No modificamos el carrito si ya hay 2
+                toast.info(`Solo puedes añadir hasta ${productStock} unidades de este producto.`);
+                return prevCartItems;
             }
         });
     };
     
+    
 
 
 
-    const getCartCount = () => { // aqui hacemos un simple contador del total de productos seleccionados
-        return Object.values(cartItems).reduce((total, count) => total + count, 0);
+    const getCartCount = () => {
+        return Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
     };
+    
 
     const updateQuantity = (itemId, newQuantity) => {
         setCartItems((prevCartItems) => {
             const updatedCart = { ...prevCartItems };
-
+    
             if (newQuantity <= 0) {
                 // Si la cantidad es 0 o menor, eliminamos el producto
                 delete updatedCart[itemId];
             } else {
-                // Si no, actualizamos la cantidad
-                updatedCart[itemId] = newQuantity;
+                // Si no, actualizamos solo la cantidad del producto
+                updatedCart[itemId] = {
+                    ...updatedCart[itemId],
+                    quantity: newQuantity,
+                };
             }
-
+    
             return updatedCart;
         });
     };
+    
 
     // Estado temporal para manejar el valor del input
     const [tempValues, setTempValues] = useState({});
@@ -139,12 +148,11 @@ const ShopContextProvider = (props) => {
 
 
     const getCartAmount = () => {
-        return Object.entries(cartItems).reduce((total, [itemId, quantity]) => {
-            const itemInfo = products.find((product) => product._id === itemId);
-            return itemInfo ? total + itemInfo.price * quantity : total;
+        return Object.entries(cartItems).reduce((total, [itemId, item]) => {
+          const itemInfo = products.find((product) => product._id === itemId);
+          return itemInfo ? total + itemInfo.price * item.quantity : total;
         }, 0);
-    };
-
+      };
     const getsProductsData = async () => {
         setLoading(true); // Mueve esto al principio para indicar que el loading empieza.
         try {
@@ -162,11 +170,9 @@ const ShopContextProvider = (props) => {
             setLoading(false); // Asegúrate de que el loading termine tanto en éxito como en error.
         }
     };
-
-
     useEffect(() => {
         getsProductsData();
-    }, []);
+    }, [cartItems, uodateQuantity]);
 
     useEffect(() => {
         if (!token && localStorage.getItem('token')) {
@@ -180,7 +186,7 @@ const ShopContextProvider = (props) => {
         cartItems, addToCart,
         getCartCount, updateQuantity, getCartAmount,
         navigate, backenUrl, token, setToken, setCartItems, handleInputChange, tempValues, handleBlur, loading,
-        setCheckoutToken, checkoutToken, setIsSending, isSending
+        setCheckoutToken, checkoutToken, setIsSending, isSending, setUpdateQuantity
     }
 
 

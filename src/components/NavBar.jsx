@@ -46,8 +46,6 @@ const NavBar = () => {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isFixed, setIsFixed] = useState(false);
 
-
-
     useEffect(() => {
         if (location.pathname.includes('collection')) {
             setSearchVisible(true)

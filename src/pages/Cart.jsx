@@ -13,14 +13,15 @@ const Cart = () => {
   useEffect(() => {
     if (cartItems && Object.keys(cartItems).length > 0) {
       const tempData = Object.entries(cartItems)
-        .filter(([_, quantity]) => quantity > 0)
-        .map(([itemId, quantity]) => ({ _id: itemId, quantity }));
-
+        .filter(([_, item]) => item.quantity > 0)
+        .map(([itemId, item]) => ({ _id: itemId, quantity: item.quantity }));
+  
       setCartData(tempData);
     } else {
       setCartData([]); // Si no hay datos, limpia el estado
     }
   }, [cartItems]);
+  
   return (
     <>
       <Helmet>
