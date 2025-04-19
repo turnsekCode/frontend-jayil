@@ -23,6 +23,11 @@ const PlaceOrder = () => {
   const [orderCancel, setOrderCancel] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const [envioPersonal, setEnvioPersonal] = useState(false);
+  const handleCheckboxChange = (e) => {
+    setEnvioPersonal(e.target.checked);
+  };
+
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
     lastName: '',
@@ -51,8 +56,8 @@ const PlaceOrder = () => {
   useEffect(() => {
     if (cartItems && Object.keys(cartItems).length > 0) {
       const tempData = Object.entries(cartItems)
-        .filter(([_, quantity]) => quantity > 0)
-        .map(([itemId, quantity]) => ({ _id: itemId, quantity }));
+        .filter(([_, item]) => item.quantity > 0)
+        .map(([itemId, item]) => ({ _id: itemId, quantity: item.quantity }));
       setCartData(tempData);
     } else {
       setCartData([]); // Si no hay datos, limpia el estado
@@ -134,9 +139,10 @@ const PlaceOrder = () => {
         orderNumber: generateOrderNumber(),
         address: shippingInfo,
         items: orderItems,
-        amount: getCartAmount() > 45
-          ? getCartAmount() - discount // No sumar delivery_fee si es gratis
-          : getCartAmount() + delivery_fee - discount,
+        amount:
+        getCartAmount() > 45
+        ? (getCartAmount() - discount)
+        : (getCartAmount() + (envioPersonal ? 0 : delivery_fee) - discount),
         delivery_fee: delivery_fee
       };
       setOrderData(orderData);
@@ -246,14 +252,15 @@ const PlaceOrder = () => {
       cartDetails,
       shippingInfo,
       paymentType,
+      envioPersonal,
       subtotal: getCartAmount(),
       shippingFee:
         getCartAmount() > 45
           ? 'Gratis (para España peninsular)'
           : `${delivery_fee.toFixed(2)}${currency} `,
       total: getCartAmount() > 45
-        ? getCartAmount() - discount // No sumar delivery_fee si es gratis
-        : getCartAmount() + delivery_fee - discount,
+      ? (getCartAmount() - discount)
+      : (getCartAmount() + (envioPersonal ? 0 : delivery_fee) - discount),
       discount,
       currency,
     };
@@ -293,9 +300,6 @@ const PlaceOrder = () => {
 
     window.open(url);
   };
-
-
-
 
   return (
     <>
@@ -431,7 +435,13 @@ const PlaceOrder = () => {
             <hr />
             <div className='flex justify-between'>
               <p>Costo de envío</p>
-              <p>{getCartAmount() > 45 ? 'Gratis (Para España peninsular)' : `${delivery_fee.toFixed(2)}${currency}`}</p>
+              <p>
+                {envioPersonal
+                  ? `0.00${currency}`
+                  : getCartAmount() > 45
+                    ? 'Gratis (Para España peninsular)'
+                    : `${delivery_fee.toFixed(2)}${currency}`}
+              </p>
             </div>
             {discount > 0 ? <div className='flex justify-between'>
               <p>Descuento</p>
@@ -444,10 +454,22 @@ const PlaceOrder = () => {
                 {getCartAmount() === 0
                   ? "0.00"
                   : getCartAmount() > 45
-                    ? (getCartAmount() - discount).toFixed(2) // No sumar delivery_fee si es gratis
-                    : (getCartAmount() + delivery_fee - discount).toFixed(2)}{currency}
+                    ? (getCartAmount() - discount).toFixed(2)
+                    : (getCartAmount() + (envioPersonal ? 0 : delivery_fee) - discount).toFixed(2)
+                }{currency}
+
+
               </p>
 
+            </div>
+            <div className='flex gap-1'>
+              <input
+                type="checkbox"
+                className="mr-2"
+                checked={envioPersonal}
+                onChange={handleCheckboxChange}
+              />
+              <p className='text-sm text-gray-500'>Entrega personal<span className='text-[#C15470]'> (Sólo Valencia capital)</span></p>
             </div>
           </div>
           {/* popup sumup */}
@@ -491,6 +513,14 @@ const PlaceOrder = () => {
               </div>
             </div>
             <p className='text-gray-600 text-sm mt-2'>Para otros métodos de pago comunicate con nosotros por whatsapp</p>
+            <div className='flex gap-1 mt-4'>
+              <input
+                type="checkbox"
+                className="mr-2"
+                required
+              />
+              <p className='text-sm text-gray-500'>Acepto los <a href="/privacy_policy" className='text-[#C15470]'>términos y condiciones</a> de Jayil</p>
+            </div>
             <div className='mt-12'>
               {/* Botón de envío */}
               <button

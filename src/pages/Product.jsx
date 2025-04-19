@@ -124,7 +124,7 @@ const Product = () => {
               {productData.price.toFixed(2)}
             </div>
 
-            <p className="mt-5 text-gray-500 md:w-4/5">{productData.description}</p>
+            <p className="mt-5 text-gray-500">{productData.description}</p>
 
             {/* Mensaje de disponibilidad */}
             {productData.quantity === 0 ? (
