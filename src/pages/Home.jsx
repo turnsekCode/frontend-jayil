@@ -75,13 +75,13 @@ const Home = () => {
         <div id="show-categories-trigger"></div>
         {/* Carga diferida de los componentes */}
         {loadComponents && (
-          <Suspense fallback={<p>...</p>}>
+          <>
             <HomeImage />
             <LatestCollection />
             <SeccionAyuda />
             <BestSeller />
             <CallToAction />
-          </Suspense>
+          </>
         )}
       </section>
     </>
