@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState, useEffect } from 'react';
+import React, { lazy, useState, useEffect } from 'react';
 import Hero from '../components/Hero';
 import ShowCategories from '../components/ShowCategories';
 import { Helmet } from 'react-helmet-async';
