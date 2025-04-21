@@ -434,7 +434,7 @@ const PlaceOrder = () => {
             </div>
             <hr />
             <div className='flex justify-between'>
-              <p>Costo de envío</p>
+              <p>Costo de envío <span>(Para España peninsular)</span></p>
               <p>
                 {envioPersonal
                   ? `0.00${currency}`
