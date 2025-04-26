@@ -27,6 +27,9 @@ const categories = [
             { name: 'HOJA', path: '/collection/pendientes/hoja' },
             { name: 'KARINA', path: '/collection/pendientes/karina' },
             { name: 'CÍRCULO', path: '/collection/pendientes/circulo' },
+            { name: 'ROMBO', path: '/collection/pendientes/rombo' },
+            { name: 'LÁGRIMAS', path: '/collection/pendientes/lagrimas' },
+            { name: 'LAURA', path: '/collection/pendientes/laura' },
         ],
     },
     { name: 'PULSERAS', path: '/collection/pulseras' },
@@ -72,36 +75,50 @@ const NavBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-          const currentScrollY = window.scrollY;
-    
-          if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            // Desaparece al hacer scroll hacia abajo
-            setIsVisible(false);
-            setTimeout(() => {
-              setIsFixed(true); // Se fija después de desaparecer
-              requestAnimationFrame(() => setIsVisible(true)); // Reaparece de inmediato sin salto
-            }, 200);
-          } else if (currentScrollY <= 50) {
-            // Al volver al top, recupera su estado original
-            setIsVisible(true);
-            setTimeout(() => setIsFixed(false), 300); // Pequeño delay para evitar salto
-          }
-    
-          setLastScrollY(currentScrollY);
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Desaparece al hacer scroll hacia abajo
+                setIsVisible(false);
+                setTimeout(() => {
+                    setIsFixed(true); // Se fija después de desaparecer
+                    requestAnimationFrame(() => setIsVisible(true)); // Reaparece de inmediato sin salto
+                }, 200);
+            } else if (currentScrollY <= 50) {
+                // Al volver al top, recupera su estado original
+                setIsVisible(true);
+                setTimeout(() => setIsFixed(false), 300); // Pequeño delay para evitar salto
+            }
+
+            setLastScrollY(currentScrollY);
         };
-    
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-      }, [lastScrollY]);
+    }, [lastScrollY]);
+
+    // Dentro de tu componente:
+    useEffect(() => {
+        if (visible) {
+            document.body.style.overflow = 'hidden'; // Bloquear scroll fondo
+        } else {
+            document.body.style.overflow = 'auto'; // Restaurar scroll fondo
+        }
+
+        // Limpiar al desmontar
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [visible]);
+
 
     return (
-        <header    className={`fixed left-0 w-full z-50 border-b transition-transform duration-500 ease-out ${
-            isFixed
-              ? "top-0 bg-white shadow-md py-1 translate-y-0 opacity-100"
-              : isVisible
-              ? "top-0 py-1 bg-white opacity-100"
-              : "-translate-y-full opacity-0"
-          }`}>
+        <header className={`fixed left-0 w-full z-50 border-b transition-transform duration-500 ease-out ${isFixed
+                ? "top-0 bg-white shadow-md py-1 translate-y-0 opacity-100"
+                : isVisible
+                    ? "top-0 py-1 bg-white opacity-100"
+                    : "-translate-y-full opacity-0"
+            }`}>
             <nav className={`flex items-center justify-between font-medium px-6 gap-3`}>
                 <Link to="/"><img src={assets.logo} className='w-28' alt="jayil artesania" /></Link>
                 <div className='hidden sm:flex gap-5 text-sm text-gray-700'>
@@ -154,7 +171,7 @@ const NavBar = () => {
                                             >
                                                 {category.subcategories.map((subcategory, subIndex) => (
                                                     <NavLink
-                                                        onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}
+                                                        onClick={() => { setIsSubmenuOpen(false); setHoveredCategory(null) }}
                                                         key={subIndex}
                                                         to={subcategory.path}
                                                         className="block px-4 py-2 hover:bg-gray-100 text-gray-800"
@@ -181,7 +198,7 @@ const NavBar = () => {
                 <div className='flex items-center gap-4'>
                     <p className='text-[#C15470] text-sm leading-[1.2] text-center'>Envío GRATIS en pedidos superiores a 45€</p>
                     <p className='text-[#C15470]'>
-                        
+
                         {getCartAmount() === 0
                             ? "0.00"
                             : getCartAmount().toFixed(2)}{currency}
@@ -209,7 +226,7 @@ const NavBar = () => {
                 </div>
 
                 {/* side bar menu para moviles*/}
-                <div className={`z-10 absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all h-[100vh] ${visible ? 'w-full' : 'w-0'}`}>
+                <div className={`z-10 absolute top-0 right-0 bottom-0 overflow-y-auto bg-white transition-all h-[100vh] ${visible ? 'w-full' : 'w-0'}`}>
                     <div className='flex flex-col text-gray-600'>
                         <div onClick={() => handleNavClick()} className='flex items-center gap-4 p-3 cursor-pointer'>
                             <img src={assets.dropdown_icon} className='h-4 rotate-180' alt="" />

@@ -71,17 +71,19 @@ const Product = () => {
             "@type": "Product",
             name: productData.name,
             image: productData.image[0],
+            additionalImage: Array.isArray(productData.image) ? productData.image : [productData.image],
             description: productData.description,
             sku: productData._id,
             brand: {
               "@type": "Brand",
-              name: "Jayil"
+              name: "Jayil.artesanía"
             },
             offers: {
               "@type": "Offer",
               url: window.location.href,
+              priceValidUntil: "2030-12-31",
               priceCurrency: "EUR",
-              price: productData.price + currency,
+              price: productData.price.toFixed(2),
               availability:
                 productData.quantity > 0
                   ? "https://schema.org/InStock"

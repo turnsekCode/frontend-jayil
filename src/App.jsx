@@ -36,6 +36,9 @@ import CirculoCollection from './pages/Circulo'
 import KarinaCollection from './pages/Karina'
 import Success from './pages/Success'
 import WhatsAppButton from './components/WhatsappBoton'
+import RomboCollection from './pages/Rombo'
+import LauraCollection from './pages/Laura'
+import LagrimasCollection from './pages/Lagrimas'
 
 const App = () => {
   return (
@@ -65,6 +68,9 @@ const App = () => {
       <Route path='/collection/pendientes/hoja' element={<HojaCollection/>} />
       <Route path='/collection/pendientes/circulo' element={<CirculoCollection/>} />
       <Route path='/collection/pendientes/karina' element={<KarinaCollection/>} />
+      <Route path='/collection/pendientes/rombo' element={<RomboCollection/>} />
+      <Route path='/collection/pendientes/lagrimas' element={<LagrimasCollection/>} />
+      <Route path='/collection/pendientes/laura' element={<LauraCollection/>} />
 
 
       <Route path='/about' element={<About/>} />

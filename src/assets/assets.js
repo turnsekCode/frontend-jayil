@@ -32,6 +32,9 @@ import categoria_cascada from './categoria_cascada.jpg'
 import categoria_hoja from './categoria_hoja.jpg'
 import categoria_karina from './karina.webp'
 import categoria_circulo from './circulo.webp'
+import categoria_rombo from './rombo.webp'
+import categoria_laura from './laura.webp'
+import categoria_lagrima from './lagrimas.webp'
 import sobre_mi from './sobre_mi.webp'
 import homeWeb from './elige_la_fornitura.jpg'
 import homeMovil from './elige_la fornitura_movil.jpg'
@@ -81,5 +84,8 @@ export const assets = {
     homeMovil,
     fornituraWeb,
     fornituraMovil,
-    personalizacion
+    personalizacion,
+    categoria_rombo,
+    categoria_laura,
+    categoria_lagrima,
 }
