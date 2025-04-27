@@ -31,6 +31,14 @@ select,input,textarea{
     display: none;
   }
 
+  .eapps-widget-toolbar{
+    display: none!important;
+  }
+
+  .WidgetBackground__Content-sc-52f57cce-2 a {
+    display: none!important;
+  }
+
   @media (max-width:640px){
     a.active {
         background-color: #C15470;

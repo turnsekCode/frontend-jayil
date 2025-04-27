@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import ShowCategories from '../components/ShowCategories';
 import { Helmet } from 'react-helmet-async';
 import { assets } from '../assets/assets';
+import GoogleReviews from '../components/GoogleResenas';
 
 // Lazy load de los componentes
 const HomeImage = lazy(() => import('../components/HomeImage'));
@@ -78,6 +79,7 @@ const Home = () => {
           <>
             <HomeImage />
             <LatestCollection />
+            <GoogleReviews />
             <SeccionAyuda />
             <BestSeller />
             <CallToAction />
