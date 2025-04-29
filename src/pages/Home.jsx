@@ -32,6 +32,19 @@ const Home = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const link = document.querySelector('#resenasGoogle .jGAyav a');
+      if (link) {
+        link.style.setProperty('display', 'none', 'important');
+        clearInterval(interval); // Deja de buscar cuando lo encuentre
+      }
+    }, 10000); // Cada medio segundo revisa
+
+    return () => clearInterval(interval); // Limpieza
+  }, []);
+
+
   return (
     <>
       <Helmet>
@@ -64,6 +77,28 @@ const Home = () => {
         <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://www.jayil.es' />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Store",
+            name: "jayil.es",
+            url: "https://jayil.es",
+            logo: "/logo.png",
+            image: "https://www.jayil.es/assets/hero_img-iYLBa_0K.webp",
+            description:
+              "Jayil.es es una tienda online de joyería de ocasión hecha de arcilla polimérica. Vendemos pendientes, pulseras y collares artesanales con envío desde Valencia, España.",
+            telephone: "+34 672 56 34 52",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Valencia",
+              addressCountry: "ES",
+            },
+            sameAs: [
+              "https://www.instagram.com/jayil.artesania",
+              "https://www.facebook.com/jayil.artesania",
+            ],
+          })}
+        </script>
       </Helmet>
 
       <section>
@@ -72,14 +107,15 @@ const Home = () => {
         {/* Trigger para activar el lazy loading */}
 
         <ShowCategories />
-
+        <div id='resenasGoogle'><GoogleReviews /></div>
         <div id="show-categories-trigger"></div>
         {/* Carga diferida de los componentes */}
         {loadComponents && (
           <>
             <HomeImage />
             <LatestCollection />
-            <GoogleReviews />
+
+
             <SeccionAyuda />
             <BestSeller />
             <CallToAction />

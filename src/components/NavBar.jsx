@@ -29,7 +29,7 @@ const categories = [
             { name: 'CÍRCULO', path: '/collection/pendientes/circulo' },
             { name: 'ROMBO', path: '/collection/pendientes/rombo' },
             { name: 'LÁGRIMAS', path: '/collection/pendientes/lagrimas' },
-            { name: 'LAURA', path: '/collection/pendientes/laura' },
+            { name: 'ELIA', path: '/collection/pendientes/elia' },
         ],
     },
     { name: 'PULSERAS', path: '/collection/pulseras' },

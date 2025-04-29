@@ -5,7 +5,7 @@ import ProductItem from '../components/ProductItem'
 import CallToAction from '../components/CallToAction';
 import { Helmet } from 'react-helmet-async';
 
-const LauraCollection = () => {
+const EliaCollection = () => {
 
   const { products, search, showSearch, loading } = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -22,7 +22,7 @@ const LauraCollection = () => {
 
     // Filtro por categoría "Pendientes" y subcategoría "Aro"
     const selectedCategory = "Pendientes";
-    const selectedSubcategory = "Laura";
+    const selectedSubcategory = "Elia";
     productsCopy = productsCopy.filter(item =>
       item.category === selectedCategory && item.subCategory === selectedSubcategory
     );
@@ -65,8 +65,8 @@ const LauraCollection = () => {
   return (
     <>
       <Helmet>
-        <title>Pendientes Laura Exclusivos - Joyería Artesanal en Acero Inoxidable</title>
-        <meta name='description' content='Luce los exclusivos pendientes Laura, diseño artesanal único con un toque moderno. Fornituras de acero inoxidable, elegancia duradera y estilo inigualable. Descubre la joyería que resalta tu personalidad. ¡Compra ahora!' />
+        <title>Pendientes Elia Exclusivos - Joyería de arcilla polimérica Artesanal en Acero Inoxidable</title>
+        <meta name='description' content='Luce los exclusivos pendientes Elia, diseño artesanal único con un toque moderno. Fornituras de acero inoxidable, elegancia duradera y estilo inigualable. Descubre la joyería que resalta tu personalidad. ¡Compra ahora!' />
         <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://www.jayil.es/collection/pendientes/ovalo' />
@@ -80,7 +80,7 @@ const LauraCollection = () => {
         {/* Right side*/}
         <div className='flex-1'>
           <div className='flex justify-between text-base sm:text-2xl mb-4 gap-2'>
-            <Title text1={'COLECCIÓN DE'} text2={'LAURA'} />
+            <Title text1={'COLECCIÓN DE'} text2={'ELIA'} />
             {/* Product sort (clasificar) */}
             <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2 sm:w-auto w-full'>
               <option value="relavent">Ordenar por: Relevancia</option>
@@ -90,7 +90,7 @@ const LauraCollection = () => {
           </div>
           <div >
             <p className='mb-10 text-gray-500 text-sm px-2'>
-              Los pendientes Laura son perfectos para el uso diario gracias a su diseño ligero y cómodo. Su versatilidad los convierte en el accesorio ideal para cualquier ocasión, desde una jornada laboral hasta una salida casual. Realza tu belleza natural y destaca con la elegancia discreta de estos pendientes artesanales que combinan a la perfección con tu día a día.
+              Los pendientes Elia son perfectos para el uso diario gracias a su diseño ligero y cómodo. Su versatilidad los convierte en el accesorio ideal para cualquier ocasión, desde una jornada laboral hasta una salida casual. Realza tu belleza natural y destaca con la elegancia discreta de estos pendientes artesanales que combinan a la perfección con tu día a día.
             </p>
           </div>
 
@@ -127,4 +127,4 @@ const LauraCollection = () => {
   )
 }
 
-export default LauraCollection
+export default EliaCollection
