@@ -21,12 +21,11 @@ const Product = () => {
   useEffect(() => {
     fetchProductsData();
   }, [productId, products]);
-console.log('Product data:', productData);
   const renderSkeleton = () => (
     <div className="pt-[120px] animate-pulse">
       <div className="flex gap-12 flex-col sm:flex-row">
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
-          <div className="sm:w-[18.7%] w-full space-y-2 sm:space-y-3 flex sm:flex-col flex-row overflow-auto sm:overflow-visible">
+          <div className="sm:w-[18.7%] w-full sm:space-y-3 flex sm:flex-col flex-row overflow-auto sm:overflow-visible">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="bg-gray-300 h-20 w-20 sm:w-full" />
             ))}
