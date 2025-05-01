@@ -71,7 +71,6 @@ console.log('Product data:', productData);
             "@type": "Product",
             name: productData.name,
             image: productData.image,
-            additionalImage: Array.isArray(productData.image) ? productData.image : [productData.image],
             description: productData.description,
             sku: productData._id,
             brand: {
