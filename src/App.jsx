@@ -40,6 +40,7 @@ import RomboCollection from './pages/Rombo'
 import LagrimasCollection from './pages/Lagrimas'
 import EliaCollection from './pages/Elia'
 import BlogPost from './pages/Blog'
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   return (
@@ -88,6 +89,7 @@ const App = () => {
       <Route path='/success' element={<Success/>} />
      </Routes>
      <Footer />
+     <Analytics />
     </div>
   )
 }
