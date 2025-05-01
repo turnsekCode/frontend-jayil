@@ -60,7 +60,7 @@ const LatestCollection = () => {
       ) : (
         renderSkeleton()
       )}
-      <div className='w-full flex justify-center'>
+      <div className='w-full flex justify-center mt-8'>
       <button onClick={() => navigate('/collection')} className='bg-[#C15470] text-white text-sm my-2 px-8 py-3'>VER TODAS</button>
       </div>
     </div>

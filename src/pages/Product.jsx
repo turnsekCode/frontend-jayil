@@ -21,7 +21,7 @@ const Product = () => {
   useEffect(() => {
     fetchProductsData();
   }, [productId, products]);
-
+console.log('Product data:', productData);
   const renderSkeleton = () => (
     <div className="pt-[120px] animate-pulse">
       <div className="flex gap-12 flex-col sm:flex-row">
@@ -70,7 +70,7 @@ const Product = () => {
             "@context": "https://schema.org/",
             "@type": "Product",
             name: productData.name,
-            image: productData.image[0],
+            image: productData.image,
             additionalImage: Array.isArray(productData.image) ? productData.image : [productData.image],
             description: productData.description,
             sku: productData._id,
