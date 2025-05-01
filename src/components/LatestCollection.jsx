@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import Title from './Title';
 import ProductItem from './ProductItem';
+import { useNavigate } from 'react-router-dom'
 
 const LatestCollection = () => {
+  const navigate = useNavigate();
   const { products } = useContext(ShopContext);
   const [latestProducts, setLatestProducts] = useState([]);
 
@@ -58,6 +60,9 @@ const LatestCollection = () => {
       ) : (
         renderSkeleton()
       )}
+      <div className='w-full flex justify-center'>
+      <button onClick={() => navigate('/collection')} className='bg-[#C15470] text-white text-sm my-2 px-8 py-3'>VER TODAS</button>
+      </div>
     </div>
   );
 };
