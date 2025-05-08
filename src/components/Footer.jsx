@@ -40,7 +40,8 @@ const Footer = () => {
       </div>
       <div>
         <hr/>
-        <p className='py-5 text-sm text-center'>Copyright {currentYear}@ jayil.es - Todos los derechos reservados</p>
+        <p className='pt-5 text-sm text-center'>Copyright {currentYear}@ jayil.es - Todos los derechos reservados</p>
+        <div className="pb-5 text-sm text-gray-600 text-center">Creado por <a href='https://www.pixeltech.es/' target='_blank'>pixeltech.es</a></div>
       </div>
     </footer>
   )
