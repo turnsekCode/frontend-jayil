@@ -107,19 +107,21 @@ const Home = () => {
         {/* Trigger para activar el lazy loading */}
 
         <ShowCategories />
-       
+
         <div id="show-categories-trigger"></div>
         {/* Carga diferida de los componentes */}
-        {loadComponents && (
-          <>
-            <HomeImage />
-            <LatestCollection />
+
+        <>
+          <HomeImage />
+          <LatestCollection />
+          {loadComponents && (
             <div id='resenasGoogle'><GoogleReviews /></div>
-            <SeccionAyuda />
-            <BestSeller />
-            <CallToAction />
-          </>
-        )}
+          )}
+          <SeccionAyuda />
+          <BestSeller />
+          <CallToAction />
+        </>
+
       </section>
     </>
   );

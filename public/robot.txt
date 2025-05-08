@@ -3,5 +3,7 @@ User-agent: *
 # Permitir el acceso a todas las páginas del sitio
 Allow: /
 
+Host: https://jayil.es
+
 # Sitemap - Indicar la ubicación del sitemap.xml
 Sitemap: https://jayil.es/sitemap.xml
