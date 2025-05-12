@@ -24,7 +24,7 @@ const LagrimasCollection = () => {
 
     // Filtro por categoría "Pendientes" y subcategoría "Aro"
     const selectedCategory = "Pendientes";
-    const selectedSubcategory = "Lagrimas";
+    const selectedSubcategory = "Lágrima";
     productsCopy = productsCopy.filter(item =>
         item.category === selectedCategory && item.subCategory === selectedSubcategory
     );

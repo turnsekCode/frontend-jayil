@@ -28,7 +28,7 @@ const Hero = () => {
           <img
             src={assets.sobre_mi}
             alt="joyería, accesorios, handmade, arcilla polimérica, pendientes, pulseras, collares"
-            className="w-full max-w-md mx-auto object-cover shadow-sm"
+            className="w-full max-w-xl object-cover shadow-sm"
           />
         </div>
         <div className="lg:w-1/2 text-center lg:text-left">
