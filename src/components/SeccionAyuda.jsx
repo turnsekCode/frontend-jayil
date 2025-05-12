@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const SeccionAyuda = () => {
     const navigate = useNavigate();
     return (
-        <div className='flex flex-col lg:flex-row gap-12 my-16 lg:my-28 px-4 lg:px-0'>
+        <div className='flex flex-col lg:flex-row gap-12 my-12 lg:my-28 px-4 lg:px-0'>
             <div className='flex flex-col gap-6 w-full lg:w-3/2'>
                 <b className='text-3xl text-gray-600 text-center'>Necesitas ayuda para escoger el accesorio adecuado para ti?</b>
                 <button onClick={() => navigate('/contact')} className='bg-[#C15470] text-white text-sm my-2 px-8 py-3'>PREGUNTA POR AYUDA</button>
