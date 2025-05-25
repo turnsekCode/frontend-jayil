@@ -48,10 +48,10 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Joyería Artesanal Exclusiva - Pendientes, Anillos y Collares Hechos a Mano</title>
+        <title>Joyería de arcilla polimérica Artesanal Exclusiva - Pendientes, Anillos y Collares Hechos a Mano</title>
         <meta
           name="description"
-          content="Descubre joyería única que combina diseño exclusivo artesanal con acero inoxidable. Pendientes, anillos y collares hechos a mano, complementos para mujer, fusionando moda, elegancia y durabilidad. ¡Encuentra tu estilo único aquí!"
+          content="Descubre joyería de arcilla polimérica única que combina diseño exclusivo artesanal con acero inoxidable. Pendientes, anillos y collares hechos a mano, complementos para mujer, fusionando moda, elegancia y durabilidad. ¡Encuentra tu estilo único aquí!"
         />
         <link rel="preload" as="image" href={assets.hero_img} />
         <meta name="author" content="Jayil Artesanía" />

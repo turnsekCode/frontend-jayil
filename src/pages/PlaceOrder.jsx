@@ -67,7 +67,7 @@ const PlaceOrder = () => {
   const applyCoupon = () => {
     // Lógica de validación de cupones
     const validCoupons = {
-      MADRE10: 0.10, // 10% de descuento
+      AMIGA15: 0.15, // 15% de descuento
       ENVIOGRATIS: delivery_fee, // Descuento igual al costo de envío
     };
 
