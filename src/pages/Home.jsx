@@ -59,7 +59,7 @@ const Home = () => {
         <meta property="og:title" content="Jayil.es | Joyería artesanal de ocasión" />
         <meta
           property="og:description"
-          content="Tienda online de joyería artesanal: pendientes, pulseras y collares únicos desde Valencia. Envíos a toda España."
+          content="Tienda online de joyería de arcilla polimérica artesanal: pendientes, pulseras y collares únicos desde Valencia. Envíos a toda España."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jayil.es" />
@@ -71,10 +71,10 @@ const Home = () => {
         <meta name="twitter:title" content="Jayil.es | Joyería artesanal de ocasión" />
         <meta
           name="twitter:description"
-          content="Tienda online de joyas únicas hechas a mano. Pendientes, pulseras y collares desde Valencia. ¡Descúbrelos!"
+          content="Tienda online de joyas de arcilla polimérica únicas hechas a mano. Pendientes, pulseras y collares desde Valencia. ¡Descúbrelos!"
         />
         <meta name="twitter:image" content={assets.hero_img} />
-        <meta name='keywords' content='pendientes, joyería artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
+        <meta name='keywords' content='pendientes, joyería de arcilla polimérica artesanal, moda, mujer, acero inoxidable, diseño exclusivo, tendencia, elegancia' />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://www.jayil.es' />
         <script type="application/ld+json">
