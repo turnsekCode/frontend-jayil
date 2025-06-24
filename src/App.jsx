@@ -41,6 +41,7 @@ import LagrimasCollection from './pages/Lagrimas'
 import EliaCollection from './pages/Elia'
 import BlogPost from './pages/Blog'
 import { Analytics } from "@vercel/analytics/react"
+import Personalizados from './pages/Personalizados'
 
 const App = () => {
   return (
@@ -56,6 +57,7 @@ const App = () => {
       <Route path='/collection' element={<Collection/>} />
       <Route path='/collection/collares' element={<Collares/>} />
       <Route path='/collection/pulseras' element={<Pulseras/>} />
+      <Route path='/collection/personalizados' element={<Personalizados/>} />
       <Route path='/collection/pendientes' element={<Pendientes />} />
       <Route path='/collection/pendientes/aro' element={<AroCollection/>} />
       <Route path='/collection/pendientes/corazon' element={<CorazonCollection/>} />

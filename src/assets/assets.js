@@ -41,6 +41,7 @@ import homeMovil from './elige_la fornitura_movil.jpg'
 import fornituraWeb from './fornitura web.jpg'
 import fornituraMovil from './fornitura.jpg'
 import personalizacion from './personalizacion.webp'
+import categoria_personalizada from './personalizados.webp'
 
 
 
@@ -88,4 +89,5 @@ export const assets = {
     categoria_rombo,
     categoria_laura,
     categoria_lagrima,
+    categoria_personalizada
 }

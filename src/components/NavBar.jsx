@@ -33,6 +33,7 @@ const categories = [
         ],
     },
     { name: 'PULSERAS', path: '/collection/pulseras' },
+    { name: 'PERSONALIZADOS', path: '/collection/personalizados' },
 ];
 
 const NavBar = () => {

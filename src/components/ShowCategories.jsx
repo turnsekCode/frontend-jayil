@@ -25,6 +25,13 @@ const callouts = [
         imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
         href: '/collection/pulseras',
     },
+       {
+        name: 'PERSONALIZADOS',
+        description: 'Ver colección',
+        imageSrc: assets.categoria_personalizada,
+        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+        href: '/collection/personalizados',
+    }
 ]
 
 const ShowCategories = () => {
@@ -37,7 +44,7 @@ const ShowCategories = () => {
                        {/* <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, dolores.</p> */}
                     </div>
 
-                    <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+                    <div className="mt-6 space-y-12 lg:grid lg:grid-cols-4 lg:gap-6 lg:space-y-0">
                         {callouts.map((callout) => (
                             <div key={callout.name} className="group relative p-4 border border-gray-400">
                                 <img
