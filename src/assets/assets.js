@@ -19,7 +19,7 @@ import cross_icon from './cross_icon.png'
 import pendientes_category from './pendientes.webp'
 import collares_category from './collares.jpg'
 import pulseras_category from './anillos.webp'
-import imagen_about from './imagen_about.png'
+//import imagen_about from './imagen_about.png'
 import categoria_corazon from './categoria_corazon.jpg'
 import categoria_aro from './categoria_aro.jpg'
 import categoria_colette from './categoria_colette.jpg'
@@ -39,7 +39,7 @@ import sobre_mi from './sobre_mi.webp'
 import homeWeb from './elige_la_fornitura.jpg'
 import homeMovil from './elige_la fornitura_movil.jpg'
 import fornituraWeb from './fornitura web.jpg'
-import fornituraMovil from './fornitura.jpg'
+import fornituraMovil from './fornitura-movil.jpg'
 import personalizacion from './personalizacion.webp'
 import categoria_personalizada from './personalizados.webp'
 
@@ -67,7 +67,7 @@ export const assets = {
     pendientes_category,
     collares_category,
     pulseras_category,
-    imagen_about,
+    //imagen_about,
     categoria_corazon,
     categoria_aro,
     categoria_colette,

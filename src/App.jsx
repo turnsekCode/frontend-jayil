@@ -42,6 +42,7 @@ import EliaCollection from './pages/Elia'
 import BlogPost from './pages/Blog'
 import { Analytics } from "@vercel/analytics/react"
 import Personalizados from './pages/Personalizados'
+import EdicionEspecial from './pages/EdicionEspecial'
 
 const App = () => {
   return (
@@ -58,6 +59,7 @@ const App = () => {
       <Route path='/collection/collares' element={<Collares/>} />
       <Route path='/collection/pulseras' element={<Pulseras/>} />
       <Route path='/collection/personalizados' element={<Personalizados/>} />
+      <Route path='/collection/edicion-especial' element={<EdicionEspecial/>} />
       <Route path='/collection/pendientes' element={<Pendientes />} />
       <Route path='/collection/pendientes/aro' element={<AroCollection/>} />
       <Route path='/collection/pendientes/corazon' element={<CorazonCollection/>} />
